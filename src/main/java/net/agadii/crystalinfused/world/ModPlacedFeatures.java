@@ -22,6 +22,9 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> AMBER_ORE_PLACED_KEY = registerKey("amber_ore_placed");
     public static final RegistryKey<PlacedFeature> TOPAZ_ORE_PLACED_KEY = registerKey("topaz_ore_placed");
     public static final RegistryKey<PlacedFeature> PERIDOT_ORE_PLACED_KEY = registerKey("peridot_ore_placed");
+    public static final RegistryKey<PlacedFeature> SUGILITE_ORE_PLACED_KEY = registerKey("sugilite_ore_placed");
+    public static final RegistryKey<PlacedFeature> SPINEL_ORE_PLACED_KEY = registerKey("spinel_ore_placed");
+    public static final RegistryKey<PlacedFeature> PEARL_ORE_PLACED_KEY = registerKey("pearl_ore_placed");
 
 
     public static void bootstrap(Registerable<PlacedFeature> context) {
@@ -42,6 +45,9 @@ public class ModPlacedFeatures {
         register(context, PERIDOT_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.PERIDOT_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(6,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
+        register(context, SPINEL_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SPINEL_ORE_KEY),
+                ModOrePlacement.modifiersWithCount(6,
+                        HeightRangePlacementModifier.uniform(YOffset.BOTTOM, YOffset.TOP)));
     }
 
     public static RegistryKey<PlacedFeature> registerKey(String name) {

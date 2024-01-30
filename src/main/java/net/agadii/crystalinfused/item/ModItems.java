@@ -58,7 +58,6 @@ public class ModItems {
 
     public static void registerModItems() {
         CrystalInfused.LOGGER.info("Registering Mod Items for " + CrystalInfused.MOD_ID);
-
         addItemsToItemGroup();
     }
 }

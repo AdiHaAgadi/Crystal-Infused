@@ -1,7 +1,7 @@
-// 1.19.4	2024-01-30T16:20:24.660603	Crystal Infused/Block Loot Tables
+// 1.19.4	2024-01-30T16:36:35.472445	Crystal Infused/Block Loot Tables
 c8d8993345a45f46892af9d63b46e437ebe171c1 data\crystalinfused\loot_tables\blocks\sugilite_block.json
-63f196eaede3407c1c7c40b25095a0c907ad8130 data\crystalinfused\loot_tables\blocks\peridot_block.json
 c0c1a40ec0cfcc18692021cbf87ebdf72bb1eeb2 data\crystalinfused\loot_tables\blocks\ruby_ore.json
+63f196eaede3407c1c7c40b25095a0c907ad8130 data\crystalinfused\loot_tables\blocks\peridot_block.json
 2de3dfbf01a44cf077a6ba7137bb3daee3124d08 data\crystalinfused\loot_tables\blocks\topaz_block.json
 d379d247ff4e6100283b308b4816174b36300547 data\crystalinfused\loot_tables\blocks\amber_ore.json
 cb1562962abfeeaf4e895aa70410f75352f4a6f6 data\crystalinfused\loot_tables\blocks\spinel_ore.json
