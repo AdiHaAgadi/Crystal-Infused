@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "crystalinfused",
+	"version": "${version}",
+	"name": "Crystal Infused",
+	"description": "This mod adds crystals which can be used for a plethora of things, such as elixirs",
+	"authors": [
+		"Agadii"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/crystalinfused/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.agadii.crystalinfused.CrystalInfused"
+		],
+		"client": [
+			"net.agadii.crystalinfused.CrystalInfusedClient"
+		],
+		"fabric-datagen": [
+			"net.agadii.crystalinfused.CrystalInfusedDataGenerator"
+		]
+	},
+	"mixins": [
+		"crystalinfused.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"minecraft": "~1.19.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
