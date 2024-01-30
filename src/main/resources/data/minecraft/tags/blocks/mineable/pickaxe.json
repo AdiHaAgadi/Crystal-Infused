@@ -1,0 +1,20 @@
+{
+    "replace": false,
+    "values": [
+        "crystalinfused:ruby_ore",
+        "crystalinfused:ruby_block",
+        "crystalinfused:sapphire_ore",
+        "crystalinfused:sapphire_block",
+        "crystalinfused:topaz_ore",
+        "crystalinfused:topaz_block",
+        "crystalinfused:amber_ore",
+        "crystalinfused:amber_block",
+        "crystalinfused:peridot_ore",
+        "crystalinfused:peridot_block",
+        "crystalinfused:sugilite_ore",
+        "crystalinfused:sugilite_block",
+        "crystalinfused:spinel_ore",
+        "crystalinfused:spinel_block",
+        "crystalinfused:pearl_block"
+    ]
+}

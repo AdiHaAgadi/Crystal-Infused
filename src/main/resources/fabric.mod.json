@@ -3,7 +3,7 @@
 	"id": "crystalinfused",
 	"version": "${version}",
 	"name": "Crystal Infused",
-	"description": "This mod adds crystals which can be used for a plethora of things, such as elixirs",
+	"description": "'Crystal Infused' adds new gems to the game, and aims to amplify the standard minecraft experience",
 	"authors": [
 		"Agadii"
 	],
@@ -29,7 +29,7 @@
 		"crystalinfused.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.15.6",
+		"fabricloader": ">=0.14.25",
 		"minecraft": "~1.19.4",
 		"java": ">=17",
 		"fabric-api": "*"

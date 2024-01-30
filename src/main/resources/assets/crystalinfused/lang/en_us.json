@@ -1,0 +1,27 @@
+{
+    "item.crystalinfused.sapphire": "Sapphire",
+    "item.crystalinfused.ruby": "Ruby",
+    "item.crystalinfused.topaz": "Topaz",
+    "item.crystalinfused.amber": "Amber",
+    "item.crystalinfused.spinel": "Spinel",
+    "item.crystalinfused.sugilite": "Sugilite",
+    "item.crystalinfused.pearl": "Pearl",
+    "item.crystalinfused.peridot": "Peridot",
+
+    "block.crystalinfused.sapphire_block": "Block of Sapphire",
+    "block.crystalinfused.sapphire_ore": "Sapphire Ore",
+    "block.crystalinfused.ruby_block": "Block of Ruby",
+    "block.crystalinfused.ruby_ore": "Ruby Ore",
+    "block.crystalinfused.topaz_block": "Block of Topaz",
+    "block.crystalinfused.topaz_ore": "Topaz Ore",
+    "block.crystalinfused.amber_block": "Block of Amber",
+    "block.crystalinfused.amber_ore": "Amber Ore",
+    "block.crystalinfused.spinel_block": "Block of Spinel",
+    "block.crystalinfused.spinel_ore": "Spinel Ore",
+    "block.crystalinfused.sugilite_block": "Block of Sugilite",
+    "block.crystalinfused.sugilite_ore": "Sugilite Ore",
+    "block.crystalinfused.pearl_block": "Block of Pearl",
+    "block.crystalinfused.pearl_ore": "Pearl Ore",
+    "block.crystalinfused.peridot_block": "Block of Peridot",
+    "block.crystalinfused.peridot_ore": "Peridot Ore"
+}
