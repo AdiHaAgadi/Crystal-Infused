@@ -51,6 +51,9 @@ public class ModPlacedFeatures {
         register(context, SPINEL_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SPINEL_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(6,
                         HeightRangePlacementModifier.uniform(YOffset.BOTTOM, YOffset.TOP)));
+        register(context, PEARL_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.PEARL_ORE_KEY),
+                ModOrePlacement.modifiersWithCount(16,
+                        HeightRangePlacementModifier.uniform(YOffset.fixed(0), YOffset.fixed(100))));
     }
 
     public static RegistryKey<PlacedFeature> registerKey(String name) {

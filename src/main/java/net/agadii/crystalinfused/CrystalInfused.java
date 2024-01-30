@@ -4,6 +4,7 @@ import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.item.ModItemGroup;
 import net.agadii.crystalinfused.item.ModItems;
 import net.agadii.crystalinfused.world.gen.ModWorldGeneration;
+import net.agadii.crystalinfused.world.gen.feature.ModFeatures;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ public class CrystalInfused implements ModInitializer {
 		ModItemGroup.registerItemGroups();
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+		ModFeatures.registerModFeatures();
 
 		ModWorldGeneration.generateModWorldGen();
 	}

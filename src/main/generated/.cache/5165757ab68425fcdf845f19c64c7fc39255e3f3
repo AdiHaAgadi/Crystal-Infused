@@ -1,4 +1,4 @@
-// 1.19.4	2024-01-30T16:53:46.8465488	Crystal Infused/Recipes
+// 1.19.4	2024-01-30T20:35:00.3835526	Crystal Infused/Recipes
 d589714c6a96bfbc8b76e67b8cbaa41284b90ba8 data\crystalinfused\advancements\recipes\misc\sapphire_from_blasting_sapphire_ore.json
 59b10eb745eb06d4c77c80ae4d6d2f6ad85661ea data\crystalinfused\recipes\ruby.json
 21bbf7ca10d8942a9880c969b949129ae2dc3aaf data\crystalinfused\advancements\recipes\building_blocks\pearl.json
@@ -36,8 +36,8 @@ e87d7160a7267bc73cc6e3953bc8ce6baab79089 data\crystalinfused\advancements\recipe
 02681febd3a2aeb959d0cf37b3cae190661adf61 data\crystalinfused\advancements\recipes\building_blocks\amber.json
 cd265ec299e9e8b92692bee4a29eb58a72d5a8b3 data\crystalinfused\advancements\recipes\decorations\sugilite_block.json
 96b24c274975c51fd92366bb4635bf22242bded8 data\crystalinfused\advancements\recipes\misc\sugilite_from_blasting_sugilite_ore.json
-7cb6bfcbf67ca2b59012a785c9efbcc74e366a6b data\crystalinfused\advancements\recipes\misc\pearl_from_smelting_pearl_ore.json
 2e9104e5f0882617c6a3ca538954d6043c9a1467 data\crystalinfused\advancements\recipes\misc\sugilite_from_smelting_sugilite_ore.json
+7cb6bfcbf67ca2b59012a785c9efbcc74e366a6b data\crystalinfused\advancements\recipes\misc\pearl_from_smelting_pearl_ore.json
 a3aa07b519cc1ea260564846333ebf57a3d21336 data\crystalinfused\advancements\recipes\misc\spinel_from_smelting_spinel_ore.json
 79e130ba09e5374c8f07ae8400cc973d5ddf4dd7 data\crystalinfused\recipes\amber.json
 fdc9cfedbe9014787eed10ff63035b9222b1e65d data\crystalinfused\advancements\recipes\misc\pearl_from_blasting_pearl_ore.json

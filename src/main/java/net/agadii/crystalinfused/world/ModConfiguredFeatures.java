@@ -2,6 +2,8 @@ package net.agadii.crystalinfused.world;
 
 import net.agadii.crystalinfused.CrystalInfused;
 import net.agadii.crystalinfused.block.ModBlocks;
+import net.agadii.crystalinfused.world.gen.feature.ModFeatures;
+import net.agadii.crystalinfused.world.gen.feature.PearlOreFeature;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
@@ -11,10 +13,7 @@ import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 
 import java.util.List;
 
@@ -35,6 +34,7 @@ public class ModConfiguredFeatures {
         RuleTest deepslateReplacables = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         RuleTest netherrackReplacables = new BlockMatchRuleTest(Blocks.NETHERRACK);
         RuleTest endstoneReplacables = new BlockMatchRuleTest(Blocks.END_STONE);
+        RuleTest sandReplacables = new BlockMatchRuleTest(Blocks.SAND);
 
         List<OreFeatureConfig.Target> overworldSapphireOres =
                 List.of(OreFeatureConfig.createTarget(stoneReplacables, ModBlocks.SAPPHIRE_ORE.getDefaultState()),
@@ -53,9 +53,12 @@ public class ModConfiguredFeatures {
                         OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.PERIDOT_ORE.getDefaultState())); // TODO: replace to deepslate varient of ore
 
         List<OreFeatureConfig.Target> netherSugiliteOres =
-                List.of(OreFeatureConfig.createTarget(netherrackReplacables, ModBlocks.SUGILITE_ORE.getDefaultState())); // TODO: replace to deepslate varient of ore
+                List.of(OreFeatureConfig.createTarget(netherrackReplacables, ModBlocks.SUGILITE_ORE.getDefaultState()));
         List<OreFeatureConfig.Target> endSpinelOres =
-                List.of(OreFeatureConfig.createTarget(endstoneReplacables, ModBlocks.SPINEL_ORE.getDefaultState())); // TODO: replace to deepslate varient of ore
+                List.of(OreFeatureConfig.createTarget(endstoneReplacables, ModBlocks.SPINEL_ORE.getDefaultState()));
+
+        List<OreFeatureConfig.Target> seaPearlOres =
+                List.of(OreFeatureConfig.createTarget(sandReplacables, ModBlocks.PEARL_ORE.getDefaultState()));
 
         register(context, SAPPHIRE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldSapphireOres, 7));
         register(context, RUBY_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldRubyOres, 7));
@@ -64,6 +67,7 @@ public class ModConfiguredFeatures {
         register(context, PERIDOT_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldPeridotOres, 7));
         register(context, SUGILITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherSugiliteOres, 7));
         register(context, SPINEL_ORE_KEY, Feature.ORE, new OreFeatureConfig(endSpinelOres, 7));
+        register(context, PEARL_ORE_KEY, ModFeatures.PEARL_ORE , new DefaultFeatureConfig()); // TODO: not yet uses the seaPearlOres variable due to defaultFeatureConfig
 
     }
 
