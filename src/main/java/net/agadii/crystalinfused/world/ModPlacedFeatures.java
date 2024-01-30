@@ -45,6 +45,9 @@ public class ModPlacedFeatures {
         register(context, PERIDOT_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.PERIDOT_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(6,
                         HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
+        register(context, SUGILITE_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SUGILITE_ORE_KEY),
+                ModOrePlacement.modifiersWithCount(6,
+                        HeightRangePlacementModifier.uniform(YOffset.BOTTOM, YOffset.TOP)));
         register(context, SPINEL_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SPINEL_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(6,
                         HeightRangePlacementModifier.uniform(YOffset.BOTTOM, YOffset.TOP)));

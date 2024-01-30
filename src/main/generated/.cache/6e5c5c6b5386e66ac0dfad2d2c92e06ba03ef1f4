@@ -1,4 +1,4 @@
-// 1.19.4	2024-01-30T16:36:35.4704456	Crystal Infused/Model Definitions
+// 1.19.4	2024-01-30T16:53:46.8455478	Crystal Infused/Model Definitions
 5885b1a72e7cf96537b7a302e0bbb7e7ee629fb2 assets\crystalinfused\models\block\sapphire_ore.json
 634ffbf692cd628dfb987a62175a6037aa828e76 assets\crystalinfused\models\item\pearl_block.json
 ce854ce400f4747329203003566df790db604c46 assets\crystalinfused\blockstates\pearl_ore.json
@@ -48,8 +48,8 @@ db73d5a08719fd54732ed38bf84c4f34184fdf57 assets\crystalinfused\models\item\spine
 f234675cc9b6509b74748747ffaa8d58c837a4b4 assets\crystalinfused\models\item\spinel_block.json
 d9ecc84db276f4f60c3e200b3a7eb34631f1bdb8 assets\crystalinfused\models\block\ruby_ore.json
 e6a5c8dba06fab1edfc9d41e937a59fda370942d assets\crystalinfused\blockstates\amber_block.json
-71e0481c895a0f81f4326d64fb1d0c07e88e8bbe assets\crystalinfused\models\block\peridot_block.json
 e652aad78682290101086a66d815b46eb74eb29f assets\crystalinfused\models\item\sugilite_ore.json
+71e0481c895a0f81f4326d64fb1d0c07e88e8bbe assets\crystalinfused\models\block\peridot_block.json
 e242ddf2ff2b0ecc311f1c4256583d5fb213c3d5 assets\crystalinfused\models\block\sugilite_block.json
 dc31dcade82b4415b0aba60ea42c1c9a70b7ee12 assets\crystalinfused\blockstates\sapphire_block.json
 a4d33a2f8b7a5076e300c20f2d3d1863a9a3b493 assets\crystalinfused\blockstates\ruby_ore.json
