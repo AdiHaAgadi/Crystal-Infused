@@ -53,7 +53,7 @@ public class ModPlacedFeatures {
                         HeightRangePlacementModifier.uniform(YOffset.BOTTOM, YOffset.TOP)));
         register(context, PEARL_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.PEARL_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(16,
-                        HeightRangePlacementModifier.uniform(YOffset.fixed(0), YOffset.fixed(100))));
+                        HeightRangePlacementModifier.uniform(YOffset.BOTTOM, YOffset.TOP)));
     }
 
     public static RegistryKey<PlacedFeature> registerKey(String name) {

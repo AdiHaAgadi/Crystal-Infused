@@ -7,11 +7,13 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.client.sound.Sound;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
@@ -55,7 +57,7 @@ public class ModBlocks {
             new ExperienceDroppingBlock(FabricBlockSettings.of(Material.STONE).strength(3.0f, 9.0f).requiresTool(),
                     UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
     public static final Block PEARL_ORE = registerBlock("pearl_ore", // TODO: CREATE AN EXPERIENCE DROPPING SAND BLOCK TO MAKE IT BOTH ACT AS SAND AND DROP EXP
-            new ExperienceDroppingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(1.0f).requiresTool(),
+            new ExperienceDroppingSandBlock(14406560, FabricBlockSettings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(1.0f).requiresTool().sounds(BlockSoundGroup.SAND),
                     UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {

@@ -34,7 +34,7 @@ public class ModConfiguredFeatures {
         RuleTest deepslateReplacables = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         RuleTest netherrackReplacables = new BlockMatchRuleTest(Blocks.NETHERRACK);
         RuleTest endstoneReplacables = new BlockMatchRuleTest(Blocks.END_STONE);
-        RuleTest sandReplacables = new BlockMatchRuleTest(Blocks.SAND);
+        RuleTest sandReplacables = new TagMatchRuleTest(BlockTags.SAND);
 
         List<OreFeatureConfig.Target> overworldSapphireOres =
                 List.of(OreFeatureConfig.createTarget(stoneReplacables, ModBlocks.SAPPHIRE_ORE.getDefaultState()),
@@ -58,7 +58,7 @@ public class ModConfiguredFeatures {
                 List.of(OreFeatureConfig.createTarget(endstoneReplacables, ModBlocks.SPINEL_ORE.getDefaultState()));
 
         List<OreFeatureConfig.Target> seaPearlOres =
-                List.of(OreFeatureConfig.createTarget(sandReplacables, ModBlocks.PEARL_ORE.getDefaultState()));
+                List.of(OreFeatureConfig.createTarget(sandReplacables, Blocks.BEDROCK.getDefaultState()));
 
         register(context, SAPPHIRE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldSapphireOres, 7));
         register(context, RUBY_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldRubyOres, 7));
