@@ -60,6 +60,22 @@ public class ModBlocks {
             new ExperienceDroppingSandBlock(14406560, FabricBlockSettings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(1.0f).requiresTool().sounds(BlockSoundGroup.SAND),
                     UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
 
+    public static final Block DEEPSLATE_SAPPHIRE_ORE = registerBlock("deepslate_sapphire_ore",
+            new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ModBlocks.SAPPHIRE_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5f, 3.0f).requiresTool().sounds(BlockSoundGroup.DEEPSLATE),
+                    UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
+    public static final Block DEEPSLATE_RUBY_ORE = registerBlock("deepslate_ruby_ore",
+            new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ModBlocks.RUBY_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5f, 3.0f).requiresTool().sounds(BlockSoundGroup.DEEPSLATE),
+                    UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
+    public static final Block DEEPSLATE_AMBER_ORE = registerBlock("deepslate_amber_ore",
+            new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ModBlocks.AMBER_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5f, 3.0f).requiresTool().sounds(BlockSoundGroup.DEEPSLATE),
+                    UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
+    public static final Block DEEPSLATE_TOPAZ_ORE = registerBlock("deepslate_topaz_ore",
+            new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ModBlocks.TOPAZ_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5f, 3.0f).requiresTool().sounds(BlockSoundGroup.DEEPSLATE),
+                    UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
+    public static final Block DEEPSLATE_PERIDOT_ORE = registerBlock("deepslate_peridot_ore",
+            new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ModBlocks.PERIDOT_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5f, 3.0f).requiresTool().sounds(BlockSoundGroup.DEEPSLATE),
+                    UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
+
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
 

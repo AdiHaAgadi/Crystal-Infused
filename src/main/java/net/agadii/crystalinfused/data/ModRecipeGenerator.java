@@ -19,13 +19,23 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
     public void generate(Consumer<RecipeJsonProvider> exporter) {
         offerSmelting(exporter, List.of(ModBlocks.SAPPHIRE_ORE), RecipeCategory.MISC, ModItems.SAPPHIRE,
                 1f, 200, "sapphire");
+        offerSmelting(exporter, List.of(ModBlocks.DEEPSLATE_SAPPHIRE_ORE), RecipeCategory.MISC, ModItems.SAPPHIRE,
+                1f, 200, "sapphire");
         offerSmelting(exporter, List.of(ModBlocks.RUBY_ORE), RecipeCategory.MISC, ModItems.RUBY,
+                1f, 200, "ruby");
+        offerSmelting(exporter, List.of(ModBlocks.DEEPSLATE_RUBY_ORE), RecipeCategory.MISC, ModItems.RUBY,
                 1f, 200, "ruby");
         offerSmelting(exporter, List.of(ModBlocks.TOPAZ_ORE), RecipeCategory.MISC, ModItems.TOPAZ,
                 1f, 200, "topaz");
+        offerSmelting(exporter, List.of(ModBlocks.DEEPSLATE_TOPAZ_ORE), RecipeCategory.MISC, ModItems.TOPAZ,
+                1f, 200, "topaz");
         offerSmelting(exporter, List.of(ModBlocks.AMBER_ORE), RecipeCategory.MISC, ModItems.AMBER,
                 1f, 200, "amber");
+        offerSmelting(exporter, List.of(ModBlocks.DEEPSLATE_AMBER_ORE), RecipeCategory.MISC, ModItems.AMBER,
+                1f, 200, "amber");
         offerSmelting(exporter, List.of(ModBlocks.PERIDOT_ORE), RecipeCategory.MISC, ModItems.PERIDOT,
+                1f, 200, "peridot");
+        offerSmelting(exporter, List.of(ModBlocks.DEEPSLATE_PERIDOT_ORE), RecipeCategory.MISC, ModItems.PERIDOT,
                 1f, 200, "peridot");
         offerSmelting(exporter, List.of(ModBlocks.SUGILITE_ORE), RecipeCategory.MISC, ModItems.SUGILITE,
                 1f, 200, "sugilite");
@@ -36,13 +46,23 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
 
         offerBlasting(exporter, List.of(ModBlocks.SAPPHIRE_ORE), RecipeCategory.MISC, ModItems.SAPPHIRE,
                 1f, 100, "sapphire");
+        offerBlasting(exporter, List.of(ModBlocks.DEEPSLATE_SAPPHIRE_ORE), RecipeCategory.MISC, ModItems.SAPPHIRE,
+                1f, 100, "sapphire");
         offerBlasting(exporter, List.of(ModBlocks.RUBY_ORE), RecipeCategory.MISC, ModItems.RUBY,
+                1f, 100, "ruby");
+        offerBlasting(exporter, List.of(ModBlocks.DEEPSLATE_RUBY_ORE), RecipeCategory.MISC, ModItems.RUBY,
                 1f, 100, "ruby");
         offerBlasting(exporter, List.of(ModBlocks.TOPAZ_ORE), RecipeCategory.MISC, ModItems.TOPAZ,
                 1f, 100, "topaz");
+        offerBlasting(exporter, List.of(ModBlocks.DEEPSLATE_TOPAZ_ORE), RecipeCategory.MISC, ModItems.TOPAZ,
+                1f, 100, "topaz");
         offerBlasting(exporter, List.of(ModBlocks.AMBER_ORE), RecipeCategory.MISC, ModItems.AMBER,
                 1f, 100, "amber");
+        offerBlasting(exporter, List.of(ModBlocks.DEEPSLATE_AMBER_ORE), RecipeCategory.MISC, ModItems.TOPAZ,
+                1f, 100, "amber");
         offerBlasting(exporter, List.of(ModBlocks.PERIDOT_ORE), RecipeCategory.MISC, ModItems.PERIDOT,
+                1f, 100, "peridot");
+        offerBlasting(exporter, List.of(ModBlocks.DEEPSLATE_PERIDOT_ORE), RecipeCategory.MISC, ModItems.PERIDOT,
                 1f, 100, "peridot");
         offerBlasting(exporter, List.of(ModBlocks.SUGILITE_ORE), RecipeCategory.MISC, ModItems.SUGILITE,
                 1f, 100, "sugilite");

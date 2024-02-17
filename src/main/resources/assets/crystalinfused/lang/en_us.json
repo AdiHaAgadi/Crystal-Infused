@@ -10,12 +10,16 @@
 
     "block.crystalinfused.sapphire_block": "Block of Sapphire",
     "block.crystalinfused.sapphire_ore": "Sapphire Ore",
+    "block.crystalinfused.deepslate_sapphire_ore": "Deepslate Sapphire Ore",
     "block.crystalinfused.ruby_block": "Block of Ruby",
     "block.crystalinfused.ruby_ore": "Ruby Ore",
+    "block.crystalinfused.deepslate_ruby_ore": "Deepslate Ruby Ore",
     "block.crystalinfused.topaz_block": "Block of Topaz",
     "block.crystalinfused.topaz_ore": "Topaz Ore",
+    "block.crystalinfused.deepslate_topaz_ore": "Deepslate Topaz Ore",
     "block.crystalinfused.amber_block": "Block of Amber",
     "block.crystalinfused.amber_ore": "Amber Ore",
+    "block.crystalinfused.deepslate_amber_ore": "Deepslate Amber Ore",
     "block.crystalinfused.spinel_block": "Block of Spinel",
     "block.crystalinfused.spinel_ore": "Spinel Ore",
     "block.crystalinfused.sugilite_block": "Block of Sugilite",
@@ -23,5 +27,7 @@
     "block.crystalinfused.pearl_block": "Block of Pearl",
     "block.crystalinfused.pearl_ore": "Pearl Ore",
     "block.crystalinfused.peridot_block": "Block of Peridot",
-    "block.crystalinfused.peridot_ore": "Peridot Ore"
+    "block.crystalinfused.peridot_ore": "Peridot Ore",
+    "block.crystalinfused.deepslate_peridot_ore": "Deepslate Peridot Ore"
+
 }

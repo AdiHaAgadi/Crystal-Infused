@@ -19,10 +19,15 @@ import java.util.List;
 
 public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> SAPPHIRE_ORE_KEY = registerKey("sapphire_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_SAPPHIRE_ORE_KEY = registerKey("deepslate_sapphire_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> RUBY_ORE_KEY = registerKey("ruby_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_RUBY_ORE_KEY = registerKey("deepslate_ruby_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> AMBER_ORE_KEY = registerKey("amber_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_AMBER_ORE_KEY = registerKey("deepslate_amber_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> TOPAZ_ORE_KEY = registerKey("topaz_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_TOPAZ_ORE_KEY = registerKey("deepslate_topaz_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> PERIDOT_ORE_KEY = registerKey("peridot_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> DEEPSLATE_PERIDOT_ORE_KEY = registerKey("deepslate_peridot_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> SUGILITE_ORE_KEY = registerKey("sugilite_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> SPINEL_ORE_KEY = registerKey("spinel_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> PEARL_ORE_KEY = registerKey("pearl_ore");
@@ -38,19 +43,19 @@ public class ModConfiguredFeatures {
 
         List<OreFeatureConfig.Target> overworldSapphireOres =
                 List.of(OreFeatureConfig.createTarget(stoneReplacables, ModBlocks.SAPPHIRE_ORE.getDefaultState()),
-                        OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.SAPPHIRE_ORE.getDefaultState())); // TODO: replace to deepslate varient of ore
+                        OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.DEEPSLATE_SAPPHIRE_ORE.getDefaultState()));
         List<OreFeatureConfig.Target> overworldRubyOres =
                 List.of(OreFeatureConfig.createTarget(stoneReplacables, ModBlocks.RUBY_ORE.getDefaultState()),
-                        OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.RUBY_ORE.getDefaultState())); // TODO: replace to deepslate varient of ore
+                        OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.DEEPSLATE_RUBY_ORE.getDefaultState()));
         List<OreFeatureConfig.Target> overworldAmberOres =
                 List.of(OreFeatureConfig.createTarget(stoneReplacables, ModBlocks.AMBER_ORE.getDefaultState()),
-                        OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.AMBER_ORE.getDefaultState())); // TODO: replace to deepslate varient of ore
+                        OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.DEEPSLATE_AMBER_ORE.getDefaultState()));
         List<OreFeatureConfig.Target> overworldTopazOres =
                 List.of(OreFeatureConfig.createTarget(stoneReplacables, ModBlocks.TOPAZ_ORE.getDefaultState()),
-                        OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.TOPAZ_ORE.getDefaultState())); // TODO: replace to deepslate varient of ore
+                        OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.DEEPSLATE_TOPAZ_ORE.getDefaultState()));
         List<OreFeatureConfig.Target> overworldPeridotOres =
                 List.of(OreFeatureConfig.createTarget(stoneReplacables, ModBlocks.PERIDOT_ORE.getDefaultState()),
-                        OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.PERIDOT_ORE.getDefaultState())); // TODO: replace to deepslate varient of ore
+                        OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.DEEPSLATE_PERIDOT_ORE.getDefaultState()));
 
         List<OreFeatureConfig.Target> netherSugiliteOres =
                 List.of(OreFeatureConfig.createTarget(netherrackReplacables, ModBlocks.SUGILITE_ORE.getDefaultState()));
@@ -58,13 +63,18 @@ public class ModConfiguredFeatures {
                 List.of(OreFeatureConfig.createTarget(endstoneReplacables, ModBlocks.SPINEL_ORE.getDefaultState()));
 
         List<OreFeatureConfig.Target> seaPearlOres =
-                List.of(OreFeatureConfig.createTarget(sandReplacables, Blocks.BEDROCK.getDefaultState()));
+                List.of(OreFeatureConfig.createTarget(sandReplacables, ModBlocks.PEARL_ORE.getDefaultState())); // TODO: find out how to use config
 
         register(context, SAPPHIRE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldSapphireOres, 7));
+        register(context, DEEPSLATE_SAPPHIRE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldSapphireOres, 7));
         register(context, RUBY_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldRubyOres, 7));
+        register(context, DEEPSLATE_RUBY_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldRubyOres, 7));
         register(context, AMBER_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldAmberOres, 7));
+        register(context, DEEPSLATE_AMBER_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldAmberOres, 7));
         register(context, TOPAZ_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldTopazOres, 7));
+        register(context, DEEPSLATE_TOPAZ_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldTopazOres, 7));
         register(context, PERIDOT_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldPeridotOres, 7));
+        register(context, DEEPSLATE_PERIDOT_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldPeridotOres, 7));
         register(context, SUGILITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherSugiliteOres, 7));
         register(context, SPINEL_ORE_KEY, Feature.ORE, new OreFeatureConfig(endSpinelOres, 7));
         register(context, PEARL_ORE_KEY, ModFeatures.PEARL_ORE , new DefaultFeatureConfig()); // TODO: not yet uses the seaPearlOres variable due to defaultFeatureConfig

@@ -10,12 +10,16 @@
 
     "block.crystalinfused.sapphire_block": "בלוק ספיר",
     "block.crystalinfused.sapphire_ore": "עפרת ספיר",
+    "block.crystalinfused.deepslate_sapphire_ore": "עפרת לווחת ספיר",
     "block.crystalinfused.ruby_block": "בלוק אודם",
     "block.crystalinfused.ruby_ore": "עפרת אודם",
+    "block.crystalinfused.deepslate_ruby_ore": "עפרת לווחת אודם",
     "block.crystalinfused.topaz_block": "בלוק טופז",
     "block.crystalinfused.topaz_ore": "עפרת טופז",
+    "block.crystalinfused.deepslate_topaz_ore": "עפרת לווחת טופז",
     "block.crystalinfused.amber_block": "בלוק ענבר",
     "block.crystalinfused.amber_ore": "עפרת ענבר",
+    "block.crystalinfused.deepslate_amber_ore": "עפרת לווחת ענבר",
     "block.crystalinfused.spinel_block": "בלוק ספינל",
     "block.crystalinfused.spinel_ore": "עפרת ספינל",
     "block.crystalinfused.sugilite_block": "בלוק סוגיליט",
@@ -23,5 +27,6 @@
     "block.crystalinfused.pearl_block": "בלוק פנינים",
     "block.crystalinfused.pearl_ore": "עפרת פנינה",
     "block.crystalinfused.peridot_block": "בלוק פרידוט",
-    "block.crystalinfused.peridot_ore": "עפרת פרידוט"
+    "block.crystalinfused.peridot_ore": "עפרת פרידוט",
+    "block.crystalinfused.deepslate_peridot_ore": "עפרת לווחת פרידוט"
 }

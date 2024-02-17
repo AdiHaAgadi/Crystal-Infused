@@ -22,10 +22,15 @@ public class ModLootTableGenerator extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.PEARL_BLOCK);
 
         addDrop(ModBlocks.SAPPHIRE_ORE, oreDrops(ModBlocks.SAPPHIRE_ORE, ModItems.SAPPHIRE));
+        addDrop(ModBlocks.DEEPSLATE_SAPPHIRE_ORE, oreDrops(ModBlocks.DEEPSLATE_SAPPHIRE_ORE, ModItems.SAPPHIRE));
         addDrop(ModBlocks.RUBY_ORE, oreDrops(ModBlocks.RUBY_ORE, ModItems.RUBY));
+        addDrop(ModBlocks.DEEPSLATE_RUBY_ORE, oreDrops(ModBlocks.DEEPSLATE_RUBY_ORE, ModItems.RUBY));
         addDrop(ModBlocks.TOPAZ_ORE, oreDrops(ModBlocks.TOPAZ_ORE, ModItems.TOPAZ));
+        addDrop(ModBlocks.DEEPSLATE_TOPAZ_ORE, oreDrops(ModBlocks.DEEPSLATE_TOPAZ_ORE, ModItems.RUBY));
         addDrop(ModBlocks.AMBER_ORE, oreDrops(ModBlocks.AMBER_ORE, ModItems.AMBER));
+        addDrop(ModBlocks.DEEPSLATE_AMBER_ORE, oreDrops(ModBlocks.DEEPSLATE_AMBER_ORE, ModItems.RUBY));
         addDrop(ModBlocks.PERIDOT_ORE, oreDrops(ModBlocks.PERIDOT_ORE, ModItems.PERIDOT));
+        addDrop(ModBlocks.DEEPSLATE_PERIDOT_ORE, oreDrops(ModBlocks.DEEPSLATE_PERIDOT_ORE, ModItems.RUBY));
         addDrop(ModBlocks.SUGILITE_ORE, oreDrops(ModBlocks.SUGILITE_ORE, ModItems.SUGILITE));
         addDrop(ModBlocks.SPINEL_ORE, oreDrops(ModBlocks.SPINEL_ORE, ModItems.SPINEL));
         addDrop(ModBlocks.PEARL_ORE, oreDrops(ModBlocks.PEARL_ORE, ModItems.PEARL));
