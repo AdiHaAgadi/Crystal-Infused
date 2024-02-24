@@ -38,7 +38,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "crystalinfused:pearl"
+              "name": "crystalinfused:raw_pearl"
             }
           ]
         }

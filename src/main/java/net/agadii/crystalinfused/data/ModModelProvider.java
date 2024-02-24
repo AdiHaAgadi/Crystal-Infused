@@ -48,5 +48,13 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.SUGILITE, Models.GENERATED);
         itemModelGenerator.register(ModItems.SPINEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.PEARL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_SAPPHIRE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_RUBY, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_TOPAZ, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_AMBER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_PERIDOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_SUGILITE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_SPINEL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_PEARL, Models.GENERATED);
     }
 }
