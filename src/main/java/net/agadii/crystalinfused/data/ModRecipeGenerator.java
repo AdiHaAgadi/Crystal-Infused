@@ -4,7 +4,11 @@ import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.VanillaRecipeProvider;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 
 import java.util.List;
@@ -71,7 +75,6 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
         offerBlasting(exporter, List.of(ModBlocks.PEARL_ORE), RecipeCategory.MISC, ModItems.RAW_PEARL,
                 1f, 100, "pearl");
 
-
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.SAPPHIRE, RecipeCategory.DECORATIONS,
                 ModBlocks.SAPPHIRE_BLOCK);
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.RUBY, RecipeCategory.DECORATIONS,
@@ -88,5 +91,15 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 ModBlocks.SPINEL_BLOCK);
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.PEARL, RecipeCategory.DECORATIONS,
                 ModBlocks.PEARL_BLOCK);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.CRYSTAL_PURIFIER)
+                .input('#', Blocks.COPPER_BLOCK)
+                .input('X', Blocks.GLASS)
+                .input('I', Items.COPPER_INGOT)
+                .pattern("III")
+                .pattern("IXI")
+                .pattern("###")
+                .criterion("has_copper", VanillaRecipeProvider.conditionsFromItem(Items.COPPER_INGOT)).offerTo(exporter);
+
     }
 }

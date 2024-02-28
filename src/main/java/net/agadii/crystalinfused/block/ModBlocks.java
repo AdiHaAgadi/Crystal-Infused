@@ -17,6 +17,8 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
+import static net.minecraft.block.AbstractFurnaceBlock.LIT;
+
 public class ModBlocks {
     public static final Block SAPPHIRE_BLOCK = registerBlock("sapphire_block",
             new Block(FabricBlockSettings.of(Material.METAL).strength(4.0f).requiresTool()), ModItemGroup.CRYSTAL_INFUSED);
@@ -59,6 +61,12 @@ public class ModBlocks {
     public static final Block PEARL_ORE = registerBlock("pearl_ore", // TODO: CREATE AN EXPERIENCE DROPPING SAND BLOCK TO MAKE IT BOTH ACT AS SAND AND DROP EXP
             new ExperienceDroppingSandBlock(14406560, FabricBlockSettings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(1.0f).requiresTool().sounds(BlockSoundGroup.SAND),
                     UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
+
+    public static final Block CRYSTAL_PURIFIER = registerBlock("crystal_purifier",
+            new CrystalPurifierBlock(FabricBlockSettings.of(Material.METAL)
+                    .strength(3.5f).requiresTool().sounds(BlockSoundGroup.COPPER)
+                    .luminance(Blocks.createLightLevelFromLitBlockState(13))), ModItemGroup.CRYSTAL_INFUSED); // TODO: CHANGE BLOCK TYPE TO NEW TYPE WHEN CREATED! (then add lit option to add light to world like furnace)
+
 
     public static final Block DEEPSLATE_SAPPHIRE_ORE = registerBlock("deepslate_sapphire_ore",
             new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ModBlocks.SAPPHIRE_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5f, 3.0f).requiresTool().sounds(BlockSoundGroup.DEEPSLATE),
