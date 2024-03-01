@@ -1,4 +1,4 @@
-// 1.19.4	2024-02-28T23:39:39.5028733	Crystal Infused/Recipes
+// 1.19.4	2024-03-01T20:30:05.564561	Crystal Infused/Recipes
 59b10eb745eb06d4c77c80ae4d6d2f6ad85661ea data\crystalinfused\recipes\ruby.json
 8ae1fc2532e71d5534947f2799139d75dcb49381 data\crystalinfused\advancements\recipes\misc\raw_sapphire_from_blasting_deepslate_sapphire_ore.json
 21bbf7ca10d8942a9880c969b949129ae2dc3aaf data\crystalinfused\advancements\recipes\building_blocks\pearl.json
@@ -82,6 +82,6 @@ c7aa9a333d01c36e95d30aac5233c58f1d42b380 data\crystalinfused\recipes\sugilite.js
 e2259910780a9c95879e49bb7f790d7f50851d4e data\crystalinfused\recipes\raw_spinel_from_smelting_spinel_ore.json
 1baf0726fafcc633d4808df566fad542457d074d data\crystalinfused\recipes\raw_peridot_from_smelting_deepslate_peridot_ore.json
 e84cf6893167e14b1cb798423cedc1389e28007d data\crystalinfused\recipes\ruby_block.json
-0a425e5085ef5ff88c3f64dc0911ce1aab6f0090 data\crystalinfused\advancements\recipes\misc\raw_ruby_from_blasting_deepslate_ruby_ore.json
 0f07255eeb7880298911ffc716804b2390d430e5 data\crystalinfused\recipes\raw_amber_from_blasting_amber_ore.json
+0a425e5085ef5ff88c3f64dc0911ce1aab6f0090 data\crystalinfused\advancements\recipes\misc\raw_ruby_from_blasting_deepslate_ruby_ore.json
 76909bffb99c8b1f56b5de1e2ba99387707ae449 data\crystalinfused\advancements\recipes\misc\raw_peridot_from_blasting_deepslate_peridot_ore.json

@@ -1,4 +1,4 @@
-// 1.19.4	2024-02-28T23:39:39.5018728	Crystal Infused/Model Definitions
+// 1.19.4	2024-03-01T20:30:05.5635616	Crystal Infused/Model Definitions
 ddf4e6f243fe09a6d5f23889afe5775faedb0acd assets\crystalinfused\models\item\crystal_purifier.json
 5885b1a72e7cf96537b7a302e0bbb7e7ee629fb2 assets\crystalinfused\models\block\sapphire_ore.json
 8d8d3863a14f76748005eb411e0bd5fdc669e657 assets\crystalinfused\models\block\crystal_purifier_on.json
@@ -56,8 +56,8 @@ fcefe8b7289dbff6508f5e3b79ba8f937ff585ef assets\crystalinfused\models\item\ruby_
 8434c2203df41f680d11d03d356b2af4717c8741 assets\crystalinfused\models\item\raw_spinel.json
 b0fe739f7a5bdd60c4fea4a61d4fc70f6082739a assets\crystalinfused\models\block\deepslate_amber_ore.json
 6b8d21c54dfb0c3944ced518108c0b9ae8411696 assets\crystalinfused\blockstates\amber_ore.json
-bb5072300f3a19bb4ce84c75b8e83161dfbdd796 assets\crystalinfused\models\block\spinel_block.json
 d9a908ff07ae74fa3f7000a067de2819cb3bafa4 assets\crystalinfused\models\block\pearl_block.json
+bb5072300f3a19bb4ce84c75b8e83161dfbdd796 assets\crystalinfused\models\block\spinel_block.json
 48ed5a2a5b891bc49ea2d9a0fe64cac5e38836c6 assets\crystalinfused\models\block\deepslate_sapphire_ore.json
 f5aeaa6f26da6b09da0489c7d4101b6a2a941d19 assets\crystalinfused\models\item\topaz_block.json
 c76accd605d3ddc62441ca75eb038563f2856e25 assets\crystalinfused\models\block\deepslate_topaz_ore.json

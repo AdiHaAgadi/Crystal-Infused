@@ -1,8 +1,8 @@
-// 1.19.4	2024-02-28T23:39:39.4988734	Crystal Infused/crystalinfused
+// 1.19.4	2024-03-01T20:30:05.5615534	Crystal Infused/crystalinfused
 f323192022e8626b50ed291ac65e6ec83b683859 data\crystalinfused\worldgen\placed_feature\deepslate_ruby_ore_placed.json
 b8a2b897afd884075b2d8da843ebb0df9101509c data\crystalinfused\worldgen\configured_feature\ruby_ore.json
-0fdae2722ed964d899b4eb8b560ec1351c2eb09c data\crystalinfused\worldgen\configured_feature\pearl_ore.json
 ad2f07af4a6388cb9a502be0d8c1ea64bdb3f8f1 data\crystalinfused\worldgen\configured_feature\sugilite_ore.json
+0fdae2722ed964d899b4eb8b560ec1351c2eb09c data\crystalinfused\worldgen\configured_feature\pearl_ore.json
 fc2a674ae48b6d5f8a612e920ef04b701c833a72 data\crystalinfused\worldgen\placed_feature\ruby_ore_placed.json
 4494537f07a05cdcb84e041ba815f1779db2ac64 data\crystalinfused\worldgen\placed_feature\sapphire_ore_placed.json
 7d21ae3100d16519afe6a92dac492770f673237c data\crystalinfused\worldgen\placed_feature\amber_ore_placed.json

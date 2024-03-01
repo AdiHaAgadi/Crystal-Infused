@@ -1,8 +1,10 @@
 package net.agadii.crystalinfused;
 
 import net.agadii.crystalinfused.block.ModBlocks;
+import net.agadii.crystalinfused.block.entity.ModBlockEntities;
 import net.agadii.crystalinfused.item.ModItemGroup;
 import net.agadii.crystalinfused.item.ModItems;
+import net.agadii.crystalinfused.screen.ModScreenHandlers;
 import net.agadii.crystalinfused.world.gen.ModWorldGeneration;
 import net.agadii.crystalinfused.world.gen.feature.ModFeatures;
 import net.fabricmc.api.ModInitializer;
@@ -20,6 +22,8 @@ public class CrystalInfused implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModFeatures.registerModFeatures();
+		ModBlockEntities.registerBlockEntities();
+		ModScreenHandlers.registerAllScreenHandlers();
 
 		ModWorldGeneration.generateModWorldGen();
 	}

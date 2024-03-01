@@ -65,7 +65,7 @@ public class ModBlocks {
     public static final Block CRYSTAL_PURIFIER = registerBlock("crystal_purifier",
             new CrystalPurifierBlock(FabricBlockSettings.of(Material.METAL)
                     .strength(3.5f).requiresTool().sounds(BlockSoundGroup.COPPER)
-                    .luminance(Blocks.createLightLevelFromLitBlockState(13))), ModItemGroup.CRYSTAL_INFUSED); // TODO: CHANGE BLOCK TYPE TO NEW TYPE WHEN CREATED! (then add lit option to add light to world like furnace)
+                    .luminance(Blocks.createLightLevelFromLitBlockState(13))), ModItemGroup.CRYSTAL_INFUSED);
 
 
     public static final Block DEEPSLATE_SAPPHIRE_ORE = registerBlock("deepslate_sapphire_ore",

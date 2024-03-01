@@ -1,4 +1,4 @@
-// 1.19.4	2024-02-28T23:39:39.5038731	Crystal Infused/Block Loot Tables
+// 1.19.4	2024-03-01T20:30:05.5655521	Crystal Infused/Block Loot Tables
 c8d8993345a45f46892af9d63b46e437ebe171c1 data\crystalinfused\loot_tables\blocks\sugilite_block.json
 43c165fa26c890efbefd19ed43c70cc7af89f2c5 data\crystalinfused\loot_tables\blocks\deepslate_sapphire_ore.json
 a50149050cca38ce64810a855d83b9d01521aa7c data\crystalinfused\loot_tables\blocks\deepslate_ruby_ore.json
@@ -13,11 +13,11 @@ c8bd58dde3af56fa248aef655041a69724d2edb0 data\crystalinfused\loot_tables\blocks\
 743e4087a12be9ccf58ccb8e5af790b89297daf0 data\crystalinfused\loot_tables\blocks\deepslate_topaz_ore.json
 d21c190d9397b155c35446804bcc1d22de86095e data\crystalinfused\loot_tables\blocks\topaz_ore.json
 a566cec312a2ceb6d3194ccb2e07e14f0510b486 data\crystalinfused\loot_tables\blocks\peridot_ore.json
-474e28ad305d2126e678b1f679ad40d7eec8c510 data\crystalinfused\loot_tables\blocks\sapphire_block.json
 df776bf716bce829fc6cb2df2e3f062494ee1645 data\crystalinfused\loot_tables\blocks\spinel_block.json
+474e28ad305d2126e678b1f679ad40d7eec8c510 data\crystalinfused\loot_tables\blocks\sapphire_block.json
 070ac59ee8231d17a151c629fb6cc6bf288e4c8d data\crystalinfused\loot_tables\blocks\sugilite_ore.json
-81638514b5230ec36d75c43d8a9b55dc2071cde7 data\crystalinfused\loot_tables\blocks\pearl_block.json
 558603c4f3fde7e97c4be51f7d2ce490d7cea95f data\crystalinfused\loot_tables\blocks\ruby_block.json
+81638514b5230ec36d75c43d8a9b55dc2071cde7 data\crystalinfused\loot_tables\blocks\pearl_block.json
 2687ffdf87823de4900c029662318699688f4528 data\crystalinfused\loot_tables\blocks\sapphire_ore.json
 2482ced15e9b420325705fe241714af7e8df7b1d data\crystalinfused\loot_tables\blocks\pearl_ore.json
 7eb3df3da5c6765349b0f84c690641da70c8c0d7 data\crystalinfused\loot_tables\blocks\deepslate_peridot_ore.json
