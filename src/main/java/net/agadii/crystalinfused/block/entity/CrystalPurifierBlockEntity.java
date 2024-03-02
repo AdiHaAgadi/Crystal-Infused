@@ -6,6 +6,8 @@ import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.recipe.CrystalPurificationRecipe;
 import net.agadii.crystalinfused.screen.CrystalPurificationScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.minecraft.block.AbstractFurnaceBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -175,6 +177,10 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
 
             markDirty(world, blockPos, blockState);
         }
+
+        blockState = blockState.with(AbstractFurnaceBlock.LIT, entity.isBurning());
+        world.setBlockState(blockPos, blockState, Block.NOTIFY_ALL);
+        markDirty(world, blockPos, blockState);
     }
 
     private void resetProgress() {
@@ -206,8 +212,14 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
     }
 
     public static void burnOneFuelItem(CrystalPurifierBlockEntity entity) {
-        entity.removeStack(0, 1);
-        entity.resetFuelProgress();
+        if (isFuelItem(entity, entity.getStack(0))) {
+            entity.removeStack(0, 1);
+            entity.resetFuelProgress();
+        }
+    }
+
+    public static boolean isFuelItem(CrystalPurifierBlockEntity entity, ItemStack fuel) {
+        return entity.getFuelTime(fuel) > 0;
     }
 
     private static boolean hasRecipe(CrystalPurifierBlockEntity entity) {
