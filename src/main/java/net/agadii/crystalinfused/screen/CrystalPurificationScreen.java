@@ -43,10 +43,8 @@ public class CrystalPurificationScreen extends HandledScreen<CrystalPurification
     }
 
     private void renderFuelProgressFlame(MatrixStack matrices, int x, int y) {
-        if(handler.isCrafting()) {
-            int scaledProgress = handler.getScaledFuelProgress();
-            drawTexture(matrices, x + 53, y + 49 - scaledProgress, 176, 58 - scaledProgress,  21, scaledProgress + 1);
-        }
+        int scaledProgress = handler.getScaledFuelProgress();
+        drawTexture(matrices, x + 53, y + 49 - scaledProgress, 176, 58 - scaledProgress,  21, scaledProgress + 1);
     }
 
     @Override

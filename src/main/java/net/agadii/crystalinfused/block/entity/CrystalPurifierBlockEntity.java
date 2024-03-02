@@ -137,21 +137,42 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
             }
         }
 
-        if (hasRecipe(entity) && entity.isBurning()) {
-            entity.fuelProgress++;
-            entity.progress++;
-            markDirty(world, blockPos, blockState);
-
-            if (entity.progress >= entity.maxProgress) {
-                craftItem(entity);
-            }
-
-            if (entity.fuelProgress >= entity.fuelTime) {
+        if (hasRecipe(entity)) {
+            if (!entity.isBurning()) {
+                entity.fuelTime = entity.getFuelTime(entity.getStack(0));
                 burnOneFuelItem(entity);
+
+                if (entity.fuelTime > 0) {
+                    entity.fuelProgress++;
+                }
+
+                markDirty(world, blockPos, blockState);
+            } else {
+                entity.fuelProgress++;
+                entity.progress++;
+
+                if (entity.progress >= entity.maxProgress) {
+                    craftItem(entity);
+                }
+
+                if (entity.fuelProgress >= entity.fuelTime) {
+                    burnOneFuelItem(entity);
+                }
+
+                markDirty(world, blockPos, blockState);
             }
 
         } else {
             entity.resetProgress();
+
+            if (entity.isBurning()) {
+                entity.fuelProgress++;
+
+                if (entity.fuelProgress >= entity.fuelTime) {
+                    entity.resetFuelProgress();
+                }
+            }
+
             markDirty(world, blockPos, blockState);
         }
     }
@@ -185,11 +206,6 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
     }
 
     public static void burnOneFuelItem(CrystalPurifierBlockEntity entity) {
-        SimpleInventory inventory = new SimpleInventory(entity.size());
-        for (int i = 0; i < entity.size(); i++) {
-            inventory.setStack(i, entity.getStack(i));
-        }
-
         entity.removeStack(0, 1);
         entity.resetFuelProgress();
     }
