@@ -17,6 +17,8 @@ import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,10 +26,10 @@ public class CrystalPurifierBlock extends BlockWithEntity implements BlockEntity
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = Properties.LIT;
 
-
     public CrystalPurifierBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(LIT, false));
+
     }
 
     @Nullable
@@ -50,6 +52,7 @@ public class CrystalPurifierBlock extends BlockWithEntity implements BlockEntity
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING, LIT);
     }
+
 
     /* BLOCK ENTITY */
 
@@ -74,7 +77,7 @@ public class CrystalPurifierBlock extends BlockWithEntity implements BlockEntity
     public ActionResult onUse(BlockState state, World world, BlockPos pos,
                               PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+            NamedScreenHandlerFactory screenHandlerFactory = ((CrystalPurifierBlockEntity) world.getBlockEntity(pos));
 
             if (screenHandlerFactory != null) {
                 player.openHandledScreen(screenHandlerFactory);
@@ -87,7 +90,7 @@ public class CrystalPurifierBlock extends BlockWithEntity implements BlockEntity
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return null;
+        return new CrystalPurifierBlockEntity(pos, state);
     }
 
     @Nullable

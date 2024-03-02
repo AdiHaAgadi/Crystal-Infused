@@ -1,34 +1,40 @@
 package net.agadii.crystalinfused.screen;
 
+import net.agadii.crystalinfused.block.entity.CrystalPurifierBlockEntity;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.slot.FurnaceFuelSlot;
+import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 
 public class CrystalPurificationScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
+    public final CrystalPurifierBlockEntity blockEntity;
 
     public CrystalPurificationScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
-        this(syncId, inventory, new SimpleInventory(3), new ArrayPropertyDelegate(2));
+        this(syncId, inventory, inventory.player.getWorld().getBlockEntity(buf.readBlockPos()),
+                new ArrayPropertyDelegate(4));
     }
 
-    public CrystalPurificationScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
+    public CrystalPurificationScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity entity, PropertyDelegate delegate) {
         super(ModScreenHandlers.CRYSTAL_PURIFICATION_SCREEN_HANDLER, syncId);
-        checkSize(inventory, 3);
-        this.inventory = inventory;
+        checkSize(((Inventory) entity), 3);
+        this.inventory = (Inventory)entity;
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = delegate;
+        this.blockEntity = (CrystalPurifierBlockEntity) entity;
 
-        this.addSlot(new Slot(inventory, 0, 12, 15));
-        this.addSlot(new Slot(inventory, 1, 86, 15));
-        this.addSlot(new Slot(inventory, 2, 86, 60));
+        this.addSlot(new Slot(inventory, 0, 56, 53));
+        this.addSlot(new Slot(inventory, 1, 56, 17));
+        this.addSlot(new Slot(inventory, 2, 116, 35));
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
@@ -43,9 +49,17 @@ public class CrystalPurificationScreenHandler extends ScreenHandler {
     public int getScaledProgress() {
         int progress = this.propertyDelegate.get(0);
         int maxProgress = this.propertyDelegate.get(1);  // Max Progress
-        int progressArrowSize = 26; // This is the width in pixels of your arrow
+        int progressArrowSize = 22; // This is the width in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
+    public int getScaledFuelProgress() {
+        int fuelProgress = this.propertyDelegate.get(3); // fuel progress
+        int fuelTime = this.propertyDelegate.get(2);  // Max Fuel time
+        int progressFlameSize = 14; // This is the width in pixels of your arrow
+
+        return fuelTime != 0 && fuelProgress != 0 ? progressFlameSize - (fuelProgress * progressFlameSize / fuelTime) : 0;
     }
 
     @Override
@@ -77,7 +91,6 @@ public class CrystalPurificationScreenHandler extends ScreenHandler {
     public boolean canUse(PlayerEntity player) {
         return this.inventory.canPlayerUse(player);
     }
-
 
     private void addPlayerInventory(PlayerInventory playerInventory) {
         for (int i = 0; i < 3; ++i) {

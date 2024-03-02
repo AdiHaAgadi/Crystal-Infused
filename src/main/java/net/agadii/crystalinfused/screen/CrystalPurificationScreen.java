@@ -11,9 +11,9 @@ import net.minecraft.util.Identifier;
 
 public class CrystalPurificationScreen extends HandledScreen<CrystalPurificationScreenHandler> {
     private static final Identifier TEXTURE =
-                new Identifier(CrystalInfused.MOD_ID, "textures/gui/crystal_purifier_gui.png");
+            new Identifier(CrystalInfused.MOD_ID, "textures/gui/crystal_purifier_gui.png");
 
-        public CrystalPurificationScreen(CrystalPurificationScreenHandler handler, PlayerInventory inventory, Text title) {
+    public CrystalPurificationScreen(CrystalPurificationScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 
@@ -33,11 +33,19 @@ public class CrystalPurificationScreen extends HandledScreen<CrystalPurification
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
         renderProgressArrow(matrices, x, y);
+        renderFuelProgressFlame(matrices, x, y);
     }
 
     private void renderProgressArrow(MatrixStack matrices, int x, int y) {
         if(handler.isCrafting()) {
-            drawTexture(matrices, x + 105, y + 33, 176, 0, 8, handler.getScaledProgress());
+            drawTexture(matrices, x + 80, y + 34, 176, 0,  handler.getScaledProgress(), 16);
+        }
+    }
+
+    private void renderFuelProgressFlame(MatrixStack matrices, int x, int y) {
+        if(handler.isCrafting()) {
+            int scaledProgress = handler.getScaledFuelProgress();
+            drawTexture(matrices, x + 53, y + 49 - scaledProgress, 176, 58 - scaledProgress,  21, scaledProgress + 1);
         }
     }
 

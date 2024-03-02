@@ -12,7 +12,7 @@ public class ModScreenHandlers {
             new ExtendedScreenHandlerType<>(CrystalPurificationScreenHandler::new);
 
     public static void registerAllScreenHandlers() {
-        Registry.register(Registries.SCREEN_HANDLER, new Identifier(CrystalInfused.MOD_ID, "gem_infusing"),
+        Registry.register(Registries.SCREEN_HANDLER, new Identifier(CrystalInfused.MOD_ID, "crystal_purifier"),
                 CRYSTAL_PURIFICATION_SCREEN_HANDLER);
     }
 }

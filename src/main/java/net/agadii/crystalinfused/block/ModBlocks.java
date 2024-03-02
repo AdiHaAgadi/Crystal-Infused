@@ -58,15 +58,9 @@ public class ModBlocks {
     public static final Block SPINEL_ORE = registerBlock("spinel_ore",
             new ExperienceDroppingBlock(FabricBlockSettings.of(Material.STONE).strength(3.0f, 9.0f).requiresTool(),
                     UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
-    public static final Block PEARL_ORE = registerBlock("pearl_ore", // TODO: CREATE AN EXPERIENCE DROPPING SAND BLOCK TO MAKE IT BOTH ACT AS SAND AND DROP EXP
+    public static final Block PEARL_ORE = registerBlock("pearl_ore",
             new ExperienceDroppingSandBlock(14406560, FabricBlockSettings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(1.0f).requiresTool().sounds(BlockSoundGroup.SAND),
                     UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
-
-    public static final Block CRYSTAL_PURIFIER = registerBlock("crystal_purifier",
-            new CrystalPurifierBlock(FabricBlockSettings.of(Material.METAL)
-                    .strength(3.5f).requiresTool().sounds(BlockSoundGroup.COPPER)
-                    .luminance(Blocks.createLightLevelFromLitBlockState(13))), ModItemGroup.CRYSTAL_INFUSED);
-
 
     public static final Block DEEPSLATE_SAPPHIRE_ORE = registerBlock("deepslate_sapphire_ore",
             new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ModBlocks.SAPPHIRE_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5f, 3.0f).requiresTool().sounds(BlockSoundGroup.DEEPSLATE),
@@ -83,6 +77,11 @@ public class ModBlocks {
     public static final Block DEEPSLATE_PERIDOT_ORE = registerBlock("deepslate_peridot_ore",
             new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ModBlocks.PERIDOT_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5f, 3.0f).requiresTool().sounds(BlockSoundGroup.DEEPSLATE),
                     UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
+
+    public static final Block CRYSTAL_PURIFIER = registerBlock("crystal_purifier",
+            new CrystalPurifierBlock(FabricBlockSettings.of(Material.METAL)
+                    .strength(3.5f).requiresTool().sounds(BlockSoundGroup.COPPER)
+                    .luminance(Blocks.createLightLevelFromLitBlockState(13))), ModItemGroup.CRYSTAL_INFUSED);
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);

@@ -2,6 +2,7 @@ package net.agadii.crystalinfused.data;
 
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.item.ModItems;
+import net.agadii.crystalinfused.recipe.ModRecipes;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
@@ -100,6 +101,5 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .pattern("IXI")
                 .pattern("###")
                 .criterion("has_copper", VanillaRecipeProvider.conditionsFromItem(Items.COPPER_INGOT)).offerTo(exporter);
-
     }
 }

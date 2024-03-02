@@ -4,6 +4,7 @@ import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.block.entity.ModBlockEntities;
 import net.agadii.crystalinfused.item.ModItemGroup;
 import net.agadii.crystalinfused.item.ModItems;
+import net.agadii.crystalinfused.recipe.ModRecipes;
 import net.agadii.crystalinfused.screen.ModScreenHandlers;
 import net.agadii.crystalinfused.world.gen.ModWorldGeneration;
 import net.agadii.crystalinfused.world.gen.feature.ModFeatures;
@@ -24,6 +25,7 @@ public class CrystalInfused implements ModInitializer {
 		ModFeatures.registerModFeatures();
 		ModBlockEntities.registerBlockEntities();
 		ModScreenHandlers.registerAllScreenHandlers();
+		ModRecipes.registerRecipes();
 
 		ModWorldGeneration.generateModWorldGen();
 	}
