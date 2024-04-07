@@ -1,6 +1,7 @@
 package net.agadii.crystalinfused.screen;
 
 import net.agadii.crystalinfused.block.entity.CrystalPurifierBlockEntity;
+import net.agadii.crystalinfused.screen.slot.PurificationFuelSlot;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -32,9 +33,9 @@ public class CrystalPurificationScreenHandler extends ScreenHandler {
         this.propertyDelegate = delegate;
         this.blockEntity = (CrystalPurifierBlockEntity) entity;
 
-        this.addSlot(new Slot(inventory, 0, 56, 53));
+        this.addSlot(new PurificationFuelSlot(this, inventory, 0, 56, 53));
         this.addSlot(new Slot(inventory, 1, 56, 17));
-        this.addSlot(new Slot(inventory, 2, 116, 35));
+        this.addSlot(new FurnaceOutputSlot(playerInventory.player, inventory, 2, 116, 35));
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
@@ -95,14 +96,18 @@ public class CrystalPurificationScreenHandler extends ScreenHandler {
     private void addPlayerInventory(PlayerInventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
             }
         }
     }
 
     private void addPlayerHotbar(PlayerInventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
+    }
+
+    public boolean isFuel(ItemStack stack) {
+        return CrystalPurifierBlockEntity.canUseAsFuel(stack);
     }
 }

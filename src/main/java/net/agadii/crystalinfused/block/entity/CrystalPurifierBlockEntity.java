@@ -1,6 +1,7 @@
 package net.agadii.crystalinfused.block.entity;
 
 import com.google.common.collect.Maps;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.agadii.crystalinfused.block.CrystalPurifierBlock;
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.recipe.CrystalPurificationRecipe;
@@ -9,22 +10,28 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.AbstractCookingRecipe;
+import net.minecraft.recipe.RecipeManager;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -95,6 +102,10 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
         return map;
     }
 
+    public static boolean canUseAsFuel(ItemStack stack) {
+        return createFuelTimeMap().containsKey(stack.getItem());
+    }
+
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
@@ -130,6 +141,8 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
             return;
         }
 
+        boolean isNextFuel = false;
+
         if (hasRecipe(entity) && !entity.isBurning()) {
             entity.fuelTime = entity.getFuelTime(entity.getStack(0));
             burnOneFuelItem(entity);
@@ -159,6 +172,8 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
 
                 if (entity.fuelProgress >= entity.fuelTime) {
                     burnOneFuelItem(entity);
+                    isNextFuel = entity.getFuelTime(entity.getStack(0)) > 0;
+
                 }
 
                 markDirty(world, blockPos, blockState);
@@ -178,7 +193,7 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
             markDirty(world, blockPos, blockState);
         }
 
-        blockState = blockState.with(AbstractFurnaceBlock.LIT, entity.isBurning());
+        blockState = blockState.with(AbstractFurnaceBlock.LIT, entity.isBurning() || isNextFuel);
         world.setBlockState(blockPos, blockState, Block.NOTIFY_ALL);
         markDirty(world, blockPos, blockState);
     }
@@ -191,6 +206,37 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
         this.fuelProgress = 0;
     }
 
+
+    @Override
+    public boolean isValid(int slot, ItemStack stack) {
+        if (slot == 2) {
+            return false;
+        }
+        if (slot == 0) {
+            ItemStack itemStack = this.inventory.get(0);
+            return CrystalPurifierBlockEntity.canUseAsFuel(stack) || stack.isOf(Items.BUCKET) && !itemStack.isOf(Items.BUCKET);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        return this.isValid(slot, stack);
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        if (dir == Direction.DOWN && slot == 1) {
+            return stack.isOf(Items.WATER_BUCKET) || stack.isOf(Items.BUCKET);
+        }
+
+        if (dir == Direction.DOWN && slot == 2) {
+            return true;
+        }
+
+        return false;
+    }
 
     private static void craftItem(CrystalPurifierBlockEntity entity) {
         SimpleInventory inventory = new SimpleInventory(entity.size());
@@ -212,14 +258,10 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
     }
 
     public static void burnOneFuelItem(CrystalPurifierBlockEntity entity) {
-        if (isFuelItem(entity, entity.getStack(0))) {
+        if (canUseAsFuel(entity.getStack(0))) {
             entity.removeStack(0, 1);
             entity.resetFuelProgress();
         }
-    }
-
-    public static boolean isFuelItem(CrystalPurifierBlockEntity entity, ItemStack fuel) {
-        return entity.getFuelTime(fuel) > 0;
     }
 
     private static boolean hasRecipe(CrystalPurifierBlockEntity entity) {

@@ -75,7 +75,6 @@ public class CrystalPurificationRecipe implements Recipe<SimpleInventory> {
         @Override
         public CrystalPurificationRecipe read(Identifier id, JsonObject json) {
             ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
-
             JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(1, Ingredient.EMPTY);
 
