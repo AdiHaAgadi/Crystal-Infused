@@ -48,6 +48,13 @@ public class CrystalPurificationRecipe implements Recipe<SimpleInventory> {
     }
 
     @Override
+    public DefaultedList<Ingredient> getIngredients() {
+        DefaultedList<Ingredient> list = DefaultedList.ofSize(this.recipeItems.size());
+        list.addAll(recipeItems);
+        return list;
+    }
+
+    @Override
     public Identifier getId() {
         return id;
     }
@@ -76,6 +83,7 @@ public class CrystalPurificationRecipe implements Recipe<SimpleInventory> {
         public CrystalPurificationRecipe read(Identifier id, JsonObject json) {
             ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
             JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
+
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(1, Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
@@ -100,6 +108,7 @@ public class CrystalPurificationRecipe implements Recipe<SimpleInventory> {
         @Override
         public void write(PacketByteBuf buf, CrystalPurificationRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
+
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.write(buf);
             }

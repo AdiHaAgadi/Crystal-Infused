@@ -2,6 +2,7 @@ package net.agadii.crystalinfused.block.entity;
 
 import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import me.shedaniel.rei.api.common.entry.EntryStack;
 import net.agadii.crystalinfused.block.CrystalPurifierBlock;
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.recipe.CrystalPurificationRecipe;
@@ -35,16 +36,15 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
-    private int maxProgress = 200;
+    private static int maxProgress = 200;
     private int fuelTime = 0;
     private int fuelProgress = 0;
 
@@ -54,7 +54,7 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
             public int get(int index) {
                 switch (index) {
                     case 0: return CrystalPurifierBlockEntity.this.progress;
-                    case 1: return CrystalPurifierBlockEntity.this.maxProgress;
+                    case 1: return maxProgress;
                     case 2: return CrystalPurifierBlockEntity.this.fuelTime;
                     case 3: return CrystalPurifierBlockEntity.this.fuelProgress;
                     default: return 0;
@@ -64,7 +64,7 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
             public void set(int index, int value) {
                 switch(index) {
                     case 0: CrystalPurifierBlockEntity.this.progress = value; break;
-                    case 1: CrystalPurifierBlockEntity.this.maxProgress = value; break;
+                    case 1: maxProgress = value; break;
                     case 2: CrystalPurifierBlockEntity.this.fuelTime = value; break;
                     case 3: CrystalPurifierBlockEntity.this.fuelProgress = value; break;
                 }
@@ -100,6 +100,14 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
         map.put(Items.DRAGON_BREATH, 600);
 
         return map;
+    }
+
+    public static int getPurificationTime() {
+        return maxProgress;
+    }
+
+    public static List<Item> getFuelItems() {
+        return new ArrayList<>(createFuelTimeMap().keySet());
     }
 
     public static boolean canUseAsFuel(ItemStack stack) {
@@ -166,7 +174,7 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
                 entity.fuelProgress++;
                 entity.progress++;
 
-                if (entity.progress >= entity.maxProgress) {
+                if (entity.progress >= maxProgress) {
                     craftItem(entity);
                 }
 
@@ -260,8 +268,11 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
     public static void burnOneFuelItem(CrystalPurifierBlockEntity entity) {
         if (canUseAsFuel(entity.getStack(0))) {
             entity.removeStack(0, 1);
-            entity.resetFuelProgress();
+        } else {
+            entity.resetProgress();
         }
+
+        entity.resetFuelProgress();
     }
 
     private static boolean hasRecipe(CrystalPurifierBlockEntity entity) {

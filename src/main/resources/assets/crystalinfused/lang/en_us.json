@@ -38,5 +38,7 @@
     "block.crystalinfused.peridot_ore": "Peridot Ore",
     "block.crystalinfused.deepslate_peridot_ore": "Deepslate Peridot Ore",
 
-    "block.crystalinfused.crystal_purifier": "Crystal Purifier"
+    "block.crystalinfused.crystal_purifier": "Crystal Purifier",
+
+    "tag.crystalinfused.crystal_purification": "Crystal Purification"
 }
