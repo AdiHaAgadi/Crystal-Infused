@@ -21,6 +21,7 @@ public class ModLootTableGenerator extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.SPINEL_BLOCK);
         addDrop(ModBlocks.PEARL_BLOCK);
         addDrop(ModBlocks.CRYSTAL_PURIFIER);
+        addDrop(ModBlocks.CRYSTAL_INFUSER);
 
         addDrop(ModBlocks.SAPPHIRE_ORE, oreDrops(ModBlocks.SAPPHIRE_ORE, ModItems.RAW_SAPPHIRE));
         addDrop(ModBlocks.DEEPSLATE_SAPPHIRE_ORE, oreDrops(ModBlocks.DEEPSLATE_SAPPHIRE_ORE, ModItems.RAW_SAPPHIRE));

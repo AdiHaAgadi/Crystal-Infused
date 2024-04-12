@@ -3,6 +3,7 @@ package net.agadii.crystalinfused.data;
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.item.ModItems;
 import net.agadii.crystalinfused.recipe.ModRecipes;
+import net.agadii.crystalinfused.tag.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
@@ -10,7 +11,10 @@ import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.VanillaRecipeProvider;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -101,5 +105,14 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .pattern("IXI")
                 .pattern("###")
                 .criterion("has_copper", VanillaRecipeProvider.conditionsFromItem(Items.COPPER_INGOT)).offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.CRYSTAL_INFUSER)
+                .input('#', Items.NETHERITE_INGOT)
+                .input('X', ModTags.CRYSTAL)
+                .input('I', ItemTags.WOOL)
+                .pattern("III")
+                .pattern("IXI")
+                .pattern("###")
+                .criterion("has_netherite", VanillaRecipeProvider.conditionsFromItem(Items.NETHERITE_INGOT)).offerTo(exporter);
     }
 }

@@ -84,6 +84,10 @@ public class ModBlocks {
                     .strength(3.5f).requiresTool().sounds(BlockSoundGroup.COPPER)
                     .luminance(Blocks.createLightLevelFromLitBlockState(13))), ModItemGroup.CRYSTAL_INFUSED);
 
+    public static final Block CRYSTAL_INFUSER = registerBlock("crystal_infuser",
+            new CrystalInfuserBlock(FabricBlockSettings.of(Material.METAL, MapColor.BLACK)
+                    .strength(50.0F, 1200.0F).requiresTool().sounds(BlockSoundGroup.NETHERITE)), ModItemGroup.CRYSTAL_INFUSED);
+
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
 

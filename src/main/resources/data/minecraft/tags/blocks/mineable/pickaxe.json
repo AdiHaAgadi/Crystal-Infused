@@ -21,6 +21,7 @@
         "crystalinfused:spinel_ore",
         "crystalinfused:spinel_block",
         "crystalinfused:pearl_block",
-        "crystalinfused:crystal_purifier"
+        "crystalinfused:crystal_purifier",
+        "crystalinfused:crystal_infuser"
     ]
 }

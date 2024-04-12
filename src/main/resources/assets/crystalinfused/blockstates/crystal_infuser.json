@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "crystalinfused:block/crystal_infuser",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "crystalinfused:block/crystal_infuser"
+    },
+    "facing=south": {
+      "model": "crystalinfused:block/crystal_infuser",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crystalinfused:block/crystal_infuser",
+      "y": 270
+    }
+  }
+}

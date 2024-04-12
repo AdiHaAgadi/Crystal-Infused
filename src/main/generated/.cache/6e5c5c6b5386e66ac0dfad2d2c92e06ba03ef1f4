@@ -1,6 +1,6 @@
-// 1.19.4	2024-04-09T16:20:49.7488337	Crystal Infused/Model Definitions
-ddf4e6f243fe09a6d5f23889afe5775faedb0acd assets\crystalinfused\models\item\crystal_purifier.json
+// 1.19.4	2024-04-12T22:00:02.5781683	Crystal Infused/Model Definitions
 5885b1a72e7cf96537b7a302e0bbb7e7ee629fb2 assets\crystalinfused\models\block\sapphire_ore.json
+ddf4e6f243fe09a6d5f23889afe5775faedb0acd assets\crystalinfused\models\item\crystal_purifier.json
 8d8d3863a14f76748005eb411e0bd5fdc669e657 assets\crystalinfused\models\block\crystal_purifier_on.json
 634ffbf692cd628dfb987a62175a6037aa828e76 assets\crystalinfused\models\item\pearl_block.json
 ce854ce400f4747329203003566df790db604c46 assets\crystalinfused\blockstates\pearl_ore.json
@@ -29,8 +29,8 @@ bd76a993b228d8b14b6d55720aea1c4f060044a3 assets\crystalinfused\blockstates\sugil
 27b856a3830a606b6ce927b211ac65da4e72b693 assets\crystalinfused\blockstates\deepslate_amber_ore.json
 c5c659b1c2033fce79749318e0042d970e51f404 assets\crystalinfused\models\block\sugilite_ore.json
 ba09074ad99bd180df5cb82d130a0a3c1c4cf871 assets\crystalinfused\blockstates\deepslate_topaz_ore.json
-fb2cfb1e7caa23a1046621289de0f8f0e6ec5ea8 assets\crystalinfused\models\item\raw_amber.json
 e7e4fdbcfc784cf4b7dd57860a9446d9f104b07a assets\crystalinfused\models\item\sugilite_block.json
+fb2cfb1e7caa23a1046621289de0f8f0e6ec5ea8 assets\crystalinfused\models\item\raw_amber.json
 a9b81c48d5a0c8c708bad65e42c4d3dbf5fee0a9 assets\crystalinfused\blockstates\deepslate_sapphire_ore.json
 6bd92c034b37b3175a1f53b3927a320acf8f1156 assets\crystalinfused\models\item\sapphire.json
 ed45cba0ec43cd57906bdb969bc960d9a6adc4ba assets\crystalinfused\models\item\sapphire_ore.json
@@ -41,8 +41,8 @@ a8b0c9600055ea10c16356790a5080db1ce6d424 assets\crystalinfused\models\item\sugil
 2a78869f244ca0742acf596bb33323eabe77615f assets\crystalinfused\models\item\amber_ore.json
 ea7d958023262cb0cc829f612c77aa4135484e2c assets\crystalinfused\models\item\amber.json
 4586f2f443d5af413b8ff3c166dac9dc027e91f0 assets\crystalinfused\models\item\raw_sapphire.json
-936550eda2420b73ce8a93011fff42dd25553da7 assets\crystalinfused\models\block\peridot_ore.json
 2875bd3d67680f321e8ac5a12fc8afb2e36e7b04 assets\crystalinfused\models\item\raw_peridot.json
+936550eda2420b73ce8a93011fff42dd25553da7 assets\crystalinfused\models\block\peridot_ore.json
 7ee04d88c7cb376ea78054babf993f141efe7579 assets\crystalinfused\blockstates\topaz_ore.json
 3eddd5f8145de412f10f1cae297df0af1d4d5057 assets\crystalinfused\models\item\raw_sugilite.json
 a64fcf1881ca1d637e6c78c5f0f79161a4cbc851 assets\crystalinfused\models\item\peridot.json

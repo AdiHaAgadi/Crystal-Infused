@@ -18,6 +18,11 @@ repositories {
 	// for more information about repositories.
 
 	maven { url "https://maven.shedaniel.me" }
+	maven {
+		// location of the maven that hosts JEI files since January 2023
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
+	}
 }
 
 fabricApi {

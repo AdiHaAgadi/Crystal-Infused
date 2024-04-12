@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "crystalinfused:raw_sapphire",
+    "crystalinfused:raw_ruby",
+    "crystalinfused:raw_topaz",
+    "crystalinfused:raw_amber",
+    "crystalinfused:raw_peridot",
+    "crystalinfused:raw_sugilite",
+    "crystalinfused:raw_spinel",
+    "crystalinfused:raw_pearl"
+  ]
+}
