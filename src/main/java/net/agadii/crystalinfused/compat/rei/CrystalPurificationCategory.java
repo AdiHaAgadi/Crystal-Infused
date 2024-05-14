@@ -2,6 +2,7 @@ package net.agadii.crystalinfused.compat.rei;
 
 import com.google.common.collect.Lists;
 import me.shedaniel.math.Dimension;
+import me.shedaniel.rei.api.client.REIRuntime;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;
@@ -22,8 +23,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CrystalPurificationCategory implements DisplayCategory<BasicDisplay> {
-    public static final Identifier TEXTURE =
-            new Identifier(CrystalInfused.MOD_ID, "textures/gui/crystal_purifier_rei_gui.png");
     public static final CategoryIdentifier<CrystalPurificationDisplay> CRYSTAL_PURIFICATION =
             CategoryIdentifier.of(CrystalInfused.MOD_ID, "crystal_purification");
 
@@ -42,23 +41,13 @@ public class CrystalPurificationCategory implements DisplayCategory<BasicDisplay
         return EntryStacks.of(ModBlocks.CRYSTAL_PURIFIER.asItem().getDefaultStack());
     }
 
-    public List<Widget> setupDisplay(CrystalPurificationDisplay display, Rectangle bounds) {
-        final Point startPoint = new Point(bounds.getCenterX() - 87, bounds.getCenterY() - 35);
-        List<Widget> widgets = new LinkedList<>();
-        widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 86, 47)));
-
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 56, startPoint.y + 17))
-                .entries(display.getInputEntries().get(0)));
-
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 116, startPoint.y + 35))
-                .entries(display.getOutputEntries().get(0)));
-
-
-        return widgets;
-    }
-
     @Override
     public List<Widget> setupDisplay(BasicDisplay display, Rectangle bounds) {
+        Identifier TEXTURE = new Identifier(CrystalInfused.MOD_ID, REIRuntime.getInstance().isDarkThemeEnabled()
+                        ? "textures/gui/rei/crystal_purifier_gui_dark.png"
+                        : "textures/gui/rei/crystal_purifier_gui.png"
+        );
+
         Point startPoint = new Point(bounds.getCenterX() - 41, bounds.y + 5);
         double purificationTime = CrystalPurifierBlockEntity.getPurificationTime();
 

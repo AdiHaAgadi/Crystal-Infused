@@ -18,7 +18,7 @@ import java.util.Objects;
 public class PurificationFireWidget extends PurificationFire {
     private Rectangle bounds;
     private double animationDuration = -1;
-    private final Identifier TEXTURE = new Identifier(CrystalInfused.MOD_ID, "textures/gui/purification_fire_rei.png");
+    private final Identifier TEXTURE = new Identifier(CrystalInfused.MOD_ID, "textures/gui/rei/purification_fire.png");
     private final NumberAnimator<Float> darkBackgroundAlpha = ValueAnimator.ofFloat()
             .withConvention(() -> REIRuntime.getInstance().isDarkThemeEnabled() ? 1.0F : 0.0F, ValueAnimator.typicalTransitionTime())
             .asFloat();

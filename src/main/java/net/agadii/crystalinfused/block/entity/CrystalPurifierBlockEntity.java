@@ -1,9 +1,6 @@
 package net.agadii.crystalinfused.block.entity;
 
 import com.google.common.collect.Maps;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import me.shedaniel.rei.api.common.entry.EntryStack;
-import net.agadii.crystalinfused.block.CrystalPurifierBlock;
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.recipe.CrystalPurificationRecipe;
 import net.agadii.crystalinfused.screen.CrystalPurificationScreenHandler;
@@ -11,21 +8,16 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.AbstractCookingRecipe;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -37,7 +29,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
