@@ -9,6 +9,4 @@ import net.minecraft.util.Identifier;
 public class ModTags {
     public static final TagKey<Item> CRYSTAL = TagKey.of(RegistryKeys.ITEM,  new Identifier(CrystalInfused.MOD_ID, "crystals"));
     public static final TagKey<Item> RAW_CRYSTAL = TagKey.of(RegistryKeys.ITEM,  new Identifier(CrystalInfused.MOD_ID, "raw_crystals"));
-
-
 }

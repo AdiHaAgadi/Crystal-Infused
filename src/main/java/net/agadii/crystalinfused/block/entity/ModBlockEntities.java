@@ -10,11 +10,17 @@ import net.minecraft.util.Identifier;
 
 public class ModBlockEntities {
     public static BlockEntityType<CrystalPurifierBlockEntity> CRYSTAL_PURIFIER;
+    public static BlockEntityType<CrystalInfuserBlockEntity> CRYSTAL_INFUSER;
 
     public static void registerBlockEntities() {
         CRYSTAL_PURIFIER = Registry.register(Registries.BLOCK_ENTITY_TYPE,
                 new Identifier(CrystalInfused.MOD_ID, "crystal_purifier"),
                 FabricBlockEntityTypeBuilder.create(CrystalPurifierBlockEntity::new,
                         ModBlocks.CRYSTAL_PURIFIER).build(null));
+
+        CRYSTAL_INFUSER = Registry.register(Registries.BLOCK_ENTITY_TYPE,
+                new Identifier(CrystalInfused.MOD_ID, "crystal_infuser"),
+                FabricBlockEntityTypeBuilder.create(CrystalInfuserBlockEntity::new,
+                        ModBlocks.CRYSTAL_INFUSER).build(null));
     }
 }

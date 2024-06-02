@@ -11,5 +11,10 @@ public class ModRecipes {
                 CrystalPurificationRecipe.Serializer.INSTANCE);
         Registry.register(Registries.RECIPE_TYPE, new Identifier(CrystalInfused.MOD_ID, CrystalPurificationRecipe.Type.ID),
                 CrystalPurificationRecipe.Type.INSTANCE);
+
+        Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(CrystalInfused.MOD_ID, CrystalInfusionRecipe.Serializer.ID),
+                CrystalInfusionRecipe.Serializer.INSTANCE);
+        Registry.register(Registries.RECIPE_TYPE, new Identifier(CrystalInfused.MOD_ID, CrystalInfusionRecipe.Type.ID),
+                CrystalInfusionRecipe.Type.INSTANCE);
     }
 }
