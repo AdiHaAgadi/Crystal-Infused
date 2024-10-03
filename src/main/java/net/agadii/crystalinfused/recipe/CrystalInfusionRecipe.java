@@ -2,11 +2,15 @@ package net.agadii.crystalinfused.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
@@ -83,13 +87,33 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
 
         @Override
         public CrystalInfusionRecipe read(Identifier id, JsonObject json) {
-            ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
+            JsonObject resultObject = JsonHelper.getObject(json, "result");
+            ItemStack output = ShapedRecipe.outputFromJson(resultObject);
+
+            if (resultObject.has("nbt")) {
+                try {
+                    NbtCompound nbt = StringNbtReader.parse(JsonHelper.getString(resultObject, "nbt"));
+                    output.setNbt(nbt);
+                } catch (CommandSyntaxException e) {
+                    e.printStackTrace();
+                }
+            }
+
             JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
+            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(ingredients.size(), Ingredient.EMPTY);
 
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(3, Ingredient.EMPTY);
-
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
+            for (int i = 0; i < ingredients.size(); i++) {
+                JsonObject ingredientObject = ingredients.get(i).getAsJsonObject();
+                ItemStack stack = new ItemStack(Registries.ITEM.get(new Identifier(JsonHelper.getString(ingredientObject, "item"))));
+                if (ingredientObject.has("nbt")) {
+                    try {
+                        NbtCompound nbt = StringNbtReader.parse(JsonHelper.getString(ingredientObject, "nbt"));
+                        stack.setNbt(nbt);
+                    } catch (CommandSyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+                inputs.set(i, Ingredient.ofStacks(stack));
             }
 
             return new CrystalInfusionRecipe(id, output, inputs);
@@ -97,25 +121,43 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
 
         @Override
         public CrystalInfusionRecipe read(Identifier id, PacketByteBuf buf) {
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
+            int size = buf.readInt();
+            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(size, Ingredient.EMPTY);
 
-            for (int i = 0; i < inputs.size(); i++) {
+            for (int i = 0; i < size; i++) {
                 inputs.set(i, Ingredient.fromPacket(buf));
             }
 
             ItemStack output = buf.readItemStack();
+            String nbtString = buf.readString(32767);
+            if (!nbtString.isEmpty()) {
+                try {
+                    NbtCompound nbt = StringNbtReader.parse(nbtString);
+                    output.setNbt(nbt);
+                } catch (CommandSyntaxException e) {
+                    e.printStackTrace();
+                }
+            }
+
             return new CrystalInfusionRecipe(id, output, inputs);
         }
 
         @Override
-        public void write(PacketByteBuf buf, CrystalPurificationRecipe recipe) {
+        public void write(PacketByteBuf buf, CrystalInfusionRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
 
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.write(buf);
             }
 
-            buf.writeItemStack(recipe.getOutput(null));
+            ItemStack output = recipe.getOutput(null);
+            buf.writeItemStack(output);
+
+            if (output.hasNbt()) {
+                buf.writeString(output.getNbt().toString());
+            } else {
+                buf.writeString("");
+            }
         }
     }
 }

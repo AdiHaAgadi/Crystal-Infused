@@ -1,0 +1,19 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:sharpness\",lvl:5}]}"
+    },
+    {
+      "item": "crystalinfused:spinel"
+    },
+    {
+      "item": "crystalinfused:sapphire"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:sharpness\",lvl:6}]}"
+  }
+}

@@ -39,7 +39,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PEARL_ORE);
 
         blockStateModelGenerator.registerCooker(ModBlocks.CRYSTAL_PURIFIER, TexturedModel.ORIENTABLE);
-        blockStateModelGenerator.registerCooker(ModBlocks.CRYSTAL_INFUSER, TexturedModel.ORIENTABLE);
+//        blockStateModelGenerator.registerCooker(ModBlocks.CRYSTAL_INFUSER, TexturedModel.ORIENTABLE);
     }
 
     @Override

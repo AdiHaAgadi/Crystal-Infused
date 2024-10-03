@@ -2,6 +2,7 @@ package net.agadii.crystalinfused.block.entity;
 
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.recipe.CrystalInfusionRecipe;
+import net.agadii.crystalinfused.screen.CrystalInfusionScreenHandler;
 import net.agadii.crystalinfused.tag.ModTags;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
@@ -114,13 +115,30 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
     }
 
     private boolean isBurning() {
-        return this.fuelProgress > 0;
+        return this.fuelProgress >= 0;
     }
 
-    // TODO: implement!!!
     public static void tick(World world, BlockPos blockPos, BlockState blockState, CrystalInfuserBlockEntity entity) {
         if (world.isClient()) {
             return;
+        }
+
+        if (hasRecipe(entity)) {
+            if (!entity.isBurning()) {
+                boolean hasBurnt = burnOneFuelItem(entity);
+
+                if (hasBurnt) {
+                    entity.fuelProgress--;
+                    entity.progress++;
+                }
+            } else {
+                entity.fuelProgress--;
+                entity.progress++;
+            }
+
+            if (entity.progress >= maxProgress) {
+                craftItem(entity);
+            }
         }
     }
 
@@ -129,7 +147,7 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
     }
 
     private void resetFuelProgress() {
-        this.fuelProgress = 0;
+        this.fuelProgress = maxFuelProgress;
     }
 
 
@@ -167,26 +185,33 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
         Optional<CrystalInfusionRecipe> recipe = entity.getWorld().getRecipeManager()
                 .getFirstMatch(CrystalInfusionRecipe.Type.INSTANCE, inventory, entity.getWorld());
 
-        if(hasRecipe(entity)) {
+        if (recipe.isPresent() && hasRecipe(entity)) {
+            ItemStack outputStack = recipe.get().getOutput(entity.getWorld().getRegistryManager());
+            if (outputStack.hasNbt()) {
+                entity.setStack(4, outputStack.copy());
+            } else {
+                entity.setStack(4, new ItemStack(recipe.get().getOutput(entity.getWorld().getRegistryManager()).getItem(), entity.getStack(4).getCount() + 1));
+            }
+
             entity.removeStack(1, 1);
             entity.removeStack(2, 1);
             entity.removeStack(3, 1);
-
-            entity.setStack(5, new ItemStack(recipe.get().getOutput(null).getItem(),
-                    entity.getStack(5).getCount() + 1));
 
             entity.resetProgress();
         }
     }
 
-    public static void burnOneFuelItem(CrystalInfuserBlockEntity entity) {
+    public static boolean burnOneFuelItem(CrystalInfuserBlockEntity entity) {
         if (isFuel(entity.getStack(0))) {
             entity.removeStack(0, 1);
+            entity.resetFuelProgress();
+
+            return true;
         } else {
             entity.resetProgress();
-        }
 
-        entity.resetFuelProgress();
+            return false;
+        }
     }
 
     private static boolean hasRecipe(CrystalInfuserBlockEntity entity) {
