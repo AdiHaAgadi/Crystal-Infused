@@ -1,0 +1,19 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:respiration\",lvl:3}]}"
+    },
+    {
+      "item": "crystalinfused:topaz"
+    },
+    {
+      "item": "crystalinfused:pearl"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:respiration\",lvl:4}]}"
+  }
+}

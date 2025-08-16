@@ -1,0 +1,19 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:thorns\",lvl:3}]}"
+    },
+    {
+      "item": "crystalinfused:peridot"
+    },
+    {
+      "item": "crystalinfused:sapphire"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:thorns\",lvl:4}]}"
+  }
+}

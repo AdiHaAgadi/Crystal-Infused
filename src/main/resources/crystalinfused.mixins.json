@@ -3,6 +3,8 @@
 	"package": "net.agadii.crystalinfused.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
+		"ForgingScreenHandlerAccessor",
+		"AnvilScreenHandlerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

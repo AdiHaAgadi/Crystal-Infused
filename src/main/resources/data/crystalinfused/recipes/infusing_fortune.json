@@ -1,0 +1,19 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:fortune\",lvl:3}]}"
+    },
+    {
+      "item": "crystalinfused:peridot"
+    },
+    {
+      "item": "crystalinfused:pearl"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:fortune\",lvl:4}]}"
+  }
+}

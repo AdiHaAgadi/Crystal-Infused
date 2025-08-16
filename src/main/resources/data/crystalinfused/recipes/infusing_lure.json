@@ -3,10 +3,10 @@
   "ingredients": [
     {
       "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:sharpness\",lvl:5}]}"
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:lure\",lvl:3}]}"
     },
     {
-      "item": "crystalinfused:sapphire"
+      "item": "crystalinfused:topaz"
     },
     {
       "item": "crystalinfused:amber"
@@ -14,6 +14,6 @@
   ],
   "result": {
     "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:sharpness\",lvl:6}]}"
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:lure\",lvl:4}]}"
   }
 }

@@ -1,0 +1,19 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:loyalty\",lvl:3}]}"
+    },
+    {
+      "item": "crystalinfused:topaz"
+    },
+    {
+      "item": "crystalinfused:sugilite"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:loyalty\",lvl:4}]}"
+  }
+}

@@ -155,8 +155,8 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
     public boolean isValid(int slot, ItemStack stack) {
         ItemStack itemStack = this.inventory.get(0);
 
-        if (slot == 4) {
-            return false;
+        if (slot == 4) { // could be any item
+            return true;
         } else if (slot == 3) {
             return itemStack.isOf(Items.ENCHANTED_BOOK);
         } else if (slot == 0) {
@@ -184,6 +184,8 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
 
         Optional<CrystalInfusionRecipe> recipe = entity.getWorld().getRecipeManager()
                 .getFirstMatch(CrystalInfusionRecipe.Type.INSTANCE, inventory, entity.getWorld());
+
+        entity.removeStack(4, 1);
 
         if (recipe.isPresent() && hasRecipe(entity)) {
             ItemStack outputStack = recipe.get().getOutput(entity.getWorld().getRegistryManager());
@@ -228,11 +230,11 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, Item output) {
-        return inventory.getStack(5).getItem() == output.asItem() || inventory.getStack(5).isEmpty();
+        return inventory.getStack(4).getItem() == output.asItem() || inventory.getStack(4).isEmpty();
     }
 
     private static boolean canInsertAmountIntoOutputSlot(SimpleInventory inventory) {
-        return inventory.getStack(5).getMaxCount() > inventory.getStack(5).getCount();
+        return inventory.getStack(4).getMaxCount() > inventory.getStack(4).getCount();
     }
 
     @Override

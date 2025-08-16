@@ -1,0 +1,19 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:blast_protection\",lvl:4}]}"
+    },
+    {
+      "item": "crystalinfused:pearl"
+    },
+    {
+      "item": "crystalinfused:ruby"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:blast_protection\",lvl:5}]}"
+  }
+}
