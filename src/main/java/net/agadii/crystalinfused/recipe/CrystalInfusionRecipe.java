@@ -33,7 +33,7 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
             return false;
         }
 
-        return recipeItems.get(0).test(inventory.getStack(3))
+        return recipeItems.get(0).test(inventory.getStack(0))
                 && recipeItems.get(1).test(inventory.getStack(1))
                 && recipeItems.get(2).test(inventory.getStack(2));
     }

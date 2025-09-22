@@ -157,9 +157,9 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
 
         if (slot == 4) { // could be any item
             return true;
-        } else if (slot == 3) {
-            return itemStack.isOf(Items.ENCHANTED_BOOK);
         } else if (slot == 0) {
+            return itemStack.isOf(Items.ENCHANTED_BOOK);
+        } else if (slot == 3) {
             return CrystalInfuserBlockEntity.isFuel(itemStack);
         } else {
             return itemStack.isIn(ModTags.CRYSTAL);
@@ -195,17 +195,17 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
                 entity.setStack(4, new ItemStack(recipe.get().getOutput(entity.getWorld().getRegistryManager()).getItem(), entity.getStack(4).getCount() + 1));
             }
 
+            entity.removeStack(0, 1);
             entity.removeStack(1, 1);
             entity.removeStack(2, 1);
-            entity.removeStack(3, 1);
 
             entity.resetProgress();
         }
     }
 
     public static boolean burnOneFuelItem(CrystalInfuserBlockEntity entity) {
-        if (isFuel(entity.getStack(0))) {
-            entity.removeStack(0, 1);
+        if (isFuel(entity.getStack(3))) {
+            entity.removeStack(3, 1);
             entity.resetFuelProgress();
 
             return true;

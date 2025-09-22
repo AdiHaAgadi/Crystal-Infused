@@ -31,10 +31,10 @@ public class CrystalInfusionScreenHandler extends ScreenHandler {
         this.propertyDelegate = delegate;
         this.blockEntity = (CrystalInfuserBlockEntity) entity;
 
-        this.addSlot(new Slot(inventory, 0, 80, 111));
+        this.addSlot(new Slot(inventory, 0, 80, 25));
         this.addSlot(new Slot(inventory, 1, 41, 64));
         this.addSlot(new Slot(inventory, 2, 119, 64));
-        this.addSlot(new Slot(inventory, 3, 80, 25));
+        this.addSlot(new Slot(inventory, 3, 80, 111));
 
         this.addSlot(new FurnaceOutputSlot(playerInventory.player, inventory, 4, 80, 64));
 
