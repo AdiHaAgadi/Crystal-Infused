@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Mixin(AnvilScreenHandler.class)
@@ -29,20 +30,40 @@ public abstract class AnvilScreenHandlerMixin {
 
         if (left.isEmpty() || right.isEmpty() || output.isEmpty()) return;
 
+        Map<Enchantment, Integer> inLeftEnchants = EnchantmentHelper.get(left);
+        Map<Enchantment, Integer> inRightEnchants = EnchantmentHelper.get(right);
         Map<Enchantment, Integer> outEnchants = EnchantmentHelper.get(output);
 
+        Map<Enchantment, Integer> newEnchants = new HashMap<>(outEnchants);
+
         for (Map.Entry<Enchantment, Integer> e : outEnchants.entrySet()) {
+            // default to 0 if enchantment does not exist in specific input
+            int leftEnchantmentLevel = 0;
+            int rightEnchantmentLevel = 0;
+
             Enchantment ench = e.getKey();
             int level = e.getValue();
 
+            if (inLeftEnchants.keySet().contains(ench)) {
+                leftEnchantmentLevel = inLeftEnchants.get(ench);
+            }
+
+            if (inRightEnchants.keySet().contains(ench)) {
+                rightEnchantmentLevel = inRightEnchants.get(ench);
+            }
+
             int vanillaMax = ench.getMaxLevel();
 
-            // Allow exactly +1 over vanilla max
-            if (level == vanillaMax + 1) {
-                ItemStack newBook = new ItemStack(output.getItem());
-                EnchantedBookItem.addEnchantment(newBook, new EnchantmentLevelEntry(ench, level));
-                outputInv.setStack(0, newBook);
+            // if at least one has the level above the vanilla max via mod - both max will not create max + 1
+            System.out.println("vanilla max: " + vanillaMax);
+            System.out.println("output level: " + level);
+            if (leftEnchantmentLevel == vanillaMax + 1 || rightEnchantmentLevel == vanillaMax + 1) {
+                // Allow exactly +1 over vanilla max
+//                outputInv.getStack(0).().
+                newEnchants.put(ench, vanillaMax + 1);
             }
         }
+
+        EnchantmentHelper.set(newEnchants, outputInv.getStack(0));
     }
 }
