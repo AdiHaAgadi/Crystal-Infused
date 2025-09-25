@@ -3,6 +3,7 @@ package net.agadii.crystalinfused.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -27,6 +28,30 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
         this.recipeItems = recipeItems;
     }
 
+    private boolean isSameEnchantmentsNbt(ItemStack expected, ItemStack input) {
+        if (!expected.isOf(input.getItem())) return false;
+
+        var expectedEnchants = EnchantmentHelper.get(expected);
+        var inputEnchants = EnchantmentHelper.get(input);
+
+        return expectedEnchants.equals(inputEnchants);
+    }
+
+    private boolean isMatchNbt(Ingredient expected, ItemStack input) {
+        ItemStack[] expectedStacks = expected.getMatchingStacks();
+
+        if (expectedStacks.length > 0) {
+            ItemStack expectedStack = expectedStacks[0];
+            if (expectedStack.hasNbt()) {
+                if (!input.hasNbt() || !isSameEnchantmentsNbt(expectedStack, input)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     @Override
     public boolean matches(SimpleInventory inventory, World world) {
         if (world.isClient()) {
@@ -34,6 +59,7 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
         }
 
         return recipeItems.get(0).test(inventory.getStack(0))
+                && this.isMatchNbt(recipeItems.get(0), inventory.getStack(0))
                 && recipeItems.get(1).test(inventory.getStack(1))
                 && recipeItems.get(2).test(inventory.getStack(2));
     }
@@ -57,6 +83,7 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
     public DefaultedList<Ingredient> getIngredients() {
         DefaultedList<Ingredient> list = DefaultedList.ofSize(this.recipeItems.size());
         list.addAll(recipeItems);
+
         return list;
     }
 

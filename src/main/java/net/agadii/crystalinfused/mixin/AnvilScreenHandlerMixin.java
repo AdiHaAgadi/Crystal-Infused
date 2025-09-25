@@ -55,8 +55,6 @@ public abstract class AnvilScreenHandlerMixin {
             int vanillaMax = ench.getMaxLevel();
 
             // if at least one has the level above the vanilla max via mod - both max will not create max + 1
-            System.out.println("vanilla max: " + vanillaMax);
-            System.out.println("output level: " + level);
             if (leftEnchantmentLevel == vanillaMax + 1 || rightEnchantmentLevel == vanillaMax + 1) {
                 // Allow exactly +1 over vanilla max
 //                outputInv.getStack(0).().
