@@ -3,6 +3,7 @@ package net.agadii.crystalinfused.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.datafixers.types.templates.List;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -17,15 +18,24 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+
 public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
     private final ItemStack output;
     private final DefaultedList<Ingredient> recipeItems;
+    private final ArrayList<ItemStack> displayInputs;
 
-    public CrystalInfusionRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
+    public CrystalInfusionRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems, ArrayList<ItemStack> displayInputs) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
+        this.displayInputs = displayInputs;
+    }
+
+
+    public ArrayList<ItemStack> getDisplayInputs() {
+        return displayInputs;
     }
 
     private boolean isSameEnchantmentsNbt(ItemStack expected, ItemStack input) {
@@ -128,6 +138,7 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
 
             JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(ingredients.size(), Ingredient.EMPTY);
+            ArrayList<ItemStack> displayInputs = new ArrayList<>();
 
             for (int i = 0; i < ingredients.size(); i++) {
                 JsonObject ingredientObject = ingredients.get(i).getAsJsonObject();
@@ -141,9 +152,10 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
                     }
                 }
                 inputs.set(i, Ingredient.ofStacks(stack));
+                displayInputs.add(stack);
             }
 
-            return new CrystalInfusionRecipe(id, output, inputs);
+            return new CrystalInfusionRecipe(id, output, inputs, displayInputs);
         }
 
         @Override
@@ -166,7 +178,13 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
                 }
             }
 
-            return new CrystalInfusionRecipe(id, output, inputs);
+            int displaySize = buf.readInt();
+            ArrayList<ItemStack> displayInputs = new ArrayList<>();
+            for (int i = 0; i < displaySize; i++) {
+                displayInputs.add(buf.readItemStack());
+            }
+
+            return new CrystalInfusionRecipe(id, output, inputs, displayInputs);
         }
 
         @Override

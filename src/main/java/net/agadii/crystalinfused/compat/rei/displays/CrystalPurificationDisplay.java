@@ -1,10 +1,11 @@
-package net.agadii.crystalinfused.compat.rei;
+package net.agadii.crystalinfused.compat.rei.displays;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
+import net.agadii.crystalinfused.compat.rei.categories.CrystalPurificationCategory;
 import net.agadii.crystalinfused.recipe.CrystalPurificationRecipe;
 
 

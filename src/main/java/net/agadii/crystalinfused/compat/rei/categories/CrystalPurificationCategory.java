@@ -1,4 +1,4 @@
-package net.agadii.crystalinfused.compat.rei;
+package net.agadii.crystalinfused.compat.rei.categories;
 
 import com.google.common.collect.Lists;
 import me.shedaniel.math.Dimension;
@@ -13,13 +13,14 @@ import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.agadii.crystalinfused.CrystalInfused;
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.block.entity.CrystalPurifierBlockEntity;
-import net.agadii.crystalinfused.compat.rei.widgets.PurificationFire;
-import net.agadii.crystalinfused.compat.rei.widgets.PurificationFireWidget;
+import net.agadii.crystalinfused.compat.rei.displays.CrystalPurificationDisplay;
+import net.agadii.crystalinfused.compat.rei.widgets.BoundedWidget;
+import net.agadii.crystalinfused.compat.rei.widgets.purification.PurificationFireWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.math.Point;
-import java.util.LinkedList;
+
 import java.util.List;
 
 public class CrystalPurificationCategory implements DisplayCategory<BasicDisplay> {
@@ -55,7 +56,7 @@ public class CrystalPurificationCategory implements DisplayCategory<BasicDisplay
         widgets.add(Widgets.createRecipeBase(bounds));
         widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 86, 41)));
 
-        PurificationFire purificationFireWidget = new PurificationFireWidget(new Rectangle(
+        BoundedWidget purificationFireWidget = new PurificationFireWidget(new Rectangle(
                 new Point(startPoint.x + 2, startPoint.y + 24),
                 new Dimension(21, 14)));
         purificationFireWidget.setAnimationDuration(10000);
