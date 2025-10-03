@@ -54,10 +54,8 @@ public class CrystalInfusionCategory implements DisplayCategory<BasicDisplay> {
                 : "textures/gui/rei/crystal_infuser_gui.png"
         );
 
-        Point startPoint = new Point(bounds.getCenterX() - 50, bounds.y + 7); // TODO: update
-        double infusionTime = CrystalInfuserBlockEntity.getInfusionTime();
+        Point startPoint = new Point(bounds.getCenterX() - 50, bounds.y + 7);
 
-        // TODO: update from here
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
         widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 100, 100)));
@@ -96,7 +94,6 @@ public class CrystalInfusionCategory implements DisplayCategory<BasicDisplay> {
         return widgets;
     }
 
-    // TODO: update
     @Override
     public int getDisplayHeight() {
         return 115;

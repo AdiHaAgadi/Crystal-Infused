@@ -38,6 +38,6 @@ public class CrystalInfusedREIClientPlugin implements REIClientPlugin {
         registry.registerClickArea(screen -> new Rectangle(75, 30, 20, 30), CrystalPurificationScreen.class,
                 CrystalPurificationCategory.CRYSTAL_PURIFICATION);
         registry.registerClickArea(screen -> new Rectangle(75, 30, 20, 30), CrystalInfusionScreen.class,
-                CrystalInfusionCategory.CRYSTAL_INFUSION); // TODO: update dimensions
+                CrystalInfusionCategory.CRYSTAL_INFUSION);
     }
 }
