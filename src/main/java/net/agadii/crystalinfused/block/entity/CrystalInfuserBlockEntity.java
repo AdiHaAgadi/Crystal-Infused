@@ -1,10 +1,12 @@
 package net.agadii.crystalinfused.block.entity;
 
 import net.agadii.crystalinfused.block.ModBlocks;
+import net.agadii.crystalinfused.particle.ModParticles;
 import net.agadii.crystalinfused.recipe.CrystalInfusionRecipe;
 import net.agadii.crystalinfused.screen.CrystalInfusionScreenHandler;
 import net.agadii.crystalinfused.tag.ModTags;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -17,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -37,6 +40,7 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
     private static int maxProgress = 700;
     private int fuelProgress = 0;
     private static int maxFuelProgress = maxProgress * 2;
+    private static Random random = new Random();
 
     public CrystalInfuserBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.CRYSTAL_INFUSER, pos, state);
@@ -71,6 +75,47 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
         this.propertyDelegate = propertyDelegate;
     }
 
+    // ----------- Save data to NBT (server -> disk) -----------
+    @Override
+    public void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
+
+        Inventories.writeNbt(nbt, this.inventory);
+
+        nbt.putInt("Progress", this.progress);
+        nbt.putInt("FuelProgress", this.fuelProgress);
+    }
+
+    // ----------- Load data from NBT -----------
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
+
+        Inventories.readNbt(nbt, this.inventory);
+
+        this.progress = nbt.getInt("Progress");
+        this.fuelProgress = nbt.getInt("FuelProgress");
+    }
+
+    // ----------- Sync to client -----------
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
+    }
+
+    @Override
+    public @Nullable BlockEntityUpdateS2CPacket toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    // ----------- Call this whenever progress changes -----------
+    private void sync() {
+        if (world != null && !world.isClient) {
+            markDirty();
+            world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+        }
+    }
+
     @Override
     public DefaultedList<ItemStack> getItems() {
         return this.inventory;
@@ -95,38 +140,31 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
         return new CrystalInfusionScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
-    @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("crystal_infuser.progress", progress);
-        nbt.putInt("crystal_infuser.fuel_progress", fuelProgress);
-
-    }
-
-    @Override
-    public void readNbt(NbtCompound nbt) {
-        Inventories.readNbt(nbt, inventory);
-
-        super.readNbt(nbt);
-        this.progress = nbt.getInt("crystal_infuser.progress");
-        this.fuelProgress = nbt.getInt("crystal_infuser.fuel_progress");
-
-    }
-
     private boolean isBurning() {
         return this.fuelProgress >= 0;
     }
 
-    public static void tick(World world, BlockPos blockPos, BlockState blockState, CrystalInfuserBlockEntity entity) {
-        if (world.isClient()) {
-            return;
-        }
+    private static void createInfusionParticle(World world, BlockPos pos) {
+        double x = pos.getX() + 0.5;
+        double y = pos.getY() + 0.5;
+        double z = pos.getZ() + 0.5;
 
+        world.addParticle(ModParticles.INFUSION_PARTICLE, x, y, z, 0, 0, 0);
+    }
+
+    // client-side only ticking
+    public static void tickClient(CrystalInfuserBlockEntity entity) {
+        World world = entity.getWorld();
+        if (world != null && entity.progress > 0 && random.nextInt(14) == 0) {
+            createInfusionParticle(world, entity.getPos());
+        }
+    }
+
+    // server-side only ticking
+    public static void tickServer(CrystalInfuserBlockEntity entity) {
         if (hasRecipe(entity)) {
             if (!entity.isBurning()) {
                 boolean hasBurnt = burnOneFuelItem(entity);
-
                 if (hasBurnt) {
                     entity.fuelProgress--;
                     entity.progress++;
@@ -139,6 +177,9 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
             if (entity.progress >= maxProgress) {
                 craftItem(entity);
             }
+
+            // Send update to clients so client-side tick sees it
+            entity.sync();
         }
     }
 

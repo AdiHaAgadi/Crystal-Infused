@@ -99,6 +99,15 @@ public class CrystalInfuserBlock extends BlockWithEntity implements BlockEntityP
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.CRYSTAL_INFUSER, CrystalInfuserBlockEntity::tick);
+        if (type != ModBlockEntities.CRYSTAL_INFUSER) return null;
+
+        return (w, pos, s, be) -> {
+            CrystalInfuserBlockEntity entity = (CrystalInfuserBlockEntity) be;
+            if (w.isClient) {
+                CrystalInfuserBlockEntity.tickClient(entity);
+            } else {
+                CrystalInfuserBlockEntity.tickServer(entity);
+            }
+        };
     }
 }
