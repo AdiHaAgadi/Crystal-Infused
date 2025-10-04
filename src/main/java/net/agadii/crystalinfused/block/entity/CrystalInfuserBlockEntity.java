@@ -1,5 +1,6 @@
 package net.agadii.crystalinfused.block.entity;
 
+import net.agadii.crystalinfused.block.CrystalInfuserBlock;
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.particle.ModParticles;
 import net.agadii.crystalinfused.recipe.CrystalInfusionRecipe;
@@ -13,6 +14,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -28,6 +30,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -194,27 +197,44 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
 
     @Override
     public boolean isValid(int slot, ItemStack stack) {
-        ItemStack itemStack = this.inventory.get(0);
-
         if (slot == 4) { // could be any item
             return true;
         } else if (slot == 0) {
-            return itemStack.isOf(Items.ENCHANTED_BOOK);
+            return stack.isOf(Items.ENCHANTED_BOOK);
         } else if (slot == 3) {
-            return CrystalInfuserBlockEntity.isFuel(itemStack);
+            return CrystalInfuserBlockEntity.isFuel(stack);
         } else {
-            return itemStack.isIn(ModTags.CRYSTAL);
+            return stack.isIn(ModTags.CRYSTAL);
         }
     }
 
     @Override
+    public int[] getAvailableSlots(Direction side) {
+        Direction facing = getCachedState().get(CrystalInfuserBlock.FACING);
+
+        if (side == Direction.UP) {
+            return new int[]{0};
+        } else if (side == Direction.DOWN) {
+            return new int[]{4};
+        } else if (side == facing.rotateYClockwise()) {
+            return new int[]{1}; // Left
+        } else if (side == facing.rotateYCounterclockwise()) {
+            return new int[]{2}; // Right
+        } else if (side == facing || side == facing.getOpposite()) {
+            return new int[]{3}; // Front / Back
+        }
+
+        return new int[0];
+    }
+
+    @Override
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-        return this.isValid(slot, stack);
+            return this.isValid(slot, stack);
     }
 
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return dir == Direction.DOWN && slot == 5;
+        return dir == Direction.DOWN && slot == 4;
     }
 
     private static void craftItem(CrystalInfuserBlockEntity entity) {
