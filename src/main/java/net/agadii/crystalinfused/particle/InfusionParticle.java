@@ -12,7 +12,7 @@ public class InfusionParticle extends SpriteBillboardParticle {
         super(world, x, y, z, 0, 0, 0);
         this.setSprite(spriteProvider);
 
-        this.maxAge = 20;
+        this.maxAge = 30;
         this.scale = 0.2F;
         this.gravityStrength = 0;
 
