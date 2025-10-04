@@ -1,0 +1,19 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:impaling\",lvl:5}]}"
+    },
+    {
+      "item": "crystalinfused:sapphire"
+    },
+    {
+      "item": "crystalinfused:spinel"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:impaling\",lvl:6}]}"
+  }
+}

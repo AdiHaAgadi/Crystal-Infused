@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "crystalinfused:block/crystal_purifier_front",
+    "side": "crystalinfused:block/crystal_purifier_side",
+    "top": "crystalinfused:block/crystal_purifier_top"
+  }
+}

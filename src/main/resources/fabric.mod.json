@@ -1,0 +1,43 @@
+{
+	"schemaVersion": 1,
+	"id": "crystalinfused",
+	"version": "${version}",
+	"name": "Crystal Infused",
+	"description": "'Crystal Infused' adds new gems to the game, and aims to amplify the standard minecraft experience",
+	"authors": [
+		"Agadii"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/crystalinfused/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.agadii.crystalinfused.CrystalInfused"
+		],
+		"client": [
+			"net.agadii.crystalinfused.CrystalInfusedClient"
+		],
+		"fabric-datagen": [
+			"net.agadii.crystalinfused.CrystalInfusedDataGenerator"
+		],
+		"rei_client": [
+			"net.agadii.crystalinfused.compat.rei.CrystalInfusedREIClientPlugin"
+		]
+	},
+	"mixins": [
+		"crystalinfused.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.25",
+		"minecraft": "~1.19.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

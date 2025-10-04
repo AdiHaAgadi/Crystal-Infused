@@ -1,0 +1,19 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:sweeping_edge\",lvl:3}]}"
+    },
+    {
+      "item": "crystalinfused:spinel"
+    },
+    {
+      "item": "crystalinfused:ruby"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:sweeping_edge\",lvl:4}]}"
+  }
+}

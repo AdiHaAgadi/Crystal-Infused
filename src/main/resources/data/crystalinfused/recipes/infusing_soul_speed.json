@@ -1,0 +1,19 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:soul_speed\",lvl:3}]}"
+    },
+    {
+      "item": "crystalinfused:sugilite"
+    },
+    {
+      "item": "crystalinfused:spinel"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:soul_speed\",lvl:4}]}"
+  }
+}

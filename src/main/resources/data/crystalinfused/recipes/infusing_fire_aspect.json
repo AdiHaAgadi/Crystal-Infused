@@ -1,0 +1,19 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:fire_aspect\",lvl:2}]}"
+    },
+    {
+      "item": "crystalinfused:spinel"
+    },
+    {
+      "item": "crystalinfused:amber"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:fire_aspect\",lvl:3}]}"
+  }
+}

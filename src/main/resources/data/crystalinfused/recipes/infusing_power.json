@@ -1,0 +1,19 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:power\",lvl:5}]}"
+    },
+    {
+      "item": "crystalinfused:ruby"
+    },
+    {
+      "item": "crystalinfused:amber"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:power\",lvl:6}]}"
+  }
+}

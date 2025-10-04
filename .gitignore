@@ -1,25 +1,35 @@
-# eclipse
-bin
-*.launch
-.settings
-.metadata
-.classpath
-.project
+# Fabric / Minecraft mod .gitignore
 
-# idea
-out
+# Build output
+/build/
+out/
+classes/
+bin/
+
+# Gradle cache
+.gradle/
+
+# IDE files
+.idea/
+*.iml
 *.ipr
 *.iws
-*.iml
-.idea
+.vscode/
+.project
+.classpath
+.settings/
 
-# gradle
-build
-.gradle
+# Run folder (dev worlds & logs)
+run/
+logs/
+*.log
 
-# other
-eclipse
-run
+# OS junk
+.DS_Store
+Thumbs.db
 
-# Files from Forge MDK
-forge*changelog.txt
+# Local configuration or secret files
+local.properties
+*.env
+*.token
+gradle.properties
