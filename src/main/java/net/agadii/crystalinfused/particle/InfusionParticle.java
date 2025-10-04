@@ -4,6 +4,8 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 
+import java.util.Random;
+
 public class InfusionParticle extends SpriteBillboardParticle {
     private final double angleSpeed;
     private final double spiralRadius;
@@ -16,8 +18,8 @@ public class InfusionParticle extends SpriteBillboardParticle {
         this.scale = 0.2F;
         this.gravityStrength = 0;
 
-        this.angleSpeed = 0.2;
-        this.spiralRadius = 0.15;
+        this.angleSpeed = 0.3;
+        this.spiralRadius = 0.3;
     }
 
     @Override
