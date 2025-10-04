@@ -180,10 +180,12 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
             if (entity.progress >= maxProgress) {
                 craftItem(entity);
             }
-
-            // Send update to clients so client-side tick sees it
-            entity.sync();
+        } else {
+            entity.resetProgress(); // if one of 3 ingredients taken out - reset progress
         }
+
+        // Send update to clients so client-side tick sees it
+        entity.sync();
     }
 
     private void resetProgress() {
