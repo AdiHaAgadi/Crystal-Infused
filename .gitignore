@@ -1,40 +1,35 @@
-# gradle
+# Fabric / Minecraft mod .gitignore
 
-.gradle/
-build/
+# Build output
+/build/
 out/
 classes/
+bin/
 
-# eclipse
+# Gradle cache
+.gradle/
 
-*.launch
-
-# idea
-
+# IDE files
 .idea/
 *.iml
 *.ipr
 *.iws
-
-# vscode
-
-.settings/
 .vscode/
-bin/
-.classpath
 .project
+.classpath
+.settings/
 
-# macos
-
-*.DS_Store
-
-# fabric
-
+# Run folder (dev worlds & logs)
 run/
+logs/
+*.log
 
-# java
+# OS junk
+.DS_Store
+Thumbs.db
 
-hs_err_*.log
-replay_*.log
-*.hprof
-*.jfr
+# Local configuration or secret files
+local.properties
+*.env
+*.token
+gradle.properties
