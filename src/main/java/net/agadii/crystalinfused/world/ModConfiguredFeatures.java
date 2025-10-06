@@ -63,21 +63,21 @@ public class ModConfiguredFeatures {
                 List.of(OreFeatureConfig.createTarget(endstoneReplacables, ModBlocks.SPINEL_ORE.getDefaultState()));
 
         List<OreFeatureConfig.Target> seaPearlOres =
-                List.of(OreFeatureConfig.createTarget(sandReplacables, ModBlocks.PEARL_ORE.getDefaultState())); // TODO: find out how to use config
+                List.of(OreFeatureConfig.createTarget(sandReplacables, ModBlocks.PEARL_ORE.getDefaultState()));
 
-        register(context, SAPPHIRE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldSapphireOres, 7));
-        register(context, DEEPSLATE_SAPPHIRE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldSapphireOres, 7));
-        register(context, RUBY_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldRubyOres, 7));
-        register(context, DEEPSLATE_RUBY_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldRubyOres, 7));
-        register(context, AMBER_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldAmberOres, 7));
-        register(context, DEEPSLATE_AMBER_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldAmberOres, 7));
-        register(context, TOPAZ_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldTopazOres, 7));
-        register(context, DEEPSLATE_TOPAZ_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldTopazOres, 7));
-        register(context, PERIDOT_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldPeridotOres, 7));
-        register(context, DEEPSLATE_PERIDOT_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldPeridotOres, 7));
-        register(context, SUGILITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherSugiliteOres, 7));
-        register(context, SPINEL_ORE_KEY, Feature.ORE, new OreFeatureConfig(endSpinelOres, 7));
-        register(context, PEARL_ORE_KEY, ModFeatures.PEARL_ORE , new DefaultFeatureConfig()); // TODO: not yet uses the seaPearlOres variable due to defaultFeatureConfig
+        register(context, SAPPHIRE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldSapphireOres, 4));
+        register(context, DEEPSLATE_SAPPHIRE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldSapphireOres, 4));
+        register(context, RUBY_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldRubyOres, 4));
+        register(context, DEEPSLATE_RUBY_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldRubyOres, 4));
+        register(context, AMBER_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldAmberOres, 4));
+        register(context, DEEPSLATE_AMBER_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldAmberOres, 4));
+        register(context, TOPAZ_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldTopazOres, 4));
+        register(context, DEEPSLATE_TOPAZ_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldTopazOres, 4));
+        register(context, PERIDOT_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldPeridotOres, 4));
+        register(context, DEEPSLATE_PERIDOT_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldPeridotOres, 4));
+        register(context, SUGILITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherSugiliteOres, 4));
+        register(context, SPINEL_ORE_KEY, Feature.ORE, new OreFeatureConfig(endSpinelOres, 4));
+        register(context, PEARL_ORE_KEY, ModFeatures.PEARL_ORE , new OreFeatureConfig(seaPearlOres, 5));
 
     }
 

@@ -33,7 +33,7 @@ public class ModOreGeneration {
                 GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.SUGILITE_ORE_PLACED_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(),
                 GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.SPINEL_ORE_PLACED_KEY);
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.OCEAN, BiomeKeys.COLD_OCEAN, BiomeKeys.WARM_OCEAN), // TODO: NEED TO MAKE IT SO THAT ALL OCEAN BIOMES WORK (TO WORK WITH MODS)
-                GenerationStep.Feature.TOP_LAYER_MODIFICATION, ModPlacedFeatures.PEARL_ORE_PLACED_KEY); // TODO: CHECK IF THIS IS ACTUALLY GOOD (GEN STEP)
+        BiomeModifications.addFeature(BiomeSelectors.tag(BiomeTags.IS_OCEAN),
+                GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.PEARL_ORE_PLACED_KEY);
     }
 }
