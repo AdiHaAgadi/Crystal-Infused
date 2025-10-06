@@ -63,6 +63,7 @@ public class ModBlocks {
             new ExperienceDroppingSandBlock(14406560, FabricBlockSettings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(1.0f).requiresTool().sounds(BlockSoundGroup.SAND),
                     UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);
 
+    Block a = Blocks.DIAMOND_ORE;
     public static final Block DEEPSLATE_SAPPHIRE_ORE = registerBlock("deepslate_sapphire_ore",
             new ExperienceDroppingBlock(AbstractBlock.Settings.copy(ModBlocks.SAPPHIRE_ORE).mapColor(MapColor.DEEPSLATE_GRAY).strength(4.5f, 3.0f).requiresTool().sounds(BlockSoundGroup.DEEPSLATE),
                     UniformIntProvider.create(3, 7)), ModItemGroup.CRYSTAL_INFUSED);

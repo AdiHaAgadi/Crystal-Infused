@@ -1,5 +1,6 @@
 package net.agadii.crystalinfused.world;
 
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public class ModOrePlacement {
         return List.of(countModifier, SquarePlacementModifier.of(), heightModifier, BiomePlacementModifier.of());
     }
 
-    public static List<PlacementModifier> modifiersWithCount(int count, PlacementModifier heightModifier) {
+    public static List<PlacementModifier> modifiersWithCount(UniformIntProvider count, PlacementModifier heightModifier) {
         return modifiers(CountPlacementModifier.of(count), heightModifier);
     }
 

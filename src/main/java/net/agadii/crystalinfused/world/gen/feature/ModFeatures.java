@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.*;
 
 public class ModFeatures {
     public static final PearlOreFeature PEARL_ORE =
-            registerFeature("pearl_ore_feature", new PearlOreFeature(DefaultFeatureConfig.CODEC));
+            registerFeature("pearl_ore_feature", new PearlOreFeature(OreFeatureConfig.CODEC));
 
     private static <FC extends FeatureConfig, F extends Feature<FC>> F registerFeature(String name, F feature) {
         return Registry.register(Registries.FEATURE, new Identifier(CrystalInfused.MOD_ID, name), feature);

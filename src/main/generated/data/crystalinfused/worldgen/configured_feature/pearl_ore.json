@@ -1,4 +1,18 @@
 {
   "type": "crystalinfused:pearl_ore_feature",
-  "config": {}
+  "config": {
+    "discard_chance_on_air_exposure": 0.0,
+    "size": 5,
+    "targets": [
+      {
+        "state": {
+          "Name": "crystalinfused:pearl_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:sand"
+        }
+      }
+    ]
+  }
 }
