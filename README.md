@@ -18,6 +18,8 @@ There are plans to expand on the core mechanic and even add new features in the 
 ## Current Content
 <details>
   <summary>The Crystals</summary>
+  <img width="293" height="43" alt="2025-10-07_13 50 36" src="https://github.com/user-attachments/assets/94b9fc3a-0b52-428f-85f9-85738849cd4c" />
+
   The eight crystals added in this mods are:
   <br/><br/>
   <span style="color:red">Ruby</span>, <span style="color:lightblue">Sapphire</span>, <span style="color:lightyellow">Topaz</span>, <span style="color:orange">Amber</span>, <span style="color:lightgreen">Peridot</span> - all found in the caves.
@@ -32,7 +34,7 @@ There are plans to expand on the core mechanic and even add new features in the 
 <br/>
 <details>
   <summary>Crystal Purifier</summary>
-  <img width="1920" height="1009" alt="2025-10-07_13 50 06" src="https://github.com/user-attachments/assets/7eef75d0-5e9f-4de9-be6c-4386d6ce1d21" />
+<img width="532" height="472" alt="2025-10-07_13 50 06" src="https://github.com/user-attachments/assets/8e7fb192-03c1-46c9-845a-53bbd048dbe0" />
 
   The <span style="color:orange">Crystal Purifier</span> will allow you to purify the raw crystal you found. 
 
@@ -42,8 +44,8 @@ The fuel for it, however, may only be found in <span style="color:purple">__a di
 <br/>
 <details>
   <summary>Crystal Infuser</summary>
-  <img width="1920" height="1009" alt="2025-10-07_13 49 58" src="https://github.com/user-attachments/assets/e83b05d5-39fc-4167-b7fe-97938b30997b" />
-  
+  <img width="518" height="452" alt="2025-10-07_13 49 58" src="https://github.com/user-attachments/assets/7b193873-4d6c-4b21-9d9d-dc621310065c" />
+
   The <span style="color:magenta">Crystal Infuser</span> takes in two pure crystals and a maximum-level enchanted book, and upgrades the enchantment by a level to exceed vanilla maximum. 
 
 But in order to activate it - you may need to slay the <span style="color:gray">__Three-headed Terror!__</span>
