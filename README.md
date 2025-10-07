@@ -12,7 +12,7 @@
 Crystal Infused is a fabric mod that adds 8 new crystal ores to the game.
 
 These crystals will allow you to enhance your enchanted books a level beyond the vanilla maximum - in a way that does not feel overpowered in the slightest!
-
+<br/><br/>
 There are plans to expand on the core mechanic and even add new features in the future, as well as to update to the latest versions!
 
 ## Current Content
@@ -42,7 +42,7 @@ The fuel for it, however, may only be found in <span style="color:purple">__a di
   <summary>Crystal Infuser</summary>
   The <span style="color:magenta">Crystal Infuser</span> takes in two pure crystals and a maximum-level enchanted book, and upgrades the enchantment by a level to exceed vanilla maximum. 
 
-But in order to activate it - you may need to slay the <span style="color:gray">Three-headed Terror!</span>
+But in order to activate it - you may need to slay the <span style="color:gray">__Three-headed Terror!__</span>
 
 </details>
 
