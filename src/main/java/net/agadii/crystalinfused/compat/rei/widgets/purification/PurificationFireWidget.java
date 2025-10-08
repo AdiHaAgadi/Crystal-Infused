@@ -7,6 +7,7 @@ import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.REIRuntime;
 import net.agadii.crystalinfused.CrystalInfused;
 import net.agadii.crystalinfused.compat.rei.widgets.BoundedWidget;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
@@ -46,15 +47,15 @@ public class PurificationFireWidget extends BoundedWidget {
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.darkBackgroundAlpha.update(delta);
-        renderBackground(matrices, false, 1.0F);
+        renderBackground(context, false, 1.0F);
         if (darkBackgroundAlpha.value() > 0) {
-            renderBackground(matrices, true, this.darkBackgroundAlpha.value());
+            renderBackground(context, true, this.darkBackgroundAlpha.value());
         }
     }
 
-    public void renderBackground(MatrixStack matrices, boolean dark, float alpha) {
+    public void renderBackground(DrawContext context, boolean dark, float alpha) {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
         RenderSystem.setShaderTexture(0, TEXTURE);
         RenderSystem.enableBlend();
@@ -62,9 +63,9 @@ public class PurificationFireWidget extends BoundedWidget {
         RenderSystem.blendFunc(770, 771);
         if (getAnimationDuration() > 0) {
             int height = 14 - MathHelper.ceil((System.currentTimeMillis() / (animationDuration / 14) % 14d));
-            drawTexture(matrices, getX(), getY() + 14 - height, 0, 14 - height, 21, height);
+            context.drawTexture(TEXTURE, getX(), getY() + 14 - height, 0, 14 - height, 21, height);
         } else {
-            drawTexture(matrices, getX(), getY(), 0, 0, 21, 14);
+            context.drawTexture(TEXTURE, getX(), getY(), 0, 0, 21, 14);
         }
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

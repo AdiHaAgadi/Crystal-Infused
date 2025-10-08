@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:amber"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

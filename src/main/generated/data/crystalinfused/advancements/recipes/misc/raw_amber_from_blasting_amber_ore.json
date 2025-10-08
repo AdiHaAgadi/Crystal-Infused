@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:raw_amber_from_blasting_amber_ore"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

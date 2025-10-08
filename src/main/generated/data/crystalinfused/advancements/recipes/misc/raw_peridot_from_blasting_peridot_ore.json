@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:raw_peridot_from_blasting_peridot_ore"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

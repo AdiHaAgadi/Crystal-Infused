@@ -1,4 +1,4 @@
-// 1.19.4	2025-10-06T23:38:33.373655	Crystal Infused/Model Definitions
+// 1.20	2025-10-09T00:03:27.4350238	Crystal Infused/Model Definitions
 ddf4e6f243fe09a6d5f23889afe5775faedb0acd assets\crystalinfused\models\item\crystal_purifier.json
 5885b1a72e7cf96537b7a302e0bbb7e7ee629fb2 assets\crystalinfused\models\block\sapphire_ore.json
 8d8d3863a14f76748005eb411e0bd5fdc669e657 assets\crystalinfused\models\block\crystal_purifier_on.json
@@ -38,14 +38,14 @@ ed45cba0ec43cd57906bdb969bc960d9a6adc4ba assets\crystalinfused\models\item\sapph
 a8b0c9600055ea10c16356790a5080db1ce6d424 assets\crystalinfused\models\item\sugilite.json
 721269a77f5b1760e625a1d41b5115c7e02d8f62 assets\crystalinfused\blockstates\peridot_block.json
 0b0a5c07286aeddaf7008951ee5a0034cc7c381e assets\crystalinfused\models\block\amber_ore.json
-2a78869f244ca0742acf596bb33323eabe77615f assets\crystalinfused\models\item\amber_ore.json
 ea7d958023262cb0cc829f612c77aa4135484e2c assets\crystalinfused\models\item\amber.json
+2a78869f244ca0742acf596bb33323eabe77615f assets\crystalinfused\models\item\amber_ore.json
 4586f2f443d5af413b8ff3c166dac9dc027e91f0 assets\crystalinfused\models\item\raw_sapphire.json
 936550eda2420b73ce8a93011fff42dd25553da7 assets\crystalinfused\models\block\peridot_ore.json
 2875bd3d67680f321e8ac5a12fc8afb2e36e7b04 assets\crystalinfused\models\item\raw_peridot.json
 7ee04d88c7cb376ea78054babf993f141efe7579 assets\crystalinfused\blockstates\topaz_ore.json
-a64fcf1881ca1d637e6c78c5f0f79161a4cbc851 assets\crystalinfused\models\item\peridot.json
 3eddd5f8145de412f10f1cae297df0af1d4d5057 assets\crystalinfused\models\item\raw_sugilite.json
+a64fcf1881ca1d637e6c78c5f0f79161a4cbc851 assets\crystalinfused\models\item\peridot.json
 2c4371fb3ba5e1e89dd1512da08cb9b23aa1207a assets\crystalinfused\blockstates\sugilite_ore.json
 8493c651fedbbd4224122f5a5ea62e03277bafce assets\crystalinfused\models\block\pearl_ore.json
 15e019263968178c8e9600bde5797f8b2cdd7113 assets\crystalinfused\models\item\deepslate_topaz_ore.json

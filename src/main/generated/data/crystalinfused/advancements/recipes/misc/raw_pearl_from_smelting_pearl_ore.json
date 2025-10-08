@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:raw_pearl_from_smelting_pearl_ore"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

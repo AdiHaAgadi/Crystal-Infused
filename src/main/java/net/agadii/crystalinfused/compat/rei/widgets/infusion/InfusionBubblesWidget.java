@@ -7,6 +7,7 @@ import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.REIRuntime;
 import net.agadii.crystalinfused.CrystalInfused;
 import net.agadii.crystalinfused.compat.rei.widgets.BoundedWidget;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
@@ -46,15 +47,15 @@ public class InfusionBubblesWidget extends BoundedWidget {
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.darkBackgroundAlpha.update(delta);
-        renderBackground(matrices, false, 1.0F);
+        renderBackground(context, false, 1.0F);
         if (darkBackgroundAlpha.value() > 0) {
-            renderBackground(matrices, true, this.darkBackgroundAlpha.value());
+            renderBackground(context, true, this.darkBackgroundAlpha.value());
         }
     }
 
-    public void renderBackground(MatrixStack matrices, boolean dark, float alpha) {
+    public void renderBackground(DrawContext context, boolean dark, float alpha) {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
         RenderSystem.setShaderTexture(0, TEXTURE);
         RenderSystem.enableBlend();
@@ -63,9 +64,9 @@ public class InfusionBubblesWidget extends BoundedWidget {
 
         if (getAnimationDuration() > 0) {
             int height = MathHelper.ceil((System.currentTimeMillis() / (animationDuration / 19) % 19d));
-            drawTexture(matrices, getX(), getY() + 19 - height, 0, 19 - height, 10, height);
+            context.drawTexture(TEXTURE, getX(), getY() + 19 - height, 0, 19 - height, 10, height);
         } else {
-            drawTexture(matrices, getX(), getY(), 0, 0, 10, 19);
+            context.drawTexture(TEXTURE, getX(), getY(), 0, 0, 10, 19);
         }
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
