@@ -39,7 +39,7 @@ public class CrystalPurificationScreen extends HandledScreen<CrystalPurification
 
     private void renderProgressArrow(DrawContext context, int x, int y) {
         if(handler.isCrafting()) {
-            context.drawTexture(TEXTURE, + 80, y + 34, 176, 0,  handler.getScaledProgress(), 16);
+            context.drawTexture(TEXTURE, x + 80, y + 34, 176, 0,  handler.getScaledProgress(), 16);
         }
     }
 
