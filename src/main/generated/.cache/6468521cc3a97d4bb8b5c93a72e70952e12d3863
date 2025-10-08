@@ -1,6 +1,6 @@
-// 1.19.4	2025-10-06T23:38:33.375657	Crystal Infused/Block Loot Tables
-c8d8993345a45f46892af9d63b46e437ebe171c1 data\crystalinfused\loot_tables\blocks\sugilite_block.json
+// 1.20	2025-10-09T00:03:27.4380231	Crystal Infused/Block Loot Tables
 43c165fa26c890efbefd19ed43c70cc7af89f2c5 data\crystalinfused\loot_tables\blocks\deepslate_sapphire_ore.json
+c8d8993345a45f46892af9d63b46e437ebe171c1 data\crystalinfused\loot_tables\blocks\sugilite_block.json
 a50149050cca38ce64810a855d83b9d01521aa7c data\crystalinfused\loot_tables\blocks\deepslate_ruby_ore.json
 63f196eaede3407c1c7c40b25095a0c907ad8130 data\crystalinfused\loot_tables\blocks\peridot_block.json
 1dd6f3789358a0b4fca8e6f9ea1813207f9d3698 data\crystalinfused\loot_tables\blocks\ruby_ore.json

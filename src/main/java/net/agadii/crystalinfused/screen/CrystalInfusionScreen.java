@@ -2,6 +2,7 @@ package net.agadii.crystalinfused.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.agadii.crystalinfused.CrystalInfused;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -32,42 +33,42 @@ public class CrystalInfusionScreen extends HandledScreen<CrystalInfusionScreenHa
     }
 
     @Override
-    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
-        drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight);
+        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-        renderProgressArrows(matrices, x, y);
-        renderFuelProgressBubbles(matrices, x, y);
-        renderFuelTank(matrices, x, y);
+        renderProgressArrows(context, x, y);
+        renderFuelProgressBubbles(context, x, y);
+        renderFuelTank(context, x, y);
     }
 
-    private void renderProgressArrows(MatrixStack matrices, int x, int y) {
+    private void renderProgressArrows(DrawContext context, int x, int y) {
         if (handler.isCrafting()) {
             int scaledProgress = handler.getScaledArrowsProgress();
-            drawTexture(matrices, x + 81, y + 44, 176, 30, 14, scaledProgress);
+            context.drawTexture(TEXTURE, x + 81, y + 44, 176, 30, 14, scaledProgress);
         }
     }
 
-    private void renderFuelProgressBubbles(MatrixStack matrices, int x, int y) {
+    private void renderFuelProgressBubbles(DrawContext context, int x, int y) {
         if (handler.isCrafting()) {
             int scaledProgress = handler.getScaledBubblesProgress();
-            drawTexture(matrices, x + 83, y + 101 - scaledProgress, 176, 19 - scaledProgress, 10, scaledProgress);
+            context.drawTexture(TEXTURE, x + 83, y + 101 - scaledProgress, 176, 19 - scaledProgress, 10, scaledProgress);
         }
     }
 
-    private void renderFuelTank(MatrixStack matrices, int x, int y) {
+    private void renderFuelTank(DrawContext context, int x, int y) {
         int scaledFuelProgress = handler.getScaledFuelTankProgress();
-        drawTexture(matrices, x + 78, y + 102, 176, 57, scaledFuelProgress, 6);
+        context.drawTexture(TEXTURE, x + 78, y + 102, 176, 57, scaledFuelProgress, 6);
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
-        drawMouseoverTooltip(matrices, mouseX, mouseY);
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        renderBackground(context);
+        super.render(context, mouseX, mouseY, delta);
+        drawMouseoverTooltip(context, mouseX, mouseY);
     }
 }

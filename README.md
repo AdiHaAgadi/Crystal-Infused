@@ -1,5 +1,5 @@
-<img width="1191" height="670" alt="crystal infused 1 19 4" src="https://github.com/user-attachments/assets/ea97f09f-659b-419c-bbc9-e8a9c97f8aab" />
 
+![cherry-blossom-biome-valley-completely-surrounded-by-v0-ibaaobuss15b1](https://github.com/user-attachments/assets/05dcfb7f-0ca3-4a33-91e9-75420a74a4e1)
 
 # Crystal Infused
 <p align="center">

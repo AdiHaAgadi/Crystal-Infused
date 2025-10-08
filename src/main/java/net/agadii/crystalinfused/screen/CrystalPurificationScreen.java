@@ -2,6 +2,7 @@ package net.agadii.crystalinfused.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.agadii.crystalinfused.CrystalInfused;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -24,33 +25,33 @@ public class CrystalPurificationScreen extends HandledScreen<CrystalPurification
     }
 
     @Override
-    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
-        drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight);
+        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-        renderProgressArrow(matrices, x, y);
-        renderFuelProgressFlame(matrices, x, y);
+        renderProgressArrow(context, x, y);
+        renderFuelProgressFlame(context, x, y);
     }
 
-    private void renderProgressArrow(MatrixStack matrices, int x, int y) {
+    private void renderProgressArrow(DrawContext context, int x, int y) {
         if(handler.isCrafting()) {
-            drawTexture(matrices, x + 80, y + 34, 176, 0,  handler.getScaledProgress(), 16);
+            context.drawTexture(TEXTURE, x + 80, y + 34, 176, 0,  handler.getScaledProgress(), 16);
         }
     }
 
-    private void renderFuelProgressFlame(MatrixStack matrices, int x, int y) {
+    private void renderFuelProgressFlame(DrawContext context, int x, int y) {
         int scaledProgress = handler.getScaledFuelProgress();
-        drawTexture(matrices, x + 53, y + 49 - scaledProgress, 176, 58 - scaledProgress,  21, scaledProgress);
+        context.drawTexture(TEXTURE, x + 53, y + 49 - scaledProgress, 176, 58 - scaledProgress,  21, scaledProgress);
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
-        drawMouseoverTooltip(matrices, mouseX, mouseY);
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        renderBackground(context);
+        super.render(context, mouseX, mouseY, delta);
+        drawMouseoverTooltip(context, mouseX, mouseY);
     }
 }

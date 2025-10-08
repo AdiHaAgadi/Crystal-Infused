@@ -42,5 +42,7 @@
     "block.crystalinfused.crystal_infuser": "משרה קריסטלים",
 
     "tag.crystalinfused.crystal_purification": "טיהור קריסטלים",
-    "tag.crystalinfused.crystal_infusion": "השריית קריסטלים"
+    "tag.crystalinfused.crystal_infusion": "השריית קריסטלים",
+
+    "itemgroup.crystal_infused": "Crystal Infused"
 }

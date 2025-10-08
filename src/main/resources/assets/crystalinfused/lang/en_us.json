@@ -42,6 +42,7 @@
     "block.crystalinfused.crystal_infuser": "Crystal Infuser",
 
     "tag.crystalinfused.crystal_purification": "Crystal Purification",
-    "tag.crystalinfused.crystal_infusion": "Crystal Infusion"
+    "tag.crystalinfused.crystal_infusion": "Crystal Infusion",
 
+    "itemgroup.crystal_infused": "Crystal Infused"
 }

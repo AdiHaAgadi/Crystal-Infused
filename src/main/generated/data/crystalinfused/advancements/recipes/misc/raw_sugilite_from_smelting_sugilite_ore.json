@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:raw_sugilite_from_smelting_sugilite_ore"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
