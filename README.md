@@ -1,5 +1,5 @@
-<img width="1191" height="670" alt="crystal infused 1 19 4" src="https://github.com/user-attachments/assets/ea97f09f-659b-419c-bbc9-e8a9c97f8aab" />
 
+![mini-banner-1 20](https://github.com/user-attachments/assets/2c2332fa-dcc4-48fb-8d36-e3dc67fe394a)
 
 # Crystal Infused
 <p align="center">
