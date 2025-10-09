@@ -43,6 +43,7 @@ jobs:
         with:
           github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
           github-tag: t${{ env.MINECRAFT_VERSION }}-${{ env.MOD_VERSION }} # tag of release that triggered the workflow
+          tag_name: t${{ env.MINECRAFT_VERSION }}-${{ env.MOD_VERSION }}
           github-draft: false
 
           changelog-file: CHANGELOG.md
