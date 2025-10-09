@@ -17,9 +17,13 @@ jobs:
       - name: Load Gradle properties
         id: gradle_props
         run: |
-          echo "MINECRAFT_VERSION=$(grep '^minecraft_version=' gradle.properties | cut -d'=' -f2 | tr -d '\r')" >> $GITHUB_ENV
-          echo "JAVA_VERSION=$(grep '^java_version=' gradle.properties | cut -d'=' -f2 | tr -d '\r')" >> $GITHUB_ENV
-          echo "MOD_VERSION=$(grep '^mod_version=' gradle.properties | cut -d'=' -f2 | tr -d '\r')" >> $GITHUB_ENV
+          grep '^minecraft_version=' gradle.properties | cut -d'=' -f2 | tr -d '\r' > temp_version.txt
+          echo "MINECRAFT_VERSION=$(cat temp_version.txt)" >> $GITHUB_ENV
+          grep '^java_version=' gradle.properties | cut -d'=' -f2 | tr -d '\r' > temp_version.txt
+          echo "JAVA_VERSION=$(cat temp_version.txt)" >> $GITHUB_ENV
+          grep '^mod_version=' gradle.properties | cut -d'=' -f2 | tr -d '\r' > temp_version.txt
+          echo "MOD_VERSION=$(cat temp_version.txt)" >> $GITHUB_ENV
+          
           echo "RELEASE_NAME=Crystal Infused ${MOD_VERSION} for Minecraft ${MINECRAFT_VERSION}" >> $GITHUB_ENV
           
           # Read changelog file and store as environment variable
