@@ -29,6 +29,10 @@ jobs:
           distribution: temurin
           java-version: ${{ env.JAVA_VERSION }}
 
+      # make gradlew executable
+      - name: Make Gradle Wrapper executable
+        run: chmod +x ./gradlew
+
       # builds mod using gradle
       - name: Build mod
         run: ./gradlew build
