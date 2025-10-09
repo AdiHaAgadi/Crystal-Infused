@@ -1,0 +1,2 @@
+- add publish action in github
+- add CHANGELOG.md
