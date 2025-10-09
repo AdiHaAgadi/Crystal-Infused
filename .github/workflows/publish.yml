@@ -20,7 +20,6 @@ jobs:
           echo "MINECRAFT_VERSION=$(grep '^minecraft_version=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
           echo "JAVA_VERSION=$(grep '^java_version=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
           echo "MOD_VERSION=$(grep '^mod_version=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
-          echo "RELEASE_NAME=[${MINECRAFT_VERSION}] Crystal Infused ${MOD_VERSION} t" >> $GITHUB_ENV
 
       # sets up java with version indicated in gradle.properties
       - name: Set up Java
@@ -37,22 +36,16 @@ jobs:
       - name: Build mod
         run: ./gradlew build
 
-      # sets release tag for Github publish stage
-      - name: Set release tag
-        run: echo "RELEASE_TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       # publishes to Github
       - name: Publish to GitHub (with sources)
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
-          github-tag: ${{ env.RELEASE_TAG }} # tag of release that triggered the workflow
+          github-tag: ${{ github.event.release.tag_name }} # tag of release that triggered the workflow
+          tag_name: v${{ env.MINECRAFT_VERSION  }}-${{ env.MOD_VERSION }}
           github-draft: false
 
-          version: ${{ env.MOD_VERSION }}
-          name: ${{ env.RELEASE_NAME }}
-          game-versions: ${{ env.MINECRAFT_VERSION }}
-          java: ${{ env.JAVA_VERSION }}
           changelog-file: CHANGELOG.md
           files: build/libs/*.jar
 
@@ -67,7 +60,7 @@ jobs:
           curseforge-token: ${{ secrets.PUBLISH_CURSEFORGE_TOKEN }}
 
           version: ${{ env.MOD_VERSION }}
-          name: ${{ env.RELEASE_NAME }}
+          name: Crystal Infused ${{MOD_VERSION}} t
           game-versions: ${{ env.MINECRAFT_VERSION }}
           java: ${{ env.JAVA_VERSION }}
           changelog-file: CHANGELOG.md
