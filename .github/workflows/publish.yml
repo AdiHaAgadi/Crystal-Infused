@@ -21,11 +21,6 @@ jobs:
           echo "JAVA_VERSION=$(grep '^java_version=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
           echo "MOD_VERSION=$(grep '^mod_version=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
           echo "RELEASE_NAME=Crystal Infused ${MOD_VERSION} for Minecraft ${MINECRAFT_VERSION}" >> $GITHUB_ENV
-          
-          # Read changelog file and store as environment variable
-          echo CHANGELOG<<EOF >> $GITHUB_ENV
-          $(cat CHANGELOG.md)
-          EOF
 
       # sets up java with version indicated in gradle.properties
       - name: Set up Java
@@ -51,5 +46,5 @@ jobs:
           name: ${{ env.RELEASE_NAME }}
           game-versions: ${{ env.MINECRAFT_VERSION }}
           java: ${{ env.JAVA_VERSION }}
-          changelog: ${{ env.CHANGELOG }}
+          changelog-file: CHANGELOG.md
           files: build/libs/*.jar
