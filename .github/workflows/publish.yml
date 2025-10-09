@@ -41,8 +41,12 @@ jobs:
       - name: Publish to Modrinth, CurseForge & GitHub
         uses: Kir-Antipov/mc-publish@v3.3
         with:
+          modrinth-id: CD7mzznx
           modrinth-token: ${{ secrets.PUBLISH_MODRINTH_TOKEN }}
+
+          curseforge-id: 1360615
           curseforge-token: ${{ secrets.PUBLISH_CURSEFORGE_TOKEN }}
+
           github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
 
           # Use dynamic env values
@@ -52,3 +56,4 @@ jobs:
           java: ${{ env.JAVA_VERSION }}
           changelog-file: CHANGELOG.md
           files: build/libs/*.jar
+          loaders: fabric
