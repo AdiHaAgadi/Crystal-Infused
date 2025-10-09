@@ -57,3 +57,4 @@ jobs:
           changelog-file: CHANGELOG.md
           files: build/libs/*.jar
           loaders: fabric
+          side: universal # both client and server
