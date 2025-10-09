@@ -41,6 +41,7 @@ jobs:
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
+          tag_name: abba
 
           version: ${{ env.MOD_VERSION }}
           name: ${{ env.RELEASE_NAME }}
