@@ -20,7 +20,7 @@ jobs:
           echo "MINECRAFT_VERSION=$(grep '^minecraft_version=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
           echo "JAVA_VERSION=$(grep '^java_version=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
           echo "MOD_VERSION=$(grep '^mod_version=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_ENV
-          echo "RELEASE_NAME=Crystal Infused ${MOD_VERSION} for Minecraft ${MINECRAFT_VERSION}" >> $GITHUB_ENV
+          echo "RELEASE_NAME=[${MINECRAFT_VERSION}] Crystal Infused ${MOD_VERSION} t" >> $GITHUB_ENV
 
       # sets up java with version indicated in gradle.properties
       - name: Set up Java
@@ -37,8 +37,19 @@ jobs:
       - name: Build mod
         run: ./gradlew build
 
-      # publish mod to all platforms
-      - name: Publish to Modrinth, CurseForge & GitHub
+      - name: Publish to GitHub (with sources)
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
+
+          version: ${{ env.MOD_VERSION }}
+          name: ${{ env.RELEASE_NAME }}
+          game-versions: ${{ env.MINECRAFT_VERSION }}
+          java: ${{ env.JAVA_VERSION }}
+          changelog-file: CHANGELOG.md
+          files: build/libs/*.jar
+
+      - name: Publish to Modrinth & CurseForge (without sources)
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: CD7mzznx
@@ -47,14 +58,11 @@ jobs:
           curseforge-id: 1360615
           curseforge-token: ${{ secrets.PUBLISH_CURSEFORGE_TOKEN }}
 
-          github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
-
-          # Use dynamic env values
           version: ${{ env.MOD_VERSION }}
           name: ${{ env.RELEASE_NAME }}
           game-versions: ${{ env.MINECRAFT_VERSION }}
           java: ${{ env.JAVA_VERSION }}
           changelog-file: CHANGELOG.md
-          files: build/libs/*.jar
-          loaders: fabric
-          side: universal # both client and server
+          files: build/libs/crystalinfused-${{ env.MOD_VERSION }}.jar
+          side: universal
+          curseforge-side: both
