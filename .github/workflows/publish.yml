@@ -42,8 +42,7 @@ jobs:
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
-          github-tag: ${{ github.event.release.tag_name }} # tag of release that triggered the workflow
-          tag_name: v${{ env.MINECRAFT_VERSION  }}-${{ env.MOD_VERSION }}
+          github-tag: v${{ env.MINECRAFT_VERSION }}-${{ env.MOD_VERSION }} # tag of release that triggered the workflow
           github-draft: false
 
           changelog-file: CHANGELOG.md
