@@ -3,7 +3,7 @@
 
 # Crystal Infused
 <p align="center">
-  <img src="https://img.shields.io/badge/Mod_Version-1.0.1-brightgreen" alt="Mod Version"/>
+  <img src="https://img.shields.io/badge/Mod_Version-1.0.2-brightgreen" alt="Mod Version"/>
   <img src="https://img.shields.io/badge/Minecraft_Version-1.20-blue" alt="Minecraft Version"/>
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License"/>
 </p>
