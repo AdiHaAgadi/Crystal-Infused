@@ -83,7 +83,7 @@ public class ModBlocks {
     public static final Block CRYSTAL_PURIFIER = registerBlock("crystal_purifier",
             new CrystalPurifierBlock(FabricBlockSettings.copyOf(Blocks.COPPER_BLOCK)
                     .strength(3.5f).requiresTool().sounds(BlockSoundGroup.COPPER)
-                    .luminance(13)));
+                    .luminance(state -> state.get(CrystalPurifierBlock.LIT) ? 13 : 0)));
 
     public static final Block CRYSTAL_INFUSER = registerBlock("crystal_infuser",
             new CrystalInfuserBlock(FabricBlockSettings.copyOf(Blocks.NETHERITE_BLOCK).mapColor(MapColor.BLACK)

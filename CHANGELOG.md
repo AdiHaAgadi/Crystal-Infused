@@ -1,2 +1,2 @@
-- add publish action in github
-- add CHANGELOG.md
+- Fix Crystal Infuser emitting light regardless of if active
+- Update Purification fire texture (base + REI compat)
