@@ -1,3 +1,5 @@
+# TODO: make server & client sent, fix inputs, fix modrinth not working
+
 name: Publish Mod # publishes on Github, CurseForge & Modrinth
 
 on:
@@ -46,14 +48,29 @@ jobs:
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
-          github-tag: ${{ github.ref_name }} # tag of release that triggered the workflow
+          github-tag: ${{ github.event.release.tag_name }} # tag of release that triggered the workflow
           github-draft: false
 
           changelog-file: CHANGELOG.md
           files: build/libs/*.jar
 
-      # publishes to Modrinth & CurseForge
-      - name: Publish to Modrinth & CurseForge (without sources)
+      # publishes to CurseForge
+      - name: Publish to CurseForge (without sources)
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          curseforge-id: 1360615
+          curseforge-token: ${{ secrets.PUBLISH_CURSEFORGE_TOKEN }}
+
+          version: ${{ env.MOD_VERSION }}
+          name: Crystal Infused ${{env.MOD_VERSION}} - ${{env.MINECRAFT_VERSION}}
+          game-versions: ${{ env.MINECRAFT_VERSION }}
+          java: ${{ env.JAVA_VERSION }}
+          changelog-file: CHANGELOG.md
+          files: build/libs/crystalinfused-${{ env.MOD_VERSION }}.jar
+          curseforge-side: both
+
+      # publishes to Modrinth
+      - name: Publish to Modrinth (without sources)
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: CD7mzznx
@@ -63,10 +80,9 @@ jobs:
           curseforge-token: ${{ secrets.PUBLISH_CURSEFORGE_TOKEN }}
 
           version: ${{ env.MOD_VERSION }}
-          name: Crystal Infused ${{env.MOD_VERSION}} t
+          name: Crystal Infused ${{env.MOD_VERSION}} - ${{env.MINECRAFT_VERSION}}
           game-versions: ${{ env.MINECRAFT_VERSION }}
           java: ${{ env.JAVA_VERSION }}
           changelog-file: CHANGELOG.md
           files: build/libs/crystalinfused-${{ env.MOD_VERSION }}.jar
           side: universal
-          curseforge-side: both
