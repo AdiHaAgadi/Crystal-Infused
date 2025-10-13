@@ -1,2 +1,1 @@
-- Fix Crystal Infuser emitting light regardless of if active
-- Update Purification fire texture (base + REI compat)
+- Add localization for French, Spanish, Arabic, Italian, UK English, German, Japanese & Korean
