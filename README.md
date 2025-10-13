@@ -3,11 +3,10 @@
 
 # Crystal Infused
 <p align="center">
-  <img src="https://img.shields.io/badge/Mod_Version-1.0.2-brightgreen" alt="Mod Version"/>
-  <img src="https://img.shields.io/badge/Minecraft_Version-1.20-blue" alt="Minecraft Version"/>
+  <img src="https://img.shields.io/badge/Mod_Version-1.0.3-brightgreen" alt="Mod Version"/>
+  <img src="https://img.shields.io/badge/Minecraft_Version-1.20.1-blue" alt="Minecraft Version"/>
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License"/>
 </p>
-
 
 Crystal Infused is a fabric mod that adds 8 new crystal ores to the game.
 
