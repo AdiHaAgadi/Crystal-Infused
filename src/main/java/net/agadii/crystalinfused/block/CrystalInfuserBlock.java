@@ -1,5 +1,6 @@
 package net.agadii.crystalinfused.block;
 
+import com.mojang.serialization.MapCodec;
 import net.agadii.crystalinfused.block.entity.CrystalInfuserBlockEntity;
 import net.agadii.crystalinfused.block.entity.ModBlockEntities;
 import net.minecraft.block.*;
@@ -27,6 +28,11 @@ public class CrystalInfuserBlock extends BlockWithEntity implements BlockEntityP
     protected CrystalInfuserBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getStateManager().getDefaultState().with(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return null;
     }
 
     private static VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 12, 16);

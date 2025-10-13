@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -244,12 +245,13 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
         }
 
         Optional<CrystalPurificationRecipe> recipe = entity.getWorld().getRecipeManager()
-                .getFirstMatch(CrystalPurificationRecipe.Type.INSTANCE, inventory, entity.getWorld());
+                .getFirstMatch(CrystalPurificationRecipe.Type.INSTANCE, inventory, entity.getWorld())
+                .map(RecipeEntry::value);
 
         if(hasRecipe(entity)) {
             entity.removeStack(1, 1);
 
-            entity.setStack(2, new ItemStack(recipe.get().getOutput(null).getItem(),
+            entity.setStack(2, new ItemStack(recipe.get().getResult(null).getItem(),
                     entity.getStack(2).getCount() + 1));
 
             entity.resetProgress();
@@ -273,10 +275,11 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
         }
 
         Optional<CrystalPurificationRecipe> match = entity.getWorld().getRecipeManager()
-                .getFirstMatch(CrystalPurificationRecipe.Type.INSTANCE, inventory, entity.getWorld());
+                .getFirstMatch(CrystalPurificationRecipe.Type.INSTANCE, inventory, entity.getWorld())
+                .map(RecipeEntry::value);
 
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getOutput(null).getItem());
+                && canInsertItemIntoOutputSlot(inventory, match.get().getResult(null).getItem());
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, Item output) {

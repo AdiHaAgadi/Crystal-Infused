@@ -1,23 +1,21 @@
 package net.agadii.crystalinfused.block;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SandBlock;
+import net.minecraft.block.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ColorCode;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.world.BlockView;
 
-public class ExperienceDroppingSandBlock extends SandBlock {
+public class ExperienceDroppingFallingBlock extends ColoredFallingBlock {
     private final IntProvider experienceDropped;
 
-    public ExperienceDroppingSandBlock(int color, AbstractBlock.Settings settings) {
-        this(color, settings, ConstantIntProvider.create(0));
+    public ExperienceDroppingFallingBlock(ColorCode color, AbstractBlock.Settings settings) {
+        this(color, ConstantIntProvider.create(0), settings);
     }
 
-    public ExperienceDroppingSandBlock(int color, Settings settings, IntProvider experience) {
+    public ExperienceDroppingFallingBlock(ColorCode color, IntProvider experience, Settings settings) {
         super(color, settings);
         this.experienceDropped = experience;
     }

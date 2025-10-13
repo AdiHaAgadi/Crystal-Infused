@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.5-SNAPSHOT'
+	id 'fabric-loom' version '1.6.5'
 	id 'maven-publish'
 }
 
@@ -37,6 +37,13 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// manually forcing a version
+	modApi("me.shedaniel.cloth:cloth-config-fabric:13.0.114") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+
+	modApi "dev.architectury:architectury-fabric:11.0.8"
 
 	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
 	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"

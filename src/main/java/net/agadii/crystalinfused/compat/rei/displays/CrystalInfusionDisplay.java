@@ -8,6 +8,7 @@ import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.agadii.crystalinfused.compat.rei.categories.CrystalInfusionCategory;
 import net.agadii.crystalinfused.recipe.CrystalInfusionRecipe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.RecipeEntry;
 
 
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class CrystalInfusionDisplay extends BasicDisplay {
         super(inputs, outputs);
     }
 
-    public CrystalInfusionDisplay(CrystalInfusionRecipe recipe) {
-        super(getInputList(recipe), List.of(EntryIngredient.of(EntryStacks.of(recipe.getOutput(null)))));
+    public CrystalInfusionDisplay(RecipeEntry<CrystalInfusionRecipe> recipe) {
+        super(getInputList(recipe.value()), List.of(EntryIngredient.of(EntryStacks.of(recipe.value().getResult(null)))));
     }
 
     private static List<EntryIngredient> getInputList(CrystalInfusionRecipe recipe) {
