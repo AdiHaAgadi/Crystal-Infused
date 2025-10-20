@@ -6,10 +6,10 @@
       "nbt": "{StoredEnchantments:[{id:\"minecraft:soul_speed\",lvl:3}]}"
     },
     {
-      "item": "crystalinfused:sugilite"
+      "item": "crystalinfused:spinel"
     },
     {
-      "item": "crystalinfused:spinel"
+      "item": "crystalinfused:ruby"
     }
   ],
   "result": {

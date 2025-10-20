@@ -1,1 +1,2 @@
-- Add localization for French, Spanish, Arabic, Italian, UK English, German, Japanese & Korean
+- Revamp texture of Spinel Block
+- Update custom recipe to codecs

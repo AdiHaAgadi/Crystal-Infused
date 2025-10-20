@@ -6,6 +6,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -20,9 +21,11 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.world.World;
+import utils.CodecUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
     private final ItemStack output;
@@ -43,10 +46,10 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
     private boolean isSameEnchantmentsNbt(ItemStack expected, ItemStack input) {
         if (!expected.isOf(input.getItem())) return false;
 
-        var expectedEnchants = EnchantmentHelper.get(expected);
-        var inputEnchants = EnchantmentHelper.get(input);
+        Map<Enchantment, Integer> expectedMap = EnchantmentHelper.get(expected);
+        Map<Enchantment, Integer> inputMap = EnchantmentHelper.get(input);
 
-        return expectedEnchants.equals(inputEnchants);
+        return expectedMap.equals(inputMap);
     }
 
     private boolean isMatchNbt(Ingredient expected, ItemStack input) {
@@ -121,8 +124,8 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
 
         public static final Codec<CrystalInfusionRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 // Only encode/decode the actual ingredients and output
-                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 3).fieldOf("ingredients").forGetter(CrystalInfusionRecipe::getIngredients),
-                ItemStack.RECIPE_RESULT_CODEC.fieldOf("output").forGetter(r -> r.output)
+                validateAmount(CodecUtils.INGREDIENT_WITH_NBT_CODEC, 3).fieldOf("ingredients").forGetter(CrystalInfusionRecipe::getIngredients),
+                CodecUtils.RECIPE_RESULT_WITH_NBT_CODEC.fieldOf("result").forGetter(r -> r.output)
         ).apply(instance, (ingredients, output) -> {
             // Automatically generate displayInputs from ingredients
             ArrayList<ItemStack> displayInputs = new ArrayList<>();
@@ -164,7 +167,6 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
             return output;
         }
 
-//        @Override
 //        public CrystalInfusionRecipe read(Identifier id, JsonObject json) {
 //            JsonObject resultObject = JsonHelper.getObject(json, "result");
 //            ItemStack output = parseOutputJson(resultObject);
