@@ -67,7 +67,7 @@ public class CrystalInfusionScreen extends HandledScreen<CrystalInfusionScreenHa
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        renderBackground(context);
+        renderBackground(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context, mouseX, mouseY);
     }

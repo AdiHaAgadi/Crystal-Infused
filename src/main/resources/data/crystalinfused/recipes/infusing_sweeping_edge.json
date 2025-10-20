@@ -3,17 +3,17 @@
   "ingredients": [
     {
       "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:sweeping_edge\",lvl:3}]}"
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:sweeping\",lvl:3}]}"
     },
     {
       "item": "crystalinfused:spinel"
     },
     {
-      "item": "crystalinfused:ruby"
+      "item": "crystalinfused:sugilite"
     }
   ],
   "result": {
     "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:sweeping_edge\",lvl:4}]}"
+    "nbt": "{StoredEnchantments:[{id:\"minecraft:sweeping\",lvl:4}]}"
   }
 }

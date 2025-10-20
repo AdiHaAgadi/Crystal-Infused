@@ -22,6 +22,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -246,16 +247,17 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
         }
 
         Optional<CrystalInfusionRecipe> recipe = entity.getWorld().getRecipeManager()
-                .getFirstMatch(CrystalInfusionRecipe.Type.INSTANCE, inventory, entity.getWorld());
+                .getFirstMatch(CrystalInfusionRecipe.Type.INSTANCE, inventory, entity.getWorld())
+                .map(RecipeEntry::value);
 
         entity.removeStack(4, 1);
 
         if (recipe.isPresent() && hasRecipe(entity)) {
-            ItemStack outputStack = recipe.get().getOutput(entity.getWorld().getRegistryManager());
+            ItemStack outputStack = recipe.get().getResult(entity.getWorld().getRegistryManager());
             if (outputStack.hasNbt()) {
                 entity.setStack(4, outputStack.copy());
             } else {
-                entity.setStack(4, new ItemStack(recipe.get().getOutput(entity.getWorld().getRegistryManager()).getItem(), entity.getStack(4).getCount() + 1));
+                entity.setStack(4, new ItemStack(recipe.get().getResult(entity.getWorld().getRegistryManager()).getItem(), entity.getStack(4).getCount() + 1));
             }
 
             entity.removeStack(0, 1);
@@ -286,10 +288,11 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
         }
 
         Optional<CrystalInfusionRecipe> match = entity.getWorld().getRecipeManager()
-                .getFirstMatch(CrystalInfusionRecipe.Type.INSTANCE, inventory, entity.getWorld());
+                .getFirstMatch(CrystalInfusionRecipe.Type.INSTANCE, inventory, entity.getWorld())
+                .map(RecipeEntry::value);
 
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getOutput(null).getItem());
+                && canInsertItemIntoOutputSlot(inventory, match.get().getResult(null).getItem());
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, Item output) {

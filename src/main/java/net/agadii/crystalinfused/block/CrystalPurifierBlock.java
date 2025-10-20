@@ -1,5 +1,6 @@
 package net.agadii.crystalinfused.block;
 
+import com.mojang.serialization.MapCodec;
 import net.agadii.crystalinfused.block.entity.CrystalPurifierBlockEntity;
 import net.agadii.crystalinfused.block.entity.ModBlockEntities;
 import net.minecraft.block.*;
@@ -30,6 +31,11 @@ public class CrystalPurifierBlock extends BlockWithEntity implements BlockEntity
         super(settings);
         this.setDefaultState(this.getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(LIT, false));
 
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return null;
     }
 
     @Nullable
@@ -96,6 +102,6 @@ public class CrystalPurifierBlock extends BlockWithEntity implements BlockEntity
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.CRYSTAL_PURIFIER, CrystalPurifierBlockEntity::tick);
+        return validateTicker(type, ModBlockEntities.CRYSTAL_PURIFIER, CrystalPurifierBlockEntity::tick);
     }
 }

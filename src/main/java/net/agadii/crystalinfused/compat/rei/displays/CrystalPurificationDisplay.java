@@ -7,6 +7,7 @@ import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.agadii.crystalinfused.compat.rei.categories.CrystalPurificationCategory;
 import net.agadii.crystalinfused.recipe.CrystalPurificationRecipe;
+import net.minecraft.recipe.RecipeEntry;
 
 
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ public class CrystalPurificationDisplay extends BasicDisplay {
         super(inputs, outputs);
     }
 
-    public CrystalPurificationDisplay(CrystalPurificationRecipe recipe) {
-        super(getInputList(recipe), List.of(EntryIngredient.of(EntryStacks.of(recipe.getOutput(null)))));
+    public CrystalPurificationDisplay(RecipeEntry<CrystalPurificationRecipe> recipe) {
+        super(getInputList(recipe.value()), List.of(EntryIngredient.of(EntryStacks.of(recipe.value().getResult(null)))));
     }
 
     private static List<EntryIngredient> getInputList(CrystalPurificationRecipe recipe) {
