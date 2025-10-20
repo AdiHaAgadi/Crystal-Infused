@@ -1,25 +1,16 @@
 package net.agadii.crystalinfused.block;
 
 import net.agadii.crystalinfused.CrystalInfused;
-import net.agadii.crystalinfused.item.ModItemGroup;
-import net.fabricmc.fabric.api.block.v1.FabricBlock;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
-import net.minecraft.client.sound.Sound;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.ColorCode;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-
-import static net.minecraft.block.AbstractFurnaceBlock.LIT;
 
 public class ModBlocks {
     public static final Block SAPPHIRE_BLOCK = registerBlock("sapphire_block",
