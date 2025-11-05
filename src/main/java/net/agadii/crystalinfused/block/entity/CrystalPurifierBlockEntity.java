@@ -244,6 +244,7 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
             inventory.setStack(i, entity.getStack(i));
         }
 
+        Optional<RecipeEntry<CrystalPurificationRecipe>> recipe = getC
         Optional<CrystalPurificationRecipe> recipe = entity.getWorld().getRecipeManager()
                 .getFirstMatch(CrystalPurificationRecipe.Type.INSTANCE, inventory, entity.getWorld())
                 .map(RecipeEntry::value);
@@ -291,7 +292,9 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+    public PacketByteBuf getScreenOpeningData(ServerPlayerEntity player) {
+        PacketByteBuf buf = new PacketByteBuf(io.netty.buffer.Unpooled.buffer());
         buf.writeBlockPos(this.pos);
+        return buf;
     }
 }

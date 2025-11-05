@@ -7,14 +7,18 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.agadii.crystalinfused.recipe.recipeInput.CrystalPurificationRecipeInput;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
@@ -24,26 +28,18 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrystalPurificationRecipe implements Recipe<SimpleInventory> {
-    private final ItemStack output;
-    private final DefaultedList<Ingredient> recipeItems;
-
-    public CrystalPurificationRecipe(ItemStack output, DefaultedList<Ingredient> recipeItems) {
-        this.output = output;
-        this.recipeItems = recipeItems;
-    }
-
+public record CrystalPurificationRecipe(ItemStack output, DefaultedList<Ingredient> recipeItems) implements Recipe<CrystalPurificationRecipeInput> {
     @Override
-    public boolean matches(SimpleInventory inventory, World world) {
+    public boolean matches(CrystalPurificationRecipeInput inventory, World world) {
         if (world.isClient()) {
             return false;
         }
 
-        return recipeItems.get(0).test(inventory.getStack(1));
+        return recipeItems.get(0).test(inventory.getStackInSlot(1));
     }
 
     @Override
-    public ItemStack craft(SimpleInventory inventory, DynamicRegistryManager registryManager) {
+    public ItemStack craft(CrystalPurificationRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
         return output;
     }
 
@@ -53,7 +49,7 @@ public class CrystalPurificationRecipe implements Recipe<SimpleInventory> {
     }
 
     @Override
-    public ItemStack getResult(DynamicRegistryManager registryManager) {
+    public ItemStack getResult(RegistryWrapper.WrapperLookup registriesLookup) {
         return output.copy();
     }
 
@@ -91,9 +87,28 @@ public class CrystalPurificationRecipe implements Recipe<SimpleInventory> {
                 new CrystalPurificationRecipe(output, DefaultedList.copyOf(Ingredient.EMPTY, ingredients.toArray(new Ingredient[0])))
         ));
 
+        public static final PacketCodec<RegistryByteBuf, CrystalPurificationRecipe> STREAM_CODEC =
+                PacketCodec.tuple(
+                        PacketCodec.list(Ingredient.PACKET_CODEC), // list of ingredients
+                        ItemStack.PACKET_CODEC,
+                        (ingredients, output) -> new CrystalPurificationRecipe(
+                                DefaultedList.copyOf(Ingredient.EMPTY, ingredients.toArray(new Ingredient[0])),
+                                output
+                        ),
+                        CrystalPurificationRecipe::getIngredients, // accessor for ingredients
+                        CrystalPurificationRecipe::output         // accessor for output
+                );
+
+
+
         @Override
         public Codec<CrystalPurificationRecipe> codec() {
             return CODEC;
+        }
+
+        @Override
+        public PacketCodec<RegistryByteBuf, CrystalPurificationRecipe> packetCodec() {
+            return STREAM_CODEC;
         }
 
         public static Codec<List<Ingredient>> validateAmount(Codec<Ingredient> delegate, int max) {

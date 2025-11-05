@@ -11,10 +11,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.SidedInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,6 +23,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -31,7 +32,6 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -81,10 +81,10 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
 
     // ----------- Save data to NBT (server -> disk) -----------
     @Override
-    public void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
+    public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt, registryLookup);
 
-        Inventories.writeNbt(nbt, this.inventory);
+        Inventories.writeNbt(nbt, this.inventory, registryLookup);
 
         nbt.putInt("Progress", this.progress);
         nbt.putInt("FuelProgress", this.fuelProgress);
@@ -92,20 +92,20 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
 
     // ----------- Load data from NBT -----------
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt, registryLookup);
 
-        Inventories.readNbt(nbt, this.inventory);
+        Inventories.readNbt(nbt, this.inventory, registryLookup);
 
         this.progress = nbt.getInt("Progress");
         this.fuelProgress = nbt.getInt("FuelProgress");
     }
 
     // ----------- Sync to client -----------
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
-    }
+//    @Override
+//    public NbtCompound toInitialChunkDataNbt() {
+//        return createNbt();
+//    }
 
     @Override
     public @Nullable BlockEntityUpdateS2CPacket toUpdatePacket() {
@@ -254,12 +254,8 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
 
         if (recipe.isPresent() && hasRecipe(entity)) {
             ItemStack outputStack = recipe.get().getResult(entity.getWorld().getRegistryManager());
-            if (outputStack.hasNbt()) {
-                entity.setStack(4, outputStack.copy());
-            } else {
-                entity.setStack(4, new ItemStack(recipe.get().getResult(entity.getWorld().getRegistryManager()).getItem(), entity.getStack(4).getCount() + 1));
-            }
 
+            entity.setStack(4, outputStack.copy());
             entity.removeStack(0, 1);
             entity.removeStack(1, 1);
             entity.removeStack(2, 1);
@@ -304,7 +300,9 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+    public PacketByteBuf getScreenOpeningData(ServerPlayerEntity player) {
+        PacketByteBuf buf = new PacketByteBuf(io.netty.buffer.Unpooled.buffer());
         buf.writeBlockPos(this.pos);
+        return buf;
     }
 }

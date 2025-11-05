@@ -2,7 +2,7 @@ package net.agadii.crystalinfused.particle;
 
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 
 import java.util.Random;
 
@@ -34,7 +34,7 @@ public class InfusionParticle extends SpriteBillboardParticle {
         this.y += 0.02; // slowly moves upward
     }
 
-    public static class Factory implements ParticleFactory<DefaultParticleType> {
+    public static class Factory implements ParticleFactory<SimpleParticleType> {
         private final SpriteProvider spriteProvider;
 
         public Factory(SpriteProvider spriteProvider) {
@@ -43,7 +43,7 @@ public class InfusionParticle extends SpriteBillboardParticle {
 
 
         @Override
-        public Particle createParticle(DefaultParticleType type, ClientWorld world,
+        public Particle createParticle(SimpleParticleType type, ClientWorld world,
                                        double x, double y, double z,
                                        double vx, double vy, double vz) {
             return new InfusionParticle(world, x, y, z, this.spriteProvider);
