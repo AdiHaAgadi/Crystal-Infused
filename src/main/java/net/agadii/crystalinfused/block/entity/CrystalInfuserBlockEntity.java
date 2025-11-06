@@ -4,6 +4,7 @@ import net.agadii.crystalinfused.block.CrystalInfuserBlock;
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.particle.ModParticles;
 import net.agadii.crystalinfused.recipe.CrystalInfusionRecipe;
+import net.agadii.crystalinfused.recipe.recipeInput.CrystalInfusionRecipeInput;
 import net.agadii.crystalinfused.screen.CrystalInfusionScreenHandler;
 import net.agadii.crystalinfused.tag.ModTags;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -11,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -93,7 +93,7 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
     // ----------- Load data from NBT -----------
     @Override
     public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        super.writeNbt(nbt, registryLookup);
+        super.readNbt(nbt, registryLookup);
 
         Inventories.readNbt(nbt, this.inventory, registryLookup);
 
@@ -240,20 +240,34 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
         return dir == Direction.DOWN && slot == 4;
     }
 
+    private static Optional<RecipeEntry<CrystalInfusionRecipe>> getCurrentRecipe(CrystalInfuserBlockEntity entity) {
+        if (entity.getWorld() == null) return Optional.empty();
+
+        return entity.getWorld().getRecipeManager()
+                .getFirstMatch(
+                        CrystalInfusionRecipe.Type.INSTANCE,
+                        new CrystalInfusionRecipeInput(List.of(
+                            entity.inventory.get(0),
+                            entity.inventory.get(1),
+                            entity.inventory.get(2)
+                            )
+                        ), // slot 1 is the input slot
+                        entity.getWorld()
+                );
+    }
+
     private static void craftItem(CrystalInfuserBlockEntity entity) {
         SimpleInventory inventory = new SimpleInventory(entity.size());
         for (int i = 0; i < entity.size(); i++) {
             inventory.setStack(i, entity.getStack(i));
         }
 
-        Optional<CrystalInfusionRecipe> recipe = entity.getWorld().getRecipeManager()
-                .getFirstMatch(CrystalInfusionRecipe.Type.INSTANCE, inventory, entity.getWorld())
-                .map(RecipeEntry::value);
+        Optional<RecipeEntry<CrystalInfusionRecipe>> recipe = getCurrentRecipe(entity);
 
         entity.removeStack(4, 1);
 
         if (recipe.isPresent() && hasRecipe(entity)) {
-            ItemStack outputStack = recipe.get().getResult(entity.getWorld().getRegistryManager());
+            ItemStack outputStack = recipe.get().value().getResult(entity.getWorld().getRegistryManager());
 
             entity.setStack(4, outputStack.copy());
             entity.removeStack(0, 1);
@@ -283,12 +297,11 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
             inventory.setStack(i, entity.getStack(i));
         }
 
-        Optional<CrystalInfusionRecipe> match = entity.getWorld().getRecipeManager()
-                .getFirstMatch(CrystalInfusionRecipe.Type.INSTANCE, inventory, entity.getWorld())
-                .map(RecipeEntry::value);
+        Optional<RecipeEntry<CrystalInfusionRecipe>> recipe = getCurrentRecipe(entity);
 
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getResult(null).getItem());
+
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                && canInsertItemIntoOutputSlot(inventory, recipe.get().value().getResult(null).getItem());
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, Item output) {

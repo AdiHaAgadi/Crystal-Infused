@@ -1,22 +1,18 @@
 package net.agadii.crystalinfused.recipe;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.agadii.crystalinfused.recipe.recipeInput.CrystalPurificationRecipeInput;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.StringNbtReader;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.*;
-import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
@@ -25,7 +21,6 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public record CrystalPurificationRecipe(ItemStack output, DefaultedList<Ingredient> recipeItems) implements Recipe<CrystalPurificationRecipeInput> {
@@ -80,9 +75,9 @@ public record CrystalPurificationRecipe(ItemStack output, DefaultedList<Ingredie
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "purifying";
 
-        public static final Codec<CrystalPurificationRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ItemStack.RECIPE_RESULT_CODEC.fieldOf("output").forGetter(r -> r.output),
-                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 1).fieldOf("ingredients").forGetter(CrystalPurificationRecipe::getIngredients)
+        public static final MapCodec<CrystalPurificationRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                ItemStack.OPTIONAL_CODEC.fieldOf("output").forGetter(CrystalPurificationRecipe::output),
+                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 1).fieldOf("basg").forGetter(CrystalPurificationRecipe::getIngredients)
         ).apply(instance, (output, ingredients) ->
                 new CrystalPurificationRecipe(output, DefaultedList.copyOf(Ingredient.EMPTY, ingredients.toArray(new Ingredient[0])))
         ));
@@ -102,7 +97,7 @@ public record CrystalPurificationRecipe(ItemStack output, DefaultedList<Ingredie
 
 
         @Override
-        public Codec<CrystalPurificationRecipe> codec() {
+        public MapCodec<CrystalPurificationRecipe> codec() {
             return CODEC;
         }
 
@@ -152,27 +147,27 @@ public record CrystalPurificationRecipe(ItemStack output, DefaultedList<Ingredie
 //            return new CrystalPurificationRecipe(output, inputs);
 //        }
 
-        @Override
-        public CrystalPurificationRecipe read(PacketByteBuf buf) {
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
-
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromPacket(buf));
-            }
-
-            ItemStack output = buf.readItemStack();
-            return new CrystalPurificationRecipe(output, inputs);
-        }
-
-        @Override
-        public void write(PacketByteBuf buf, CrystalPurificationRecipe recipe) {
-            buf.writeInt(recipe.getIngredients().size());
-
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.write(buf);
-            }
-
-            buf.writeItemStack(recipe.getResult(null));
-        }
+//        @Override
+//        public CrystalPurificationRecipe read(PacketByteBuf buf) {
+//            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
+//
+//            for (int i = 0; i < inputs.size(); i++) {
+//                inputs.set(i, Ingredient.fromPacket(buf));
+//            }
+//
+//            ItemStack output = buf.readItemStack();
+//            return new CrystalPurificationRecipe(output, inputs);
+//        }
+//
+//        @Override
+//        public void write(PacketByteBuf buf, CrystalPurificationRecipe recipe) {
+//            buf.writeInt(recipe.getIngredients().size());
+//
+//            for (Ingredient ing : recipe.getIngredients()) {
+//                ing.write(buf);
+//            }
+//
+//            buf.writeItemStack(recipe.getResult(null));
+//        }
     }
 }

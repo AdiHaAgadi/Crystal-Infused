@@ -3,6 +3,9 @@ package utils;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ItemEnchantmentsComponent;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -17,7 +20,7 @@ public class CodecUtils {
             Registries.ITEM.getCodec().fieldOf("item").forGetter(ing -> ing.getMatchingStacks()[0].getItem()),
             Codec.STRING.optionalFieldOf("nbt").forGetter(ing -> {
                 ItemStack stack = ing.getMatchingStacks()[0];
-                NbtCompound nbt = stack.getNbt();
+                NbtCompound nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT).copyNbt();
 
                 return java.util.Optional.ofNullable(nbt != null ? nbt.toString() : null);
             })
@@ -25,7 +28,8 @@ public class CodecUtils {
         ItemStack stack = new ItemStack(item);
         nbtString.ifPresent(s -> {
             try {
-                stack.setNbt(StringNbtReader.parse(s));
+                NbtCompound nbt = StringNbtReader.parse(s);
+                stack.set(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(nbt));
             } catch (CommandSyntaxException e) {
                 throw new RuntimeException("Invalid NBT: " + s, e);
             }
@@ -38,7 +42,7 @@ public class CodecUtils {
             Registries.ITEM.getCodec().fieldOf("item").forGetter(ItemStack::getItem),
             Codec.INT.optionalFieldOf("count", 1).forGetter(ItemStack::getCount),
             Codec.STRING.optionalFieldOf("nbt").forGetter(stack -> {
-                NbtCompound nbt = stack.getNbt();
+                NbtCompound nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT).copyNbt();
 
                 return Optional.ofNullable(nbt != null ? nbt.toString() : null);
             })
@@ -46,7 +50,8 @@ public class CodecUtils {
         ItemStack stack = new ItemStack(item, count);
         nbtString.ifPresent(s -> {
             try {
-                stack.setNbt(StringNbtReader.parse(s));
+                NbtCompound nbt = StringNbtReader.parse(s);
+                stack.set(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(nbt));
             } catch (CommandSyntaxException e) {
                 throw new RuntimeException("Invalid NBT: " + s, e);
             }

@@ -1,21 +1,22 @@
 package net.agadii.crystalinfused.recipe;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.agadii.crystalinfused.recipe.recipeInput.CrystalInfusionRecipeInput;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.*;
-import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
@@ -27,17 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
-    private final ItemStack output;
-    private final DefaultedList<Ingredient> recipeItems;
-    private final ArrayList<ItemStack> displayInputs;
-
-    public CrystalInfusionRecipe(ItemStack output, DefaultedList<Ingredient> recipeItems, ArrayList<ItemStack> displayInputs) {
-        this.output = output;
-        this.recipeItems = recipeItems;
-        this.displayInputs = displayInputs;
-    }
-
+public record CrystalInfusionRecipe(ItemStack output, DefaultedList<Ingredient> recipeItems, ArrayList<ItemStack> displayInputs) implements Recipe<CrystalInfusionRecipeInput> {
 
     public ArrayList<ItemStack> getDisplayInputs() {
         return displayInputs;
@@ -68,19 +59,18 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
     }
 
     @Override
-    public boolean matches(SimpleInventory inventory, World world) {
+    public boolean matches(CrystalInfusionRecipeInput input, World world) {
         if (world.isClient()) {
             return false;
         }
 
-        return recipeItems.get(0).test(inventory.getStack(0))
-                && this.isMatchNbt(recipeItems.get(0), inventory.getStack(0))
-                && recipeItems.get(1).test(inventory.getStack(1))
-                && recipeItems.get(2).test(inventory.getStack(2));
-    }
+        return recipeItems.get(0).test(input.getStackInSlot(0))
+                && this.isMatchNbt(recipeItems.get(0), input.getStackInSlot(0))
+                && recipeItems.get(1).test(input.getStackInSlot(1))
+                && recipeItems.get(2).test(input.getStackInSlot(2));    }
 
     @Override
-    public ItemStack craft(SimpleInventory inventory, DynamicRegistryManager registryManager) {
+    public ItemStack craft(CrystalInfusionRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
         return output;
     }
 
@@ -90,7 +80,7 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
     }
 
     @Override
-    public ItemStack getResult(DynamicRegistryManager registryManager) {
+    public ItemStack getResult(RegistryWrapper.WrapperLookup registriesLookup) {
         return output.copy();
     }
 
@@ -150,8 +140,13 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
             return CODEC;
         }
 
+        @Override
+        public PacketCodec<RegistryByteBuf, CrystalInfusionRecipe> packetCodec() {
+            return null;
+        }
+
         private ItemStack parseOutputJson(JsonObject outputJson) {
-            Identifier itemId = new Identifier(JsonHelper.getString(outputJson, "item"));
+            Identifier itemId = Identifier.of(JsonHelper.getString(outputJson, "item"));
             int count = JsonHelper.getInt(outputJson, "count", 1);
             ItemStack output = new ItemStack(Registries.ITEM.get(itemId), count);
 
@@ -193,51 +188,51 @@ public class CrystalInfusionRecipe implements Recipe<SimpleInventory> {
 //            return new CrystalInfusionRecipe(output, inputs, displayInputs);
 //        }
 
-        @Override
-        public CrystalInfusionRecipe read(PacketByteBuf buf) {
-            int size = buf.readInt();
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(size, Ingredient.EMPTY);
-
-            for (int i = 0; i < size; i++) {
-                inputs.set(i, Ingredient.fromPacket(buf));
-            }
-
-            ItemStack output = buf.readItemStack();
-            String nbtString = buf.readString(32767);
-            if (!nbtString.isEmpty()) {
-                try {
-                    NbtCompound nbt = StringNbtReader.parse(nbtString);
-                    output.setNbt(nbt);
-                } catch (CommandSyntaxException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            int displaySize = buf.readInt();
-            ArrayList<ItemStack> displayInputs = new ArrayList<>();
-            for (int i = 0; i < displaySize; i++) {
-                displayInputs.add(buf.readItemStack());
-            }
-
-            return new CrystalInfusionRecipe(output, inputs, displayInputs);
-        }
-
-        @Override
-        public void write(PacketByteBuf buf, CrystalInfusionRecipe recipe) {
-            buf.writeInt(recipe.getIngredients().size());
-
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.write(buf);
-            }
-
-            ItemStack output = recipe.getResult(null);
-            buf.writeItemStack(output);
-
-            if (output.hasNbt()) {
-                buf.writeString(output.getNbt().toString());
-            } else {
-                buf.writeString("");
-            }
-        }
+//        @Override
+//        public CrystalInfusionRecipe read(PacketByteBuf buf) {
+//            int size = buf.readInt();
+//            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(size, Ingredient.EMPTY);
+//
+//            for (int i = 0; i < size; i++) {
+//                inputs.set(i, Ingredient.fromPacket(buf));
+//            }
+//
+//            ItemStack output = buf.readItemStack();
+//            String nbtString = buf.readString(32767);
+//            if (!nbtString.isEmpty()) {
+//                try {
+//                    NbtCompound nbt = StringNbtReader.parse(nbtString);
+//                    output.setNbt(nbt);
+//                } catch (CommandSyntaxException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            int displaySize = buf.readInt();
+//            ArrayList<ItemStack> displayInputs = new ArrayList<>();
+//            for (int i = 0; i < displaySize; i++) {
+//                displayInputs.add(buf.readItemStack());
+//            }
+//
+//            return new CrystalInfusionRecipe(output, inputs, displayInputs);
+//        }
+//
+//        @Override
+//        public void write(PacketByteBuf buf, CrystalInfusionRecipe recipe) {
+//            buf.writeInt(recipe.getIngredients().size());
+//
+//            for (Ingredient ing : recipe.getIngredients()) {
+//                ing.write(buf);
+//            }
+//
+//            ItemStack output = recipe.getResult(null);
+//            buf.writeItemStack(output);
+//
+//            if (output.hasNbt()) {
+//                buf.writeString(output.getNbt().toString());
+//            } else {
+//                buf.writeString("");
+//            }
+//        }
     }
 }

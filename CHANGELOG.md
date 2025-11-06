@@ -1,2 +1,0 @@
-- Revamp texture of Spinel Block
-- Update custom recipe to codecs
