@@ -2,8 +2,7 @@ package net.agadii.crystalinfused.recipe;
 
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.agadii.crystalinfused.recipe.recipeInput.CrystalInfusionRecipeInput;
 import net.minecraft.enchantment.Enchantment;
@@ -11,7 +10,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.StringNbtReader;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.*;
@@ -20,13 +18,13 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.world.World;
 import utils.CodecUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+
+import static utils.CodecUtils.validateAmount;
 
 public record CrystalInfusionRecipe(ItemStack output, DefaultedList<Ingredient> recipeItems, ArrayList<ItemStack> displayInputs) implements Recipe<CrystalInfusionRecipeInput> {
 
@@ -112,7 +110,7 @@ public record CrystalInfusionRecipe(ItemStack output, DefaultedList<Ingredient> 
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "infusing";
 
-        public static final Codec<CrystalInfusionRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        public static final MapCodec<CrystalInfusionRecipe> MAP_CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 // Only encode/decode the actual ingredients and output
                 validateAmount(CodecUtils.INGREDIENT_WITH_NBT_CODEC, 3).fieldOf("ingredients").forGetter(CrystalInfusionRecipe::getIngredients),
                 CodecUtils.RECIPE_RESULT_WITH_NBT_CODEC.fieldOf("result").forGetter(r -> r.output)
@@ -128,16 +126,9 @@ public record CrystalInfusionRecipe(ItemStack output, DefaultedList<Ingredient> 
             return new CrystalInfusionRecipe(output, DefaultedList.copyOf(Ingredient.EMPTY, ingredients.toArray(new Ingredient[0])), displayInputs);
         }));
 
-        public static Codec<List<Ingredient>> validateAmount(Codec<Ingredient> delegate, int max) {
-            return Codecs.validate(Codecs.validate(
-                    delegate.listOf(), list -> list.size() > max ? DataResult.error(() ->
-                            "Recipe has too many ingredients!") : DataResult.success(list)
-            ), list -> list.isEmpty() ? DataResult.error(() -> "Recipe has no ingredients!") : DataResult.success(list));
-        }
-
         @Override
-        public Codec<CrystalInfusionRecipe> codec() {
-            return CODEC;
+        public MapCodec<CrystalInfusionRecipe> codec() {
+            return MAP_CODEC;
         }
 
         @Override

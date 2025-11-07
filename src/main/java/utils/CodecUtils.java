@@ -2,6 +2,7 @@ package utils;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
@@ -12,7 +13,9 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
+import net.minecraft.util.dynamic.Codecs;
 
+import java.util.List;
 import java.util.Optional;
 
 public class CodecUtils {
@@ -59,5 +62,28 @@ public class CodecUtils {
 
         return stack;
     }));
+
+    public static Codec<List<Ingredient>> validateAmount(Codec<Ingredient> delegate, int max) {
+        return delegate.listOf().flatXmap(
+                list -> {
+                    if (list.isEmpty()) {
+                        return DataResult.error(() -> "Recipe has no ingredients!");
+                    }
+                    if (list.size() > max) {
+                        return DataResult.error(() -> "Recipe has too many ingredients!");
+                    }
+                    return DataResult.success(list);
+                },
+                list -> {
+                    if (list.isEmpty()) {
+                        return DataResult.error(() -> "Recipe has no ingredients!");
+                    }
+                    if (list.size() > max) {
+                        return DataResult.error(() -> "Recipe has too many ingredients!");
+                    }
+                    return DataResult.success(list);
+                }
+        );
+    }
 }
 
