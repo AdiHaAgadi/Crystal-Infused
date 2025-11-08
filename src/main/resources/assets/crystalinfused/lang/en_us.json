@@ -44,5 +44,8 @@
     "tag.crystalinfused.crystal_purification": "Crystal Purification",
     "tag.crystalinfused.crystal_infusion": "Crystal Infusion",
 
-    "itemgroup.crystal_infused": "Crystal Infused"
+    "tag.item.crystalinfused.crystals": "Crystals",
+    "tag.item.crystalinfused.raw_crystals": "Raw Crystals",
+
+  "itemgroup.crystal_infused": "Crystal Infused"
 }

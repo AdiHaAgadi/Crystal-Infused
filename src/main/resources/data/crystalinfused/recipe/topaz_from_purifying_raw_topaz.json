@@ -1,0 +1,11 @@
+{
+  "type": "crystalinfused:purifying",
+  "ingredients": [
+    {
+      "item": "crystalinfused:raw_topaz"
+    }
+  ],
+  "output": {
+    "id": "crystalinfused:topaz"
+  }
+}

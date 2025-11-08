@@ -313,9 +313,7 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
     }
 
     @Override
-    public PacketByteBuf getScreenOpeningData(ServerPlayerEntity player) {
-        PacketByteBuf buf = new PacketByteBuf(io.netty.buffer.Unpooled.buffer());
-        buf.writeBlockPos(this.pos);
-        return buf;
+    public BlockPos getScreenOpeningData(ServerPlayerEntity player) {
+        return this.pos;
     }
 }

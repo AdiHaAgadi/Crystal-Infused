@@ -1,11 +1,9 @@
 package net.agadii.crystalinfused.screen;
 
 import net.agadii.crystalinfused.CrystalInfused;
+import net.agadii.crystalinfused.block.entity.CrystalPurifierBlockEntity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.screen.ScreenHandlerType;
