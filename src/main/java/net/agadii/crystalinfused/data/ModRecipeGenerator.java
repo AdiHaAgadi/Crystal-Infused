@@ -13,13 +13,15 @@ import net.minecraft.data.server.recipe.VanillaRecipeProvider;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeGenerator extends FabricRecipeProvider {
-    public ModRecipeGenerator(FabricDataOutput output) {
-        super(output);
+    public ModRecipeGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        super(output, registryLookup);
     }
 
     @Override

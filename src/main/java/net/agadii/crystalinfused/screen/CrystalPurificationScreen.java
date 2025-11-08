@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 
 public class CrystalPurificationScreen extends HandledScreen<CrystalPurificationScreenHandler> {
     private static final Identifier TEXTURE =
-            new Identifier(CrystalInfused.MOD_ID, "textures/gui/crystal_purifier_gui.png");
+            Identifier.of(CrystalInfused.MOD_ID, "textures/gui/crystal_purifier_gui.png");
 
     public CrystalPurificationScreen(CrystalPurificationScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);

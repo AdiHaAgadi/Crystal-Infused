@@ -11,7 +11,7 @@ public class ModFeatures {
             registerFeature("pearl_ore_feature", new PearlOreFeature(OreFeatureConfig.CODEC));
 
     private static <FC extends FeatureConfig, F extends Feature<FC>> F registerFeature(String name, F feature) {
-        return Registry.register(Registries.FEATURE, new Identifier(CrystalInfused.MOD_ID, name), feature);
+        return Registry.register(Registries.FEATURE, Identifier.of(CrystalInfused.MOD_ID, name), feature);
     }
 
     public static void registerModFeatures() {

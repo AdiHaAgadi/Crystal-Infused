@@ -1,28 +1,24 @@
 package net.agadii.crystalinfused.recipe;
 
-import com.google.gson.JsonObject;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.agadii.crystalinfused.recipe.recipeInput.CrystalInfusionRecipeInput;
-import net.minecraft.enchantment.Enchantment;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.recipe.*;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 import utils.CodecUtils;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 import static utils.CodecUtils.validateAmount;
 
@@ -32,13 +28,32 @@ public record CrystalInfusionRecipe(ItemStack output, DefaultedList<Ingredient> 
         return displayInputs;
     }
 
+    private static ArrayList<ItemStack> createDisplayInputsFromIngredientList(List<Ingredient> ingredients) {
+        ArrayList<ItemStack> displayInputs = new ArrayList<>();
+        for (Ingredient ing : ingredients) {
+            ItemStack[] matchingStacks = ing.getMatchingStacks();
+            if (matchingStacks.length > 0) {
+                displayInputs.add(matchingStacks[0].copy()); // take first stack for display
+            }
+        }
+
+        return displayInputs;
+    }
+
     private boolean isSameEnchantmentsNbt(ItemStack expected, ItemStack input) {
         if (!expected.isOf(input.getItem())) return false;
 
-        Map<Enchantment, Integer> expectedMap = EnchantmentHelper.get(expected);
-        Map<Enchantment, Integer> inputMap = EnchantmentHelper.get(input);
+        ItemEnchantmentsComponent expectedEnchantments = EnchantmentHelper.getEnchantments(expected);
+        ItemEnchantmentsComponent inputEnchantments = EnchantmentHelper.getEnchantments(input);
 
-        return expectedMap.equals(inputMap);
+        if (expectedEnchantments == null && inputEnchantments == null) {
+            return true;
+        }
+        if (expectedEnchantments == null || inputEnchantments == null) {
+            return false;
+        }
+
+        return expectedEnchantments.getEnchantments().equals(inputEnchantments.getEnchantments());
     }
 
     private boolean isMatchNbt(Ingredient expected, ItemStack input) {
@@ -46,14 +61,17 @@ public record CrystalInfusionRecipe(ItemStack output, DefaultedList<Ingredient> 
 
         if (expectedStacks.length > 0) {
             ItemStack expectedStack = expectedStacks[0];
-            if (expectedStack.hasNbt()) {
-                if (!input.hasNbt() || !isSameEnchantmentsNbt(expectedStack, input)) {
-                    return false;
-                }
+
+            // Compare enchantments if either stack has them
+            boolean expectedHasEnchants = expectedStack.get(DataComponentTypes.ENCHANTMENTS) != null;
+            boolean inputHasEnchants = input.get(DataComponentTypes.ENCHANTMENTS) != null;
+
+            if (expectedHasEnchants) {
+                return inputHasEnchants && isSameEnchantmentsNbt(expectedStack, input);
             }
         }
 
-        return true;
+        return false;
     }
 
     @Override
@@ -110,21 +128,38 @@ public record CrystalInfusionRecipe(ItemStack output, DefaultedList<Ingredient> 
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "infusing";
 
-        public static final MapCodec<CrystalInfusionRecipe> MAP_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        public static final MapCodec<CrystalInfusionRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 // Only encode/decode the actual ingredients and output
                 validateAmount(CodecUtils.INGREDIENT_WITH_NBT_CODEC, 3).fieldOf("ingredients").forGetter(CrystalInfusionRecipe::getIngredients),
-                CodecUtils.RECIPE_RESULT_WITH_NBT_CODEC.fieldOf("result").forGetter(r -> r.output)
+                CodecUtils.RECIPE_RESULT_WITH_NBT_CODEC.fieldOf("result").forGetter(CrystalInfusionRecipe::output)
         ).apply(instance, (ingredients, output) -> {
-            // Automatically generate displayInputs from ingredients
-            ArrayList<ItemStack> displayInputs = new ArrayList<>();
-            for (Ingredient ing : ingredients) {
-                ItemStack[] matchingStacks = ing.getMatchingStacks();
-                if (matchingStacks.length > 0) {
-                    displayInputs.add(matchingStacks[0].copy()); // take first stack for display
-                }
-            }
-            return new CrystalInfusionRecipe(output, DefaultedList.copyOf(Ingredient.EMPTY, ingredients.toArray(new Ingredient[0])), displayInputs);
+            ArrayList<ItemStack> displayInputs =
+                    CrystalInfusionRecipe.createDisplayInputsFromIngredientList(ingredients);
+
+            // constructor logic
+            return new CrystalInfusionRecipe(
+                    output,
+                    DefaultedList.copyOf(Ingredient.EMPTY, ingredients.toArray(new Ingredient[0])),
+                    displayInputs
+            );
         }));
+
+        public static final PacketCodec<RegistryByteBuf, CrystalInfusionRecipe> STREAM_CODEC =
+                PacketCodec.tuple(
+                        Ingredient.PACKET_CODEC.collect(PacketCodecs.toList()), CrystalInfusionRecipe::recipeItems,
+                        ItemStack.PACKET_CODEC, CrystalInfusionRecipe::output,
+                        (ingredients, output) -> {
+                            ArrayList<ItemStack> displayInputs =
+                                    CrystalInfusionRecipe.createDisplayInputsFromIngredientList(ingredients);
+
+                            // constructor logic
+                            return new CrystalInfusionRecipe(
+                                    output,
+                                    DefaultedList.copyOf(Ingredient.EMPTY, ingredients.toArray(new Ingredient[0])),
+                                    displayInputs
+                            );
+                        }
+                );
 
         @Override
         public MapCodec<CrystalInfusionRecipe> codec() {
@@ -133,25 +168,25 @@ public record CrystalInfusionRecipe(ItemStack output, DefaultedList<Ingredient> 
 
         @Override
         public PacketCodec<RegistryByteBuf, CrystalInfusionRecipe> packetCodec() {
-            return null;
+            return STREAM_CODEC;
         }
 
-        private ItemStack parseOutputJson(JsonObject outputJson) {
-            Identifier itemId = Identifier.of(JsonHelper.getString(outputJson, "item"));
-            int count = JsonHelper.getInt(outputJson, "count", 1);
-            ItemStack output = new ItemStack(Registries.ITEM.get(itemId), count);
-
-            if (outputJson.has("nbt")) {
-                try {
-                    NbtCompound nbt = StringNbtReader.parse(JsonHelper.getString(outputJson, "nbt"));
-                    output.setNbt(nbt);
-                } catch (CommandSyntaxException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return output;
-        }
+//        private ItemStack parseOutputJson(JsonObject outputJson) {
+//            Identifier itemId = Identifier.of(JsonHelper.getString(outputJson, "item"));
+//            int count = JsonHelper.getInt(outputJson, "count", 1);
+//            ItemStack output = new ItemStack(Registries.ITEM.get(itemId), count);
+//
+//            if (outputJson.has("nbt")) {
+//                try {
+//                    NbtCompound nbt = StringNbtReader.parse(JsonHelper.getString(outputJson, "nbt"));
+//                    output.setNbt(nbt);
+//                } catch (CommandSyntaxException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            return output;
+//        }
 
 //        public CrystalInfusionRecipe read(Identifier id, JsonObject json) {
 //            JsonObject resultObject = JsonHelper.getObject(json, "result");

@@ -14,14 +14,15 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.FurnaceFuelSlot;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.math.BlockPos;
 
 public class CrystalPurificationScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
     public final CrystalPurifierBlockEntity blockEntity;
 
-    public CrystalPurificationScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
-        this(syncId, inventory, inventory.player.getWorld().getBlockEntity(buf.readBlockPos()),
+    public CrystalPurificationScreenHandler(int syncId, PlayerInventory inventory, BlockPos pos) {
+        this(syncId, inventory, inventory.player.getWorld().getBlockEntity(pos),
                 new ArrayPropertyDelegate(4));
     }
 

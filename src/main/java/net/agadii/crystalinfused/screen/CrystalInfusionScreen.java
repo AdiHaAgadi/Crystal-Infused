@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 
 public class CrystalInfusionScreen extends HandledScreen<CrystalInfusionScreenHandler> {
     private static final Identifier TEXTURE =
-            new Identifier(CrystalInfused.MOD_ID, "textures/gui/crystal_infuser_gui.png");
+            Identifier.of(CrystalInfused.MOD_ID, "textures/gui/crystal_infuser_gui.png");
 
     private final PlayerInventory playerInventory; // Store player inventory
 

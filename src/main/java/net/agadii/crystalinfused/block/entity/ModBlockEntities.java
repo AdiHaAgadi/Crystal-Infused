@@ -3,7 +3,6 @@ package net.agadii.crystalinfused.block.entity;
 import net.agadii.crystalinfused.CrystalInfused;
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -16,12 +15,12 @@ public class ModBlockEntities {
 
     public static void registerBlockEntities() {
         CRYSTAL_PURIFIER = Registry.register(Registries.BLOCK_ENTITY_TYPE,
-                new Identifier(CrystalInfused.MOD_ID, "crystal_purifier"),
+                Identifier.of(CrystalInfused.MOD_ID, "crystal_purifier"),
                 FabricBlockEntityTypeBuilder.create(CrystalPurifierBlockEntity::new,
                         ModBlocks.CRYSTAL_PURIFIER).build(null));
 
         CRYSTAL_INFUSER = Registry.register(Registries.BLOCK_ENTITY_TYPE,
-                new Identifier(CrystalInfused.MOD_ID, "crystal_infuser"),
+                Identifier.of(CrystalInfused.MOD_ID, "crystal_infuser"),
                 FabricBlockEntityTypeBuilder.create(CrystalInfuserBlockEntity::new,
                         ModBlocks.CRYSTAL_INFUSER).build(null));
     }
