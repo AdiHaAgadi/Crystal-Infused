@@ -16,12 +16,12 @@ public class ModBlockEntities {
     public static void registerBlockEntities() {
         CRYSTAL_PURIFIER = Registry.register(Registries.BLOCK_ENTITY_TYPE,
                 Identifier.of(CrystalInfused.MOD_ID, "crystal_purifier"),
-                FabricBlockEntityTypeBuilder.create(CrystalPurifierBlockEntity::new,
+                BlockEntityType.Builder.create(CrystalPurifierBlockEntity::new,
                         ModBlocks.CRYSTAL_PURIFIER).build(null));
 
         CRYSTAL_INFUSER = Registry.register(Registries.BLOCK_ENTITY_TYPE,
                 Identifier.of(CrystalInfused.MOD_ID, "crystal_infuser"),
-                FabricBlockEntityTypeBuilder.create(CrystalInfuserBlockEntity::new,
+                BlockEntityType.Builder.create(CrystalInfuserBlockEntity::new,
                         ModBlocks.CRYSTAL_INFUSER).build(null));
     }
 }
