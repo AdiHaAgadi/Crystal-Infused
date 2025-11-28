@@ -2,18 +2,27 @@
   "type": "crystalinfused:infusing",
   "ingredients": [
     {
-      "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:efficiency\",lvl:5}]}"
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:efficiency": 5
+        }
+      }
     },
     {
-      "item": "crystalinfused:peridot"
+      "id": "crystalinfused:peridot"
     },
     {
-      "item": "crystalinfused:spinel"
+      "id": "crystalinfused:spinel"
     }
   ],
   "result": {
-    "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:efficiency\",lvl:6}]}"
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:efficiency": 6
+      }
+    }
   }
 }

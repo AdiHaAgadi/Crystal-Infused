@@ -2,18 +2,27 @@
   "type": "crystalinfused:infusing",
   "ingredients": [
     {
-      "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:bane_of_arthropods\",lvl:5}]}"
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:bane_of_arthropods": 5
+        }
+      }
     },
     {
-      "item": "crystalinfused:sapphire"
+      "id": "crystalinfused:sapphire"
     },
     {
-      "item": "crystalinfused:ruby"
+      "id": "crystalinfused:ruby"
     }
   ],
   "result": {
-    "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:bane_of_arthropods\",lvl:6}]}"
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:bane_of_arthropods": 6
+      }
+    }
   }
 }

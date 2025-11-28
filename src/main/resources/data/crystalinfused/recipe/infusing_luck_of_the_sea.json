@@ -2,18 +2,27 @@
   "type": "crystalinfused:infusing",
   "ingredients": [
     {
-      "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:luck_of_the_sea\",lvl:3}]}"
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:luck_of_the_sea": 3
+        }
+      }
     },
     {
-      "item": "crystalinfused:topaz"
+      "id": "crystalinfused:topaz"
     },
     {
-      "item": "crystalinfused:peridot"
+      "id": "crystalinfused:peridot"
     }
   ],
   "result": {
-    "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:luck_of_the_sea\",lvl:4}]}"
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:luck_of_the_sea": 4
+      }
+    }
   }
 }

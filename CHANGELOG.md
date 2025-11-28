@@ -1,0 +1,3 @@
+- Add armor trims for the different crystals
+- Add infusion recipes for 1.21 enchantments
+- Revamp infusion recipe format

@@ -2,18 +2,27 @@
   "type": "crystalinfused:infusing",
   "ingredients": [
     {
-      "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:swift_sneak\",lvl:3}]}"
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:swift_sneak": 3
+        }
+      }
     },
     {
-      "item": "crystalinfused:sugilite"
+      "id": "crystalinfused:sugilite"
     },
     {
-      "item": "crystalinfused:sapphire"
+      "id": "crystalinfused:sapphire"
     }
   ],
   "result": {
-    "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:swift_sneak\",lvl:4}]}"
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:swift_sneak": 4
+      }
+    }
   }
 }

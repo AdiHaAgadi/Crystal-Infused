@@ -2,18 +2,27 @@
   "type": "crystalinfused:infusing",
   "ingredients": [
     {
-      "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:smite\",lvl:5}]}"
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:smite": 5
+        }
+      }
     },
     {
-      "item": "crystalinfused:sapphire"
+      "id": "crystalinfused:sapphire"
     },
     {
-      "item": "crystalinfused:topaz"
+      "id": "crystalinfused:topaz"
     }
   ],
   "result": {
-    "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:smite\",lvl:6}]}"
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:smite": 6
+      }
+    }
   }
 }

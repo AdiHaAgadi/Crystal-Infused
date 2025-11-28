@@ -2,18 +2,27 @@
   "type": "crystalinfused:infusing",
   "ingredients": [
     {
-      "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:frost_walker\",lvl:2}]}"
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:frost_walker": 2
+        }
+      }
     },
     {
-      "item": "crystalinfused:sugilite"
+      "id": "crystalinfused:sugilite"
     },
     {
-      "item": "crystalinfused:amber"
+      "id": "crystalinfused:amber"
     }
   ],
   "result": {
-    "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:frost_walker\",lvl:3}]}"
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:frost_walker": 3
+      }
+    }
   }
 }

@@ -2,18 +2,27 @@
   "type": "crystalinfused:infusing",
   "ingredients": [
     {
-      "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:piercing\",lvl:4}]}"
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:piercing": 4
+        }
+      }
     },
     {
-      "item": "crystalinfused:ruby"
+      "id": "crystalinfused:ruby"
     },
     {
-      "item": "crystalinfused:peridot"
+      "id": "crystalinfused:peridot"
     }
   ],
   "result": {
-    "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:piercing\",lvl:5}]}"
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:piercing": 5
+      }
+    }
   }
 }

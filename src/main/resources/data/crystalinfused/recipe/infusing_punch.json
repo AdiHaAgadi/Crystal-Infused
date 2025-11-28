@@ -2,18 +2,27 @@
   "type": "crystalinfused:infusing",
   "ingredients": [
     {
-      "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:punch\",lvl:2}]}"
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:punch": 2
+        }
+      }
     },
     {
-      "item": "crystalinfused:ruby"
+      "id": "crystalinfused:ruby"
     },
     {
-      "item": "crystalinfused:topaz"
+      "id": "crystalinfused:topaz"
     }
   ],
   "result": {
-    "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:punch\",lvl:3}]}"
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:punch": 3
+      }
+    }
   }
 }

@@ -130,8 +130,8 @@ public record CrystalInfusionRecipe(ItemStack output, DefaultedList<Ingredient> 
 
         public static final MapCodec<CrystalInfusionRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 // Only encode/decode the actual ingredients and output
-                validateAmount(CodecUtils.INGREDIENT_WITH_NBT_CODEC, 3).fieldOf("ingredients").forGetter(CrystalInfusionRecipe::getIngredients),
-                CodecUtils.RECIPE_RESULT_WITH_NBT_CODEC.fieldOf("result").forGetter(CrystalInfusionRecipe::output)
+                validateAmount(CodecUtils.INGREDIENT_FROM_STACK_CODEC, 3).fieldOf("ingredients").forGetter(CrystalInfusionRecipe::getIngredients),
+                ItemStack.CODEC.fieldOf("result").forGetter(CrystalInfusionRecipe::output)
         ).apply(instance, (ingredients, output) -> {
             ArrayList<ItemStack> displayInputs =
                     CrystalInfusionRecipe.createDisplayInputsFromIngredientList(ingredients);

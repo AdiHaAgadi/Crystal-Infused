@@ -2,18 +2,27 @@
   "type": "crystalinfused:infusing",
   "ingredients": [
     {
-      "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:sweeping\",lvl:3}]}"
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:sweeping_edge": 3
+        }
+      }
     },
     {
-      "item": "crystalinfused:spinel"
+      "id": "crystalinfused:spinel"
     },
     {
-      "item": "crystalinfused:sugilite"
+      "id": "crystalinfused:sugilite"
     }
   ],
   "result": {
-    "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:sweeping\",lvl:4}]}"
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:sweeping_edge": 4
+      }
+    }
   }
 }

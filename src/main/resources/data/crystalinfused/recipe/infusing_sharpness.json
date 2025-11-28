@@ -2,18 +2,27 @@
   "type": "crystalinfused:infusing",
   "ingredients": [
     {
-      "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:\"minecraft:sharpness\",lvl:5}]}"
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:sharpness": 5
+        }
+      }
     },
     {
-      "item": "crystalinfused:sapphire"
+      "id": "crystalinfused:sapphire"
     },
     {
-      "item": "crystalinfused:amber"
+      "id": "crystalinfused:amber"
     }
   ],
   "result": {
-    "item": "minecraft:enchanted_book",
-    "nbt": "{StoredEnchantments:[{id:\"minecraft:sharpness\",lvl:6}]}"
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:sharpness": 6
+      }
+    }
   }
 }
