@@ -1,0 +1,9 @@
+{
+  "asset_name": "sapphire",
+  "description": {
+    "translate": "trim_material.crystalinfused.sapphire",
+    "color": "#1E50B7"
+  },
+  "ingredient": "crystalinfused:sapphire",
+  "item_model_index": 10.4
+}

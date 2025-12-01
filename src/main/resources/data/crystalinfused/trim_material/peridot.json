@@ -1,0 +1,9 @@
+{
+  "asset_name": "peridot",
+  "description": {
+    "translate": "trim_material.crystalinfused.peridot",
+    "color": "#8FDB00"
+  },
+  "ingredient": "crystalinfused:peridot",
+  "item_model_index": 10.2
+}
