@@ -1,0 +1,28 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:riptide": 3
+        }
+      }
+    },
+    {
+      "id": "crystalinfused:pearl"
+    },
+    {
+      "id": "crystalinfused:pearl"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:riptide": 4
+      }
+    }
+  }
+}
