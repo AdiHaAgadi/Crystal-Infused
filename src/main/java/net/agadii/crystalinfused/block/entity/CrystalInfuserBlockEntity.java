@@ -21,6 +21,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.registry.RegistryWrapper;
@@ -50,13 +52,13 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
         super(ModBlockEntities.CRYSTAL_INFUSER, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
-                switch (index) {
-                    case 0: return CrystalInfuserBlockEntity.this.progress;
-                    case 1: return maxProgress;
-                    case 2: return CrystalInfuserBlockEntity.this.fuelProgress;
-                    case 3: return maxFuelProgress;
-                    default: return 0;
-                }
+                return switch (index) {
+                    case 0 -> CrystalInfuserBlockEntity.this.progress;
+                    case 1 -> maxProgress;
+                    case 2 -> CrystalInfuserBlockEntity.this.fuelProgress;
+                    case 3 -> maxFuelProgress;
+                    default -> 0;
+                };
             }
 
             public void set(int index, int value) {
@@ -102,14 +104,17 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
     }
 
     // ----------- Sync to client -----------
-//    @Override
-//    public NbtCompound toInitialChunkDataNbt() {
-//        return createNbt();
-//    }
 
+    // 1. Packet for when the block updates (e.g., setBlockState or notifyListeners)
     @Override
-    public @Nullable BlockEntityUpdateS2CPacket toUpdatePacket() {
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
         return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    // 2. NBT for when the chunk is first loaded by the client
+    @Override
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        return createNbt(registryLookup);
     }
 
     // ----------- Call this whenever progress changes -----------
