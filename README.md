@@ -49,6 +49,13 @@ The fuel for it, however, may only be found in <span style="color:purple">__a di
 But in order to activate it - you may need to slay the <span style="color:gray">__Three-headed Terror!__</span>
 
 </details>
+<br/>
+<details>
+  <summary>Armor Trims</summary>
+    Each Crystal also gets its own armor trim coloring!
+  
+  <img width="1920" height="1009" alt="2025-12-01_23 42 25" src="https://github.com/user-attachments/assets/fb3c7c5e-373d-4440-ada8-45a44571c0e3" />
+</details>
 
 ## Language Support
 The mod supports the following languages: 🇺🇸 English, 🇬🇧 English, 🇫🇷 French, 🇪🇸 Spanish, 🇸🇦 Arabic, 🇮🇹 Italian, 🇮🇱 Hebrew, 🇯🇵 Japanese, 🇰🇷 Korean, 🇩🇪 German.
