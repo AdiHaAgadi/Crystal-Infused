@@ -19,50 +19,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class CodecUtils {
-//    public static final Codec<Ingredient> INGREDIENT_WITH_NBT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-//            Registries.ITEM.getCodec().fieldOf("item").forGetter(ing -> ing.getMatchingStacks()[0].getItem()),
-//            Codec.STRING.optionalFieldOf("nbt").forGetter(ing -> {
-//                ItemStack stack = ing.getMatchingStacks()[0];
-//                NbtCompound nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT).copyNbt();
-//
-//                return java.util.Optional.ofNullable(nbt != null ? nbt.toString() : null);
-//            })
-//    ).apply(instance, (item, nbtString) -> {
-//        ItemStack stack = new ItemStack(item);
-//        nbtString.ifPresent(s -> {
-//            try {
-//                NbtCompound nbt = StringNbtReader.parse(s);
-//                stack.set(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(nbt));
-//            } catch (CommandSyntaxException e) {
-//                throw new RuntimeException("Invalid NBT: " + s, e);
-//            }
-//        });
-//
-//        return Ingredient.ofStacks(stack);
-//    }));
-//
-//    public static final Codec<ItemStack> RECIPE_RESULT_WITH_NBT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-//            Registries.ITEM.getCodec().fieldOf("item").forGetter(ItemStack::getItem),
-//            Codec.INT.optionalFieldOf("count", 1).forGetter(ItemStack::getCount),
-//            Codec.STRING.optionalFieldOf("nbt").forGetter(stack -> {
-//                NbtCompound nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT).copyNbt();
-//
-//                return Optional.ofNullable(nbt != null ? nbt.toString() : null);
-//            })
-//    ).apply(instance, (item, count, nbtString) -> {
-//        ItemStack stack = new ItemStack(item, count);
-//        nbtString.ifPresent(s -> {
-//            try {
-//                NbtCompound nbt = StringNbtReader.parse(s);
-//                stack.set(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(nbt));
-//            } catch (CommandSyntaxException e) {
-//                throw new RuntimeException("Invalid NBT: " + s, e);
-//            }
-//        });
-//
-//        return stack;
-//    }));
-
     public static final Codec<Ingredient> INGREDIENT_FROM_STACK_CODEC = ItemStack.CODEC.flatComapMap(
             Ingredient::ofStacks,
             (Ingredient ingredient) -> {

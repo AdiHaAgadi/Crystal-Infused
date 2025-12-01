@@ -38,21 +38,21 @@ public class ModTrimMaterials {
 
     public static void bootstrap(Registerable<ArmorTrimMaterial> registerable) {
         register(registerable, SAPPHIRE, Registries.ITEM.getEntry(ModItems.SAPPHIRE),
-                Style.EMPTY.withColor(TextColor.parse("#b03fe0").getOrThrow()), 1.0f);
+                Style.EMPTY.withColor(TextColor.parse("#1E50B7").getOrThrow()), 1.0f);
         register(registerable, RUBY, Registries.ITEM.getEntry(ModItems.RUBY),
-                Style.EMPTY.withColor(TextColor.parse("#b03fe0").getOrThrow()), 1.0f);
+                Style.EMPTY.withColor(TextColor.parse("#B41725").getOrThrow()), 1.0f);
         register(registerable, TOPAZ, Registries.ITEM.getEntry(ModItems.TOPAZ),
-                Style.EMPTY.withColor(TextColor.parse("#b03fe0").getOrThrow()), 1.0f);
+                Style.EMPTY.withColor(TextColor.parse("#E59A11").getOrThrow()), 1.0f);
         register(registerable, AMBER, Registries.ITEM.getEntry(ModItems.AMBER),
-                Style.EMPTY.withColor(TextColor.parse("#b03fe0").getOrThrow()), 1.0f);
+                Style.EMPTY.withColor(TextColor.parse("#F0710C").getOrThrow()), 1.0f);
         register(registerable, PERIDOT, Registries.ITEM.getEntry(ModItems.PERIDOT),
-                Style.EMPTY.withColor(TextColor.parse("#b03fe0").getOrThrow()), 1.0f);
+                Style.EMPTY.withColor(TextColor.parse("#8FDB00").getOrThrow()), 1.0f);
         register(registerable, SUGILITE, Registries.ITEM.getEntry(ModItems.SUGILITE),
-                Style.EMPTY.withColor(TextColor.parse("#b03fe0").getOrThrow()), 1.0f);
+                Style.EMPTY.withColor(TextColor.parse("#9140AE").getOrThrow()), 1.0f);
         register(registerable, SPINEL, Registries.ITEM.getEntry(ModItems.SPINEL),
-                Style.EMPTY.withColor(TextColor.parse("#b03fe0").getOrThrow()), 1.0f);
+                Style.EMPTY.withColor(TextColor.parse("#DB4388").getOrThrow()), 1.0f);
         register(registerable, PEARL, Registries.ITEM.getEntry(ModItems.PEARL),
-                Style.EMPTY.withColor(TextColor.parse("#b03fe0").getOrThrow()), 1.0f);
+                Style.EMPTY.withColor(TextColor.parse("#E2B89A").getOrThrow()), 1.0f);
     }
 
     private static void register(Registerable<ArmorTrimMaterial> registerable, RegistryKey<ArmorTrimMaterial> armorTrimKey,
@@ -62,4 +62,6 @@ public class ModTrimMaterials {
 
         registerable.register(armorTrimKey, trimMaterial);
     }
+
+
 }
