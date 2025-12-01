@@ -1,2 +1,3 @@
-- Revamp texture of Spinel Block
-- Update custom recipe to codecs
+- Add armor trims for the different crystals
+- Add infusion recipes for 1.21 enchantments, as well as Riptide
+- Revamp infusion recipe format

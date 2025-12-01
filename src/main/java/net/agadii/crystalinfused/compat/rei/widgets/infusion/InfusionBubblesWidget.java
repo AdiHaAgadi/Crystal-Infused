@@ -20,7 +20,7 @@ import java.util.Objects;
 public class InfusionBubblesWidget extends BoundedWidget {
     private Rectangle bounds;
     private double animationDuration = -1;
-    private final Identifier TEXTURE = new Identifier(CrystalInfused.MOD_ID, "textures/gui/rei/infusion_bubbles.png");
+    private final Identifier TEXTURE = Identifier.of(CrystalInfused.MOD_ID, "textures/gui/rei/infusion_bubbles.png");
     private final NumberAnimator<Float> darkBackgroundAlpha = ValueAnimator.ofFloat()
             .withConvention(() -> REIRuntime.getInstance().isDarkThemeEnabled() ? 1.0F : 0.0F, ValueAnimator.typicalTransitionTime())
             .asFloat();

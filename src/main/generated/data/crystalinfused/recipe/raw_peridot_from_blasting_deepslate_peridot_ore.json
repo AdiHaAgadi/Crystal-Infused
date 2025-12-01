@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "group": "peridot",
+  "ingredient": {
+    "item": "crystalinfused:deepslate_peridot_ore"
+  },
+  "result": {
+    "id": "crystalinfused:raw_peridot"
+  }
+}

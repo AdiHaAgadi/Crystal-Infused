@@ -44,5 +44,14 @@
   "tag.crystalinfused.crystal_purification": "クリスタルの精製",
   "tag.crystalinfused.crystal_infusion": "クリスタルの注入",
 
+  "trim_material.crystalinfused.ruby": "ルビーの素材",
+  "trim_material.crystalinfused.sapphire": "サファイアの素材",
+  "trim_material.crystalinfused.topaz": "トパーズの素材",
+  "trim_material.crystalinfused.amber": "琥珀の素材",
+  "trim_material.crystalinfused.peridot": "ペリドットの素材",
+  "trim_material.crystalinfused.sugilite": "スギライトの素材",
+  "trim_material.crystalinfused.spinel": "スピネルの素材",
+  "trim_material.crystalinfused.pearl": "パールの素材",
+
   "itemgroup.crystal_infused": "Crystal Infused"
 }

@@ -3,6 +3,8 @@ package net.agadii.crystalinfused.block.entity;
 import com.google.common.collect.Maps;
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.recipe.CrystalPurificationRecipe;
+import net.agadii.crystalinfused.recipe.ModRecipes;
+import net.agadii.crystalinfused.recipe.recipeInput.CrystalPurificationRecipeInput;
 import net.agadii.crystalinfused.screen.CrystalPurificationScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.AbstractFurnaceBlock;
@@ -17,8 +19,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -113,20 +115,20 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
+    public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt, registryLookup);
+        Inventories.writeNbt(nbt, this.inventory, registryLookup);
         nbt.putInt("crystal_purifier.progress", progress);
         nbt.putInt("crystal_purifier.fuel_progress", fuelProgress);
 
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        Inventories.readNbt(nbt, inventory);
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        Inventories.readNbt(nbt, this.inventory, registryLookup);
         this.fuelTime = this.getFuelTime(inventory.get(0));
 
-        super.readNbt(nbt);
+        super.readNbt(nbt, registryLookup);
         this.progress = nbt.getInt("crystal_purifier.progress");
         this.fuelProgress = nbt.getInt("crystal_purifier.fuel_progress");
 
@@ -238,20 +240,29 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
         return false;
     }
 
+    private static Optional<RecipeEntry<CrystalPurificationRecipe>> getCurrentRecipe(CrystalPurifierBlockEntity entity) {
+        if (entity.getWorld() == null) return Optional.empty();
+
+        return entity.getWorld().getRecipeManager()
+                .getFirstMatch(
+                        CrystalPurificationRecipe.Type.INSTANCE,
+                        new CrystalPurificationRecipeInput(entity.inventory.get(1)), // slot 1 is the input slot
+                        entity.getWorld()
+                );
+    }
+
     private static void craftItem(CrystalPurifierBlockEntity entity) {
         SimpleInventory inventory = new SimpleInventory(entity.size());
         for (int i = 0; i < entity.size(); i++) {
             inventory.setStack(i, entity.getStack(i));
         }
 
-        Optional<CrystalPurificationRecipe> recipe = entity.getWorld().getRecipeManager()
-                .getFirstMatch(CrystalPurificationRecipe.Type.INSTANCE, inventory, entity.getWorld())
-                .map(RecipeEntry::value);
+        Optional<RecipeEntry<CrystalPurificationRecipe>> recipe = getCurrentRecipe(entity);
 
         if(hasRecipe(entity)) {
             entity.removeStack(1, 1);
 
-            entity.setStack(2, new ItemStack(recipe.get().getResult(null).getItem(),
+            entity.setStack(2, new ItemStack(recipe.get().value().getResult(null).getItem(),
                     entity.getStack(2).getCount() + 1));
 
             entity.resetProgress();
@@ -274,12 +285,10 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
             inventory.setStack(i, entity.getStack(i));
         }
 
-        Optional<CrystalPurificationRecipe> match = entity.getWorld().getRecipeManager()
-                .getFirstMatch(CrystalPurificationRecipe.Type.INSTANCE, inventory, entity.getWorld())
-                .map(RecipeEntry::value);
+        Optional<RecipeEntry<CrystalPurificationRecipe>> recipe = getCurrentRecipe(entity);
 
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getResult(null).getItem());
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                && canInsertItemIntoOutputSlot(inventory, recipe.get().value().getResult(null).getItem());
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, Item output) {
@@ -291,7 +300,7 @@ public class CrystalPurifierBlockEntity extends BlockEntity implements ExtendedS
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(this.pos);
+    public BlockPos getScreenOpeningData(ServerPlayerEntity player) {
+        return this.pos;
     }
 }

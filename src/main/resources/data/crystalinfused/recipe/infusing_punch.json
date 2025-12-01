@@ -1,0 +1,28 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:punch": 2
+        }
+      }
+    },
+    {
+      "id": "crystalinfused:ruby"
+    },
+    {
+      "id": "crystalinfused:topaz"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:punch": 3
+      }
+    }
+  }
+}

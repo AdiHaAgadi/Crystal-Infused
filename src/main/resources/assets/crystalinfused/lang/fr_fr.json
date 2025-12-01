@@ -44,5 +44,14 @@
   "tag.crystalinfused.crystal_purification": "Purification de cristaux",
   "tag.crystalinfused.crystal_infusion": "Infusion de cristaux",
 
+  "trim_material.crystalinfused.ruby": "En rubis",
+  "trim_material.crystalinfused.sapphire": "En saphir",
+  "trim_material.crystalinfused.topaz": "En topaze",
+  "trim_material.crystalinfused.amber": "En ambre",
+  "trim_material.crystalinfused.peridot": "En péridot",
+  "trim_material.crystalinfused.sugilite": "En sugilite",
+  "trim_material.crystalinfused.spinel": "En spinelle",
+  "trim_material.crystalinfused.pearl": "En perle",
+
   "itemgroup.crystal_infused": "Crystal Infused"
 }

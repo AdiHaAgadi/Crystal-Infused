@@ -4,6 +4,7 @@ import net.agadii.crystalinfused.block.CrystalInfuserBlock;
 import net.agadii.crystalinfused.block.ModBlocks;
 import net.agadii.crystalinfused.particle.ModParticles;
 import net.agadii.crystalinfused.recipe.CrystalInfusionRecipe;
+import net.agadii.crystalinfused.recipe.recipeInput.CrystalInfusionRecipeInput;
 import net.agadii.crystalinfused.screen.CrystalInfusionScreenHandler;
 import net.agadii.crystalinfused.tag.ModTags;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -14,15 +15,17 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.SidedInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -31,7 +34,6 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -50,13 +52,13 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
         super(ModBlockEntities.CRYSTAL_INFUSER, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
-                switch (index) {
-                    case 0: return CrystalInfuserBlockEntity.this.progress;
-                    case 1: return maxProgress;
-                    case 2: return CrystalInfuserBlockEntity.this.fuelProgress;
-                    case 3: return maxFuelProgress;
-                    default: return 0;
-                }
+                return switch (index) {
+                    case 0 -> CrystalInfuserBlockEntity.this.progress;
+                    case 1 -> maxProgress;
+                    case 2 -> CrystalInfuserBlockEntity.this.fuelProgress;
+                    case 3 -> maxFuelProgress;
+                    default -> 0;
+                };
             }
 
             public void set(int index, int value) {
@@ -81,10 +83,10 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
 
     // ----------- Save data to NBT (server -> disk) -----------
     @Override
-    public void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
+    public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt, registryLookup);
 
-        Inventories.writeNbt(nbt, this.inventory);
+        Inventories.writeNbt(nbt, this.inventory, registryLookup);
 
         nbt.putInt("Progress", this.progress);
         nbt.putInt("FuelProgress", this.fuelProgress);
@@ -92,24 +94,27 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
 
     // ----------- Load data from NBT -----------
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
 
-        Inventories.readNbt(nbt, this.inventory);
+        Inventories.readNbt(nbt, this.inventory, registryLookup);
 
         this.progress = nbt.getInt("Progress");
         this.fuelProgress = nbt.getInt("FuelProgress");
     }
 
     // ----------- Sync to client -----------
+
+    // 1. Packet for when the block updates (e.g., setBlockState or notifyListeners)
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
     }
 
+    // 2. NBT for when the chunk is first loaded by the client
     @Override
-    public @Nullable BlockEntityUpdateS2CPacket toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        return createNbt(registryLookup);
     }
 
     // ----------- Call this whenever progress changes -----------
@@ -240,26 +245,36 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
         return dir == Direction.DOWN && slot == 4;
     }
 
+    private static Optional<RecipeEntry<CrystalInfusionRecipe>> getCurrentRecipe(CrystalInfuserBlockEntity entity) {
+        if (entity.getWorld() == null) return Optional.empty();
+
+        return entity.getWorld().getRecipeManager()
+                .getFirstMatch(
+                        CrystalInfusionRecipe.Type.INSTANCE,
+                        new CrystalInfusionRecipeInput(List.of(
+                            entity.inventory.get(0),
+                            entity.inventory.get(1),
+                            entity.inventory.get(2)
+                            )
+                        ), // slot 1 is the input slot
+                        entity.getWorld()
+                );
+    }
+
     private static void craftItem(CrystalInfuserBlockEntity entity) {
         SimpleInventory inventory = new SimpleInventory(entity.size());
         for (int i = 0; i < entity.size(); i++) {
             inventory.setStack(i, entity.getStack(i));
         }
 
-        Optional<CrystalInfusionRecipe> recipe = entity.getWorld().getRecipeManager()
-                .getFirstMatch(CrystalInfusionRecipe.Type.INSTANCE, inventory, entity.getWorld())
-                .map(RecipeEntry::value);
+        Optional<RecipeEntry<CrystalInfusionRecipe>> recipe = getCurrentRecipe(entity);
 
         entity.removeStack(4, 1);
 
         if (recipe.isPresent() && hasRecipe(entity)) {
-            ItemStack outputStack = recipe.get().getResult(entity.getWorld().getRegistryManager());
-            if (outputStack.hasNbt()) {
-                entity.setStack(4, outputStack.copy());
-            } else {
-                entity.setStack(4, new ItemStack(recipe.get().getResult(entity.getWorld().getRegistryManager()).getItem(), entity.getStack(4).getCount() + 1));
-            }
+            ItemStack outputStack = recipe.get().value().getResult(entity.getWorld().getRegistryManager());
 
+            entity.setStack(4, outputStack.copy());
             entity.removeStack(0, 1);
             entity.removeStack(1, 1);
             entity.removeStack(2, 1);
@@ -287,12 +302,11 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
             inventory.setStack(i, entity.getStack(i));
         }
 
-        Optional<CrystalInfusionRecipe> match = entity.getWorld().getRecipeManager()
-                .getFirstMatch(CrystalInfusionRecipe.Type.INSTANCE, inventory, entity.getWorld())
-                .map(RecipeEntry::value);
+        Optional<RecipeEntry<CrystalInfusionRecipe>> recipe = getCurrentRecipe(entity);
 
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getResult(null).getItem());
+
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                && canInsertItemIntoOutputSlot(inventory, recipe.get().value().getResult(null).getItem());
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, Item output) {
@@ -304,7 +318,7 @@ public class CrystalInfuserBlockEntity extends BlockEntity implements ExtendedSc
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(this.pos);
+    public BlockPos getScreenOpeningData(ServerPlayerEntity player) {
+        return this.pos;
     }
 }

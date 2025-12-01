@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "crystalinfused:pearl_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "crystalinfused:pearl"
+  }
+}

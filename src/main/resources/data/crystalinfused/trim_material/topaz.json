@@ -1,0 +1,9 @@
+{
+  "asset_name": "topaz",
+  "description": {
+    "translate": "trim_material.crystalinfused.topaz",
+    "color": "#E59A11"
+  },
+  "ingredient": "crystalinfused:topaz",
+  "item_model_index": 0.6
+}

@@ -1,11 +1,13 @@
 package net.agadii.crystalinfused.mixin;
 
+import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.screen.AnvilScreenHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Mixin(AnvilScreenHandler.class)
 public abstract class AnvilScreenHandlerMixin {
@@ -30,38 +33,29 @@ public abstract class AnvilScreenHandlerMixin {
 
         if (left.isEmpty() || right.isEmpty() || output.isEmpty()) return;
 
-        Map<Enchantment, Integer> inLeftEnchants = EnchantmentHelper.get(left);
-        Map<Enchantment, Integer> inRightEnchants = EnchantmentHelper.get(right);
-        Map<Enchantment, Integer> outEnchants = EnchantmentHelper.get(output);
+        ItemEnchantmentsComponent inLeftEnchants = EnchantmentHelper.getEnchantments(left);
+        ItemEnchantmentsComponent inRightEnchants = EnchantmentHelper.getEnchantments(right);
+        ItemEnchantmentsComponent outEnchants = EnchantmentHelper.getEnchantments(output);
 
-        Map<Enchantment, Integer> newEnchants = new HashMap<>(outEnchants);
+        ItemEnchantmentsComponent.Builder enchantsBuilder = new ItemEnchantmentsComponent.Builder(outEnchants);
 
-        for (Map.Entry<Enchantment, Integer> e : outEnchants.entrySet()) {
-            // default to 0 if enchantment does not exist in specific input
-            int leftEnchantmentLevel = 0;
-            int rightEnchantmentLevel = 0;
+        for (RegistryEntry<Enchantment> currEnchantment : outEnchants.getEnchantments()) {
 
-            Enchantment ench = e.getKey();
-            int level = e.getValue();
+            Enchantment enchant = currEnchantment.value();
 
-            if (inLeftEnchants.keySet().contains(ench)) {
-                leftEnchantmentLevel = inLeftEnchants.get(ench);
-            }
+            int leftEnchantmentLevel = inLeftEnchants.getLevel(currEnchantment);
+            int rightEnchantmentLevel = inRightEnchants.getLevel(currEnchantment);
 
-            if (inRightEnchants.keySet().contains(ench)) {
-                rightEnchantmentLevel = inRightEnchants.get(ench);
-            }
-
-            int vanillaMax = ench.getMaxLevel();
+            int vanillaMax = enchant.getMaxLevel();
 
             // if at least one has the level above the vanilla max via mod - both max will not create max + 1
             if (leftEnchantmentLevel == vanillaMax + 1 || rightEnchantmentLevel == vanillaMax + 1) {
                 // Allow exactly +1 over vanilla max
-//                outputInv.getStack(0).().
-                newEnchants.put(ench, vanillaMax + 1);
+                enchantsBuilder.set(currEnchantment, vanillaMax + 1);
             }
         }
 
-        EnchantmentHelper.set(newEnchants, outputInv.getStack(0));
+        ItemEnchantmentsComponent newEnchants = enchantsBuilder.build();
+        EnchantmentHelper.set(outputInv.getStack(0), newEnchants);
     }
 }

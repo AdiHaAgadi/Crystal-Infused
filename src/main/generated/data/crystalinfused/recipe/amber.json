@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "crystalinfused:amber_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "crystalinfused:amber"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:bane_of_arthropods": 5
+        }
+      }
+    },
+    {
+      "id": "crystalinfused:sapphire"
+    },
+    {
+      "id": "crystalinfused:ruby"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:bane_of_arthropods": 6
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
 
-![cherry-blossom-biome-valley-completely-surrounded-by-v0-ibaaobuss15b1](https://github.com/user-attachments/assets/05dcfb7f-0ca3-4a33-91e9-75420a74a4e1)
+<img width="1920" height="1080" alt="1 21" src="https://github.com/user-attachments/assets/db08ac55-87b7-4045-9d6a-71ec5b201629" />
 
 # Crystal Infused
 <p align="center">
-  <img src="https://img.shields.io/badge/Mod_Version-1.0.4-brightgreen" alt="Mod Version"/>
-  <img src="https://img.shields.io/badge/Minecraft_Version-1.20.4-blue" alt="Minecraft Version"/>
+  <img src="https://img.shields.io/badge/Mod_Version-1.1.0-brightgreen" alt="Mod Version"/>
+  <img src="https://img.shields.io/badge/Minecraft_Version-1.21-blue" alt="Minecraft Version"/>
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License"/>
 </p>
 Crystal Infused is a fabric mod that adds 8 new crystal ores to the game.

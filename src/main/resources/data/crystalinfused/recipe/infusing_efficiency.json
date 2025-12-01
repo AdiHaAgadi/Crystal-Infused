@@ -1,0 +1,28 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:efficiency": 5
+        }
+      }
+    },
+    {
+      "id": "crystalinfused:peridot"
+    },
+    {
+      "id": "crystalinfused:spinel"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:efficiency": 6
+      }
+    }
+  }
+}

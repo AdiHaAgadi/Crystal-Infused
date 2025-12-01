@@ -1,0 +1,28 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:knockback": 2
+        }
+      }
+    },
+    {
+      "id": "crystalinfused:spinel"
+    },
+    {
+      "id": "crystalinfused:topaz"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:knockback": 3
+      }
+    }
+  }
+}

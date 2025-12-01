@@ -1,0 +1,9 @@
+{
+  "asset_name": "sugilite",
+  "description": {
+    "translate": "trim_material.crystalinfused.sugilite",
+    "color": "#9140AE"
+  },
+  "ingredient": "crystalinfused:sugilite",
+  "item_model_index": 1.0
+}

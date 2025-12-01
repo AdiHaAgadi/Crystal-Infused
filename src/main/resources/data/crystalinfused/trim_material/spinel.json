@@ -1,0 +1,9 @@
+{
+  "asset_name": "spinel",
+  "description": {
+    "translate": "trim_material.crystalinfused.spinel",
+    "color": "#DB4388"
+  },
+  "ingredient": "crystalinfused:spinel",
+  "item_model_index": 1.0
+}

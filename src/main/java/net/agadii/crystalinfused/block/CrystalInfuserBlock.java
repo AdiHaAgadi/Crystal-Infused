@@ -84,7 +84,7 @@ public class CrystalInfuserBlock extends BlockWithEntity implements BlockEntityP
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos,
-                              PlayerEntity player, Hand hand, BlockHitResult hit) {
+                              PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient) {
             NamedScreenHandlerFactory screenHandlerFactory = ((CrystalInfuserBlockEntity) world.getBlockEntity(pos));
 

@@ -44,5 +44,14 @@
   "tag.crystalinfused.crystal_purification": "تنقية الكريستالات",
   "tag.crystalinfused.crystal_infusion": "تشبيع الكريستالات",
 
+  "trim_material.crystalinfused.ruby": "مادة الياقوت",
+  "trim_material.crystalinfused.sapphire": "مادة الياقوت الأزرق",
+  "trim_material.crystalinfused.topaz": "مادة التوباز",
+  "trim_material.crystalinfused.amber": "مادة الكهرمان",
+  "trim_material.crystalinfused.peridot": "مادة الزبرجد",
+  "trim_material.crystalinfused.sugilite": "مادة السوغيليت",
+  "trim_material.crystalinfused.spinel": "مادة الإسبينل",
+  "trim_material.crystalinfused.pearl": "مادة اللؤلؤ",
+
   "itemgroup.crystal_infused": "Crystal Infused"
 }

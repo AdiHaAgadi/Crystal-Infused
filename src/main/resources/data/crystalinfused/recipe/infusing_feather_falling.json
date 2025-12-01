@@ -1,0 +1,28 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:feather_falling": 4
+        }
+      }
+    },
+    {
+      "id": "crystalinfused:sugilite"
+    },
+    {
+      "id": "crystalinfused:peridot"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:feather_falling": 5
+      }
+    }
+  }
+}

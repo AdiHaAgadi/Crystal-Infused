@@ -13,7 +13,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ModItemGroup {
-    public static ItemGroup CRYSTAL_INFUSED = Registry.register(Registries.ITEM_GROUP, new Identifier(CrystalInfused.MOD_ID, "crystal_infused"),
+    public static ItemGroup CRYSTAL_INFUSED = Registry.register(Registries.ITEM_GROUP, Identifier.of(CrystalInfused.MOD_ID, "crystal_infused"),
             FabricItemGroup.builder()
                     .displayName(Text.translatable("itemgroup.crystal_infused"))
                     .icon(() -> new ItemStack(ModItems.SPINEL)).entries((displayContext, entries) -> {

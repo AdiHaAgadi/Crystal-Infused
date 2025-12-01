@@ -1,0 +1,28 @@
+{
+  "type": "crystalinfused:infusing",
+  "ingredients": [
+    {
+      "id": "minecraft:enchanted_book",
+      "components": {
+        "minecraft:stored_enchantments": {
+          "minecraft:quick_charge": 3
+        }
+      }
+    },
+    {
+      "id": "crystalinfused:ruby"
+    },
+    {
+      "id": "crystalinfused:sugilite"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "count": 1,
+    "components": {
+      "minecraft:stored_enchantments": {
+        "minecraft:quick_charge": 4
+      }
+    }
+  }
+}

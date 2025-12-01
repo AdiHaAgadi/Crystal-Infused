@@ -49,7 +49,7 @@ public class CrystalInfusionCategory implements DisplayCategory<BasicDisplay> {
 
     @Override
     public List<Widget> setupDisplay(BasicDisplay display, Rectangle bounds) {
-        Identifier TEXTURE = new Identifier(CrystalInfused.MOD_ID, REIRuntime.getInstance().isDarkThemeEnabled()
+        Identifier TEXTURE = Identifier.of(CrystalInfused.MOD_ID, REIRuntime.getInstance().isDarkThemeEnabled()
                 ? "textures/gui/rei/crystal_infuser_gui_dark.png"
                 : "textures/gui/rei/crystal_infuser_gui.png"
         );

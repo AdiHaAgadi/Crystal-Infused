@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "I": {
+      "tag": "minecraft:wool"
+    },
+    "X": {
+      "tag": "crystalinfused:crystals"
+    }
+  },
+  "pattern": [
+    "III",
+    "IXI",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "crystalinfused:crystal_infuser"
+  }
+}
