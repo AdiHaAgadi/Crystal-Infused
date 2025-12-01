@@ -44,5 +44,14 @@
   "tag.crystalinfused.crystal_purification": "Crystal Purification",
   "tag.crystalinfused.crystal_infusion": "Crystal Infusion",
 
+  "trim_material.crystalinfused.ruby": "Ruby Material",
+  "trim_material.crystalinfused.sapphire": "Sapphire Material",
+  "trim_material.crystalinfused.topaz": "Topaz Material",
+  "trim_material.crystalinfused.amber": "Amber Material",
+  "trim_material.crystalinfused.peridot": "Peridot Material",
+  "trim_material.crystalinfused.sugilite": "Sugilite Material",
+  "trim_material.crystalinfused.spinel": "Spinel Material",
+  "trim_material.crystalinfused.pearl": "Pearl Material",
+
   "itemgroup.crystal_infused": "Crystal Infused"
 }

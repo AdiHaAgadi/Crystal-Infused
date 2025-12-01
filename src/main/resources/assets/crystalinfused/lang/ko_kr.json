@@ -44,5 +44,14 @@
   "tag.crystalinfused.crystal_purification": "크리스탈 정화",
   "tag.crystalinfused.crystal_infusion": "크리스탈 주입",
 
+  "trim_material.crystalinfused.ruby": "루비 재료",
+  "trim_material.crystalinfused.sapphire": "사파이어 재료",
+  "trim_material.crystalinfused.topaz": "토파즈 재료",
+  "trim_material.crystalinfused.amber": "호박 재료",
+  "trim_material.crystalinfused.peridot": "페리도트 재료",
+  "trim_material.crystalinfused.sugilite": "수기라이트 재료",
+  "trim_material.crystalinfused.spinel": "스피넬 재료",
+  "trim_material.crystalinfused.pearl": "진주 재료",
+
   "itemgroup.crystal_infused": "Crystal Infused"
 }

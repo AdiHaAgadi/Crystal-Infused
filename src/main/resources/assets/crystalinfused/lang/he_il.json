@@ -44,5 +44,14 @@
     "tag.crystalinfused.crystal_purification": "טיהור קריסטלים",
     "tag.crystalinfused.crystal_infusion": "השריית קריסטלים",
 
+  "trim_material.crystalinfused.ruby": "חומר אודם",
+  "trim_material.crystalinfused.sapphire": "חומר ספיר",
+  "trim_material.crystalinfused.topaz": "חומר טופז",
+  "trim_material.crystalinfused.amber": "חומר ענבר",
+  "trim_material.crystalinfused.peridot": "חומר פרידוט",
+  "trim_material.crystalinfused.sugilite": "חומר סוגיליט",
+  "trim_material.crystalinfused.spinel": "חומר ספינל",
+  "trim_material.crystalinfused.pearl": "חומר פנינה",
+
     "itemgroup.crystal_infused": "Crystal Infused"
 }

@@ -44,5 +44,14 @@
   "tag.crystalinfused.crystal_purification": "Purificazione dei cristalli",
   "tag.crystalinfused.crystal_infusion": "Infusione dei cristalli",
 
+  "trim_material.crystalinfused.ruby": "Di rubino",
+  "trim_material.crystalinfused.sapphire": "Di zaffiro",
+  "trim_material.crystalinfused.topaz": "Di topazio",
+  "trim_material.crystalinfused.amber": "Di ambra",
+  "trim_material.crystalinfused.peridot": "Di peridoto",
+  "trim_material.crystalinfused.sugilite": "Di sugilite",
+  "trim_material.crystalinfused.spinel": "Di spinello",
+  "trim_material.crystalinfused.pearl": "Di perla",
+
   "itemgroup.crystal_infused": "Crystal Infused"
 }
